@@ -15,8 +15,8 @@ class CreateEnglishLevelsTable extends Migration
     {
         Schema::create('english_levels', function (Blueprint $table) {
             $table->id();
-            $table->string('english_level');
-            $table->date('english_date');
+            $table->string('level');
+            $table->string('slug');
             $table->timestamps();
         });
     }

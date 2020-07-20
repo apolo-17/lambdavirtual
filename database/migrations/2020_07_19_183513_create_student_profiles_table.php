@@ -20,8 +20,11 @@ class CreateStudentProfilesTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('name');
-            $table->string('las_name');
-            $table->string('country');
+            $table->string('last_name');
+
+            $table->bigInteger('country')->unsigned();
+            $table->foreign('country')->references('id')->on('countries');
+
             $table->string('department');
             $table->string('province');
             $table->string('district');

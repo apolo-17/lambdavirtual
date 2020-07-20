@@ -92,8 +92,8 @@
             <label><input type="radio" name="terms" value="acepto Terminos" required>Acepto las condiciones de tratamiento para mis datos personales. <a href="#" target="_blank">(Ver términos)</a></label>
             <br />	<br />
             <br />	<br />
-            <input type="hidden" name="idunico" value="">
-            <input type="submit" name="" value="Guardar" class="btn-formUser">
+            
+            <button type="submit" name="" value="Guardar" class="btn-formUser"></button>
             
         </div>
     </form>
