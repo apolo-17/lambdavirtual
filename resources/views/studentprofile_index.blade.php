@@ -72,7 +72,7 @@
             </div>
             <br />	<br />
             <br />	<br />
-            <a href="{{ action('StudentProfileController@Edit') }}"></a>
+            <a href="{{-- {{ action('StudentProfileController@Edit') }} --}}"></a>
             <button type="submit" name="" value="Guardar" class="btn-formUser">Editar</button>
         </div>
     </div>

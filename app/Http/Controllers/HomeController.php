@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\StudentProfile;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +23,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if (StudentProfile::where('user_id',auth()->user()->id)->first() != null) {
+            return view('home');
+        }
+        return redirect()->route('student-profile-create');
     }
 }
