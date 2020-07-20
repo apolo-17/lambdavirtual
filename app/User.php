@@ -37,8 +37,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = ['studentProfile'];
+
     public function studentProfile()
     {
-        return $this->belongsTo(StudentProfile::class);
+        return $this->hasOne(StudentProfile::class);
     }
 }

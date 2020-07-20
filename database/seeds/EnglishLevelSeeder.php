@@ -12,8 +12,8 @@ class EnglishLevelSeeder extends Seeder
      */
     public function run()
     {
-        EnglishLevel::create(['name' => 'Basico', 'slug' => 'basic']);
-        EnglishLevel::create(['name' => 'Intermedio', 'slug' => 'intermediate']);
-        EnglishLevel::create(['name' => 'Avanzado', 'slug' => 'advanced']);
+        EnglishLevel::create(['level' => 'Basico', 'slug' => 'basic']);
+        EnglishLevel::create(['level' => 'Intermedio', 'slug' => 'intermediate']);
+        EnglishLevel::create(['level' => 'Avanzado', 'slug' => 'advanced']);
     }
 }

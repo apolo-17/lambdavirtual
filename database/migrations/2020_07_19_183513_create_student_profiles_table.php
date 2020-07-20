@@ -21,9 +21,10 @@ class CreateStudentProfilesTable extends Migration
 
             $table->string('name');
             $table->string('last_name');
+            $table->string('phone_number');
 
-            $table->bigInteger('country')->unsigned();
-            $table->foreign('country')->references('id')->on('countries');
+            $table->bigInteger('country_id')->unsigned();
+            $table->foreign('country_id')->references('id')->on('countries');
 
             $table->string('department');
             $table->string('province');
