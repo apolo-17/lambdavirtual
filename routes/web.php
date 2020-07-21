@@ -26,4 +26,5 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('verified'
 Route::get('/student-profile', 'StudentProfileController@index')->name('student-profile-index')->middleware('verified');
 Route::get('/student-profile-create', 'StudentProfileController@create')->name('student-profile-create')->middleware('verified');
 Route::post('/student-profile-store','StudentProfileController@store')->name('student-profile-store')->middleware('verified');
-/* Route::get('/student-profile-edit','StudentProfileController@Edit')->name('student-profile-edit')->middleware('verified'); */
+Route::get('/student-profile-edit','StudentProfileController@Edit')->name('student-profile-edit')->middleware('verified');
+Route::post('/student-profile-edit','StudentProfileController@update')->name('student-profile-update')->middleware('verified');

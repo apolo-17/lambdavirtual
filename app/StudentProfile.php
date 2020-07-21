@@ -15,8 +15,6 @@ class StudentProfile extends Model
 
     protected $fillable = ['user_id','name','last_name','phone_number','country_id','department','province','district','born_date','gender','dni','university_id','school_cycle_id','academic_degree_id','english_level_id','work'];
 
-    //protected $with = ['user','country','university','schoolCycle','academicDegree','englishLevel'];
-
     public function user()
     {
         return $this->belongsTo(User::class);

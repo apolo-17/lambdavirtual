@@ -72,8 +72,9 @@
             </div>
             <br />	<br />
             <br />	<br />
-            <a href="{{-- {{ action('StudentProfileController@Edit') }} --}}"></a>
-            <button type="submit" name="" value="Guardar" class="btn-formUser">Editar</button>
+            <a href="{{ action('StudentProfileController@Edit') }}">
+                <button type="submit" name="" value="Editar" class="btn-formUser">Editar</button>
+            </a>
         </div>
     </div>
 </section>

@@ -71,7 +71,7 @@ class StudentProfileController extends Controller
             'english_level_id' => $request->english_level_id,
             'work' => $request->work
         ]);
-        //return $student;
+
         return redirect()->route('student-profile-index');
     }
 
@@ -94,9 +94,14 @@ class StudentProfileController extends Controller
      */
     public function edit(StudentProfile $studentProfile)
     {
-        /* $studient = auth()->user()->studentProfile;
-        dd($studient); */
-        //return view('studientprofile_edit')->with(['studient' => $studient]);
+        $student = StudentProfile::where('user_id',auth()->user()->id)->with(['country','university','schoolCycle','academicDegree','englishLevel'])->first();
+        $countries = Country::get();
+        $universities = University::get();
+        $school_ciclies = SchoolCycle::get();
+        $academic_degrees = AcademicDegree::get();
+        $english_levels = EnglishLevel::get();
+
+        return view('studientprofile_edit')->with(['student' => $student, 'countries' => $countries, 'universities' => $universities, 'school_ciclies' => $school_ciclies, 'academic_degrees' => $academic_degrees, 'english_levels' => $english_levels]);
     }
 
     /**
@@ -108,7 +113,24 @@ class StudentProfileController extends Controller
      */
     public function update(Request $request, StudentProfile $studentProfile)
     {
-        //
+        StudentProfile::where('user_id',auth()->user()->id)->update([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+            'country_id' => $request->country_id,
+            'department' => $request->department,
+            'province' => $request->province,
+            'district' => $request->district,
+            'born_date' => $request->born_date,
+            'gender' => $request->gender,
+            'dni' => $request->dni,
+            'university_id' => $request->university_id,
+            'school_cycle_id' => $request->school_cycle_id,
+            'academic_degree_id' => $request->academic_degree_id,
+            'english_level_id' => $request->english_level_id,
+        ]);
+
+        return redirect()->route('student-profile-index');
     }
 
     /**
