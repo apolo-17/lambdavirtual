@@ -20,3 +20,7 @@ mix.sass('resources/sass/app.scss', 'public/css')
       processCssUrls: false,
       postCss: [ tailwindcss('tailwind.config.js') ],
 })
+
+mix.styles([
+    'public/css/styles_lambda.css'
+], 'public/css/all.css');

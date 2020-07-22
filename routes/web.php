@@ -28,3 +28,6 @@ Route::get('/student-profile-create', 'StudentProfileController@create')->name('
 Route::post('/student-profile-store','StudentProfileController@store')->name('student-profile-store')->middleware('verified');
 Route::get('/student-profile-edit','StudentProfileController@Edit')->name('student-profile-edit')->middleware('verified');
 Route::post('/student-profile-edit','StudentProfileController@update')->name('student-profile-update')->middleware('verified');
+
+Route::get('/admin-exam-index','ExamsController@index')->name('exam-index')->middleware('verified');
+Route::get('/admin-exam-create','ExamsController@create')->name('exam-create')->middleware('verified');
