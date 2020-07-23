@@ -11,7 +11,7 @@
 
                 <div class="text-center rounded-md bg-red-700 bg-opacity-700 font-bold shadow-2xl text-white h-6">Crear cuenta</div>
             </div>
-            <div class="grid-flow-col">    
+            <div class="grid-flow-col">
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
 
@@ -56,7 +56,7 @@
                             </button>
                         </div>
                     </div>
-                </form> 
+                </form>
             </div>
         </div>
     </div>
