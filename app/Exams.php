@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Exams extends Model
 {
-    //
+    protected $cast = [
+        'questionary' => 'array'
+    ];
 }
