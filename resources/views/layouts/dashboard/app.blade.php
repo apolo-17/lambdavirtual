@@ -23,31 +23,43 @@
 <body>
     <div id="app" class="userswrap">
         <div class="userslateral">
-            <header class="lateral__header">
+            <header class="userslateral__header">
                 <img src="{{ asset('images/logo.png') }}" alt="logo lambda">
             </header>
             <div class="userslateral__menu">
                 <ul>
                     <li>
-                    <img src="{{ asset('images/ico-tablero.png') }}" alt="" class="iconosmenu"><a href="{{ action('HomeController@index') }}">Tablero</a>
+                        <div class="userslateral__item">
+                            <img src="{{ asset('images/ico-tablero-black.png') }}" alt="" class="userslateral__img"><a href="{{ action('HomeController@index') }}">Tablero</a>
+                        </div>
                     </li>
                     <li>
-                        <img src="{{ asset('images/ico-cursos.png') }}" alt="" class="iconosmenu"><a href="#">Mis Cursos</a>
+                        <div class="userslateral__item">
+                            <img src="{{ asset('images/ico-cursos-black.png') }}" alt="" class="userslateral__img"><a href="#">Mis Cursos</a>
+                        </div>
                     </li>
                     <li>
-                        <img src="{{ asset('images/ico-chat.png') }}" alt="" class="iconosmenu"><a href="#">Chat</a>
+                        <div class="userslateral__item">
+                            <img src="{{ asset('images/ico-chat-black.png') }}" alt="" class="userslateral__img"><a href="#">Chat</a>
+                        </div>
                     </li>
                     <li>
-                        <img src="{{ asset('images/ico-anuncio.png') }}" alt="" class="iconosmenu"><a href="#">Anuncios</a>
+                        <div class="userslateral__item">
+                            <img src="{{ asset('images/ico-anuncios-black.png') }}" alt="" class="userslateral__img"><a href="#">Anuncios</a>
+                        </div>
                     </li>
                     <li>
-                        <img src="{{ asset('images/ico-foro.png') }}" alt="" class="iconosmenu"><a href="#">Foro</a>
+                        <div class="userslateral__item">
+                            <img src="{{ asset('images/ico-foro-black.png') }}" alt="" class="userslateral__img"><a href="#">Foro</a>
+                        </div>
                     </li>
-                    <li style="background:#B60011">
-                    <img src="{{ asset('images/ico-configuracion-white.png') }}" alt="" class="iconosmenu"><a href="{{ action('StudentProfileController@index') }}"  style="color:#ffffff">Configuraciones</a>
+                    <li>
+                        <div class="userslateral__item">
+                            <img src="{{ asset('images/ico-confi-black.png') }}" alt="" class="userslateral__img"><a href="{{ action('StudentProfileController@index') }}">Configuraciones</a>
+                        </div>
                     </li>
                 </li>
-                <img src="{{ asset('images/ico-configuracion-white.png') }}" alt="" class="iconosmenu"><a href="{{ action('ExamsController@index') }}" >Administracion de examenes</a>
+                <img src="{{ asset('images/ico-configuracion-white.png') }}" alt="" class="userslateral__img"><a href="{{ action('ExamsController@index') }}" >Administracion de examenes</a>
                 </li>
                 </ul>
             </div>
@@ -57,20 +69,26 @@
             @yield('content')
         </section>
         <section class="contentRight">
-				<header class="contentRight__header">
-					<div>
-                        {{ Auth::user()->email }}
-					</div>
-					<div>
-                        <form action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit">
-                                <img src="{{ asset('images/logout.png') }}" alt="">
-                            </button>
-                        </form>
-					</div>
-				</header>
-			</section>
+            <header class="contentRight__header">
+                <div>
+                    <img src="{{ asset('images/ico-login-mail.png') }}" alt="" class="contentRight__mensaje">
+                </div>
+                <div>
+                    {{ Auth::user()->email }}
+                </div>
+                <div>
+                    <img src="{{ asset('images/avatar.png') }}" alt="">
+                </div>
+                <div>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit">
+                            <img src="{{ asset('images/logout.png') }}" alt="">
+                        </button>
+                    </form>
+                </div>
+            </header>
+		</section>
     </div>
 </body>
 </html>

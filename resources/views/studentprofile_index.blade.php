@@ -72,6 +72,8 @@
             </div>
             <br />	<br />
             <br />	<br />
+        </div>
+        <div class="btnwrap">
             <a href="{{ action('StudentProfileController@Edit') }}">
                 <button type="submit" name="" value="Editar" class="btn-formUser">Editar</button>
             </a>

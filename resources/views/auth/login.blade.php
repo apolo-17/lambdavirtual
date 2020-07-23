@@ -4,7 +4,9 @@
 <div class="wrap">
     <div class="lateralLogin">
         <header class="lateralLogin__header">
-            <img src="{{ asset('images/logo.png') }}" alt="logo lambda">
+            <div class="lateralLogin__logo"><center>
+                <img src="{{ asset('images/logo.png') }}" alt="logo lambda">
+            </div>
             <div class="lateralLogin__wellcome">Bienvenido</div>
         </header>
         <div class="lateralLogin__form">
