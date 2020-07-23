@@ -1,58 +1,73 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex">
-    <div class="w-1/3 flex items-center justify-center">
-        <div class="flex grid">
-            <div class="grid-flow-col flex-col mb-20">
-                <div class="flex justify-center">
-                    <img src="{{ asset('images/logo.png') }}" alt="logo lambda">
+<div class="wrap">
+    <div class="lateralLogin">
+        <header class="lateralLogin__header">
+            <div class="lateralLogin__logo"><center>
+                <img src="{{ asset('images/logo.png') }}" alt="logo lambda">
+            </div>
+            <div class="lateralLogin__wellcome">Crear cuenta</div>
+        </header>
+        <div class="lateralLogin__form">
+            <form class="login__form" method="POST" action="{{ route('register') }}">
+                @csrf
+                <div class="form-group">
+                    <div class="form-group__ico">
+                        <img src="{{ asset('images/ico-login-user.png') }}" alt="">
+                    </div>
+                    <input id="name" type="text" class="form-control leading-normal @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Nombre">
+                    @error('name')
+                        <span class="text-red-500 text-xs italic">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                <div class="text-center rounded-md bg-red-700 bg-opacity-700 font-bold shadow-2xl text-white h-6">Crear cuenta</div>
-            </div>
-            <div class="grid-flow-col">
-                <form method="POST" action="{{ route('register') }}">
-                    @csrf
-                    <div class="mb-4 shadow-md">
-                        <input id="name" type="text" class="bg-white border border-gray-400 focus:border-yellow-600 rounded-lg py-2 px-4 block w-full appearance-none leading-normal @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Nombre">
-                        @error('name')
-                            <span class="text-red-500 text-xs italic">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                <div class="form-group">
+                    <div class="form-group__ico">
+                        <img src="{{ asset('images/ico-login-mail.png') }}" alt="">
                     </div>
-                    <div class="mb-4 shadow-md">
-                        <input id="email" type="email" class="bg-white border border-gray-400 focus:border-yellow-600 rounded-lg py-2 px-4 block w-full appearance-none leading-normal @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
+                    <input id="email" type="email" class="form-control leading-normal @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email">
 
-                        @error('email')
-                            <span class="text-red-500 text-xs italic" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    <div class="mb-4 shadow-md">
-                        <input id="password" type="password" class="g-white border border-gray-400 focus:border-yellow-600 rounded-lg py-2 px-4 block w-full appearance-none leading-normal @error('password') is-invalid @enderror" name="password" required placeholder="Contraseña">
+                    @error('email')
+                        <span class="text-red-500 text-xs italic" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                        @error('password')
-                            <span class="text-red-500 text-xs italic" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                <div class="form-group">
+                    <div class="form-group__ico">
+                        <img src="{{ asset('images/ico-login-pass.png') }}" alt="">
                     </div>
+                    <input id="password" type="password" class="form-control leading-normal @error('password') is-invalid @enderror" name="password" required placeholder="Contraseña">
 
-                    <div class="mb-4 shadow-md">
-                        <input id="password-confirm" type="password" class="g-white border border-gray-400 focus:border-yellow-600 rounded-lg py-2 px-4 block w-full appearance-none leading-normal" name="password_confirmation" required placeholder="Confirmar contraseña">
-                    </div>
+                    @error('password')
+                        <span class="text-red-500 text-xs italic" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
 
-                    <div class="form-group row mb-0">
-                        <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="bg-yellow-600 bg-opacity-75 text-gray-100 w-full rounded">
-                                {{ __('Registrarte') }}
-                            </button>
-                        </div>
+                <div class="form-group">
+                    <div class="form-group__ico">
+                        <img src="{{ asset('images/ico-login-pass.png') }}" alt="">
                     </div>
-                </form>
-            </div>
+                    <input id="password-confirm" type="password" class="form-control leading-normal" name="password_confirmation" required placeholder="Confirmar contraseña">
+                </div>
+
+                <div class="form-group row mb-0">
+                    
+                        <button type="submit" class="btn btn-success" style="background:#CAA23E; color:#ffffff; border:0; border-radius:20px">
+                            {{ __('Registrarte') }}
+                        </button>
+                    
+                </div>
+            </form>
+            <div class="lateralLogin__links">
+                <a href="{{ route('login') }}" class="lateralLogin__link-crearcuenta">Iniciar Sesión</a></br>
+                <a href="{{ route('password.request') }}" class="lateralLogin__link-olvidaste">{{ __('¿Olvidaste la contraseña?') }}</a>
+			</div>
         </div>
     </div>
     <div class="w-3/4">

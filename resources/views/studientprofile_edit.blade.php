@@ -103,7 +103,8 @@
             </div>
             <br />	<br />
             <br />	<br />
-
+        </div>
+        <div class="btnwrap">
             <button type="submit" name="" value="Guardar" class="btn-formUser">Actualizar</button>
         </div>
     </form>

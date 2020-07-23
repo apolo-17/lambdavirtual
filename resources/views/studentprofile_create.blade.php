@@ -109,7 +109,8 @@
             <label><input type="radio" name="terms" value="true" required>Acepto las condiciones de tratamiento para mis datos personales. <a href="#" target="_blank">(Ver términos)</a></label>
             <br />	<br />
             <br />	<br />
-
+        </div>
+        <div class="btnwrap">
             <button type="submit" name="" value="Guardar" class="btn-formUser">Guardar</button>
         </div>
     </form>
