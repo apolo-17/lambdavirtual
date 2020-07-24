@@ -35,7 +35,8 @@ Route::get('/admin-exam-index','ExamsController@index')->name('exam-index')->mid
 Route::get('/admin-exam-show','ExamsController@create')->name('exam-show')->middleware('verified');
 Route::post('/admin-exam-store','ExamsController@store')->name('exam-store')->middleware('verified');
 Route::get('/admin-exam-edit/{id}','ExamsController@edit')->name('exam-edit')->middleware('verified');
+Route::post('/admin-exam-update','ExamsController@update')->name('exam-update')->middleware('verified');
+
 Route::post('/admin-exam-edit-information', function(Request $request) {
-    //dd($request->all());
     return Exams::find($request->id);
 })->name('exam-get-information-show')->middleware('verified');

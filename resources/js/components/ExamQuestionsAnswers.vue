@@ -1,7 +1,7 @@
 <template>
     <div class="mx-4 my-4" >
         <div class="flex justify-center">
-            <div class="text-3xl">Creacion de questionario</div>
+            <div class="text-3xl">Preguntas</div>
         </div>
         <div class="flex-none">
             <form v-on:submit.prevent="editExam">
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <div class="flex px-2 py-2" v-for="(question, index) in questions" :key="index.id">
+                <div class="flex px-2 py-2" v-for="(question, index) in createQuestion" :key="index.id">
                     <div class="w-full">
                         <div class="w-4/5">
                             <label for="">Pregunta numero {{ question.id }}:</label>
@@ -66,8 +66,8 @@
                         <div class="ml-24 my-4">
                             <ul class="" v-for="(answer, index) in question.answers" :key="index.id">
                                 <li class="my-4 flex items-center" >
-                                    <input class="mr-4" type="radio" name="answer" :value= answer.value >
-                                    <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-1/2 appearance-none leading-normal" type="text" placeholder="Respuesta">
+                                    <input class="mr-4" type="radio" v-model="answer.value">
+                                    <input v-model="answer.answer" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-1/2 appearance-none leading-normal" type="text" placeholder="Respuesta">
                                 </li>
                             </ul>
                         </div>
@@ -81,24 +81,12 @@
                 </div>
             </form>
         </div>
-        <!-- <div v-for="(question, index) in createQuestion" :key="index.id">
-        <div class="mx-2 my-2">
-            <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="text" placeholder="Ingrese pregunta">
-        </div>
-        <div class="">
-            <ul>
-                <li v-for="(answer, index) in question.answers" :key="index">
-                    <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-20 appearance-none leading-normal" type="text" placeholder="Respuesta">
-                </li>
-            </ul>
-        </div>
-        </div> -->
     </div>
 </template>
 
 <script>
 export default {
-    props:['questionary','questions'],
+    props:['questionary'],
     data() {
         return {
             name: null,
@@ -108,16 +96,33 @@ export default {
             number_questions: null,
             number_subsections: null,
             description: null,
-            errors:null
+            errors:null,
+            questions: [],
+            value_answer: false
         }
     },
     computed: {
         createQuestion(){
-            return _.isEmpty(this.questionary) ? null : this.questionary.question
+            return _.isEmpty(this.questionary) ? null : this.questions = JSON.parse(this.questionary.questionary)
         }
     },
     methods: {
+        parseJson(questionary){
+            JSON.parse(questionary)
+        },
+        editExam() {
 
+            let params = {
+                questionary: this.questionary,
+                questions: this.questions
+            };
+
+            axios.post('/admin-exam-update',{...params}).then(response => {
+                response.data
+                this.$router.replace({name:'exam-index'});
+                location.reload();
+            });
+        },
     },
 }
 </script>

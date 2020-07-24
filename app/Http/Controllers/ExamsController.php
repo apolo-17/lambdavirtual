@@ -69,7 +69,7 @@ class ExamsController extends Controller
     public function show(Exams $exams, Request $request)
     {
         dd($request->all());
-        //dd($exams);
+
     }
 
     /**
@@ -92,7 +92,19 @@ class ExamsController extends Controller
      */
     public function update(Request $request, Exams $exams)
     {
-        //
+        Exams::find($request->questionary['id'])->update([
+            'name' => $request->questionary['name'],
+            'deploy_exam' => $request->questionary['deploy_exam'],
+            'finish_exam' => $request->questionary['finish_exam'],
+            'duration' => $request->questionary['duration'],
+            'number_questions' => $request->questionary['number_questions'],
+            'number_subsections' => $request->questionary['number_subsections'],
+            'description' => $request->questionary['description'],
+            'questionary' => $request->questions,//json_encode($request->questions),
+            'user_id' => auth()->user()->id
+        ]);
+
+        return redirect('/admin-exam-index');
     }
 
     /**

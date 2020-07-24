@@ -10,6 +10,7 @@ Vue.use(VueRouter)
 
 const router = new VueRouter({routes,mode: 'history'
 })
+//router.go('/');
 
 Vue.component('exam-creation', require('./components/ExamCreation.vue').default);
 Vue.component('exam-form', require('./components/ExamForm.vue').default);
