@@ -25,7 +25,7 @@ class CreateExamsTable extends Migration
 
             $table->json('questionary');
 
-            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();

@@ -18,7 +18,7 @@ export default {
                 exam_id: this.exam_id,
                 active: event.target.checked
             }
-            console.log('this params to update: ', params)
+
             axios.post('/admin-exam-status-update',{...params}).then(response => {
                 console.log(response.data)
             })
