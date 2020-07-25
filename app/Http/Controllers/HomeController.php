@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\StudentProfile;
 use Illuminate\Http\Request;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -23,9 +24,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (StudentProfile::where('user_id',auth()->user()->id)->first() != null) {
-            return view('home');
-        }
-        return redirect()->route('student-profile-create');
+        /* if (auth()->user()->hasRole('Admin')) {
+            return view('layouts.dashboard.app');
+        } else { */
+
+            if (StudentProfile::where('user_id',auth()->user()->id)->first() != null) {
+                return view('home');
+            }
+            return redirect()->route('student-profile-create');
+        //}
+    }
+
+    public function indexAdmin()
+    {
+        return view('layouts.dashboardAdmin.app');
     }
 }

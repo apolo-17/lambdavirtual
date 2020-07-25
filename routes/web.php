@@ -25,6 +25,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
+Route::get('/home-admin','HomeController@indexAdmin')->name('homeAdmin');
+
 Route::get('/student-profile', 'StudentProfileController@index')->name('student-profile-index')->middleware('verified');
 Route::get('/student-profile-create', 'StudentProfileController@create')->name('student-profile-create')->middleware('verified');
 Route::post('/student-profile-store','StudentProfileController@store')->name('student-profile-store')->middleware('verified');
