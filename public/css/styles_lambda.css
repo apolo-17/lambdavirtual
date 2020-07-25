@@ -247,12 +247,12 @@
   outline: none !important;
   outline-width: 0 !important;
 }
-.lateralLogin__form .login__form .form-group {
+.lateralLogin__form .login__form .form-group .form-group-wrap {
   display: flex;
   justify-content: center;
   align-items: top;
 }
-.lateralLogin__form .login__form .form-group .form-group__ico {
+.lateralLogin__form .login__form .form-group__ico {
   width: 34px;
   height: 34px;
   display: flex;
@@ -262,7 +262,7 @@
   border-right: 0;
   border-radius: 10px 0 0 10px;
 }
-.lateralLogin__form .login__form .form-group .form-group__ico img {
+.lateralLogin__form .login__form .form-group__ico img {
   width: 10px;
   height: 10px;
 }
