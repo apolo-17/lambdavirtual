@@ -14,26 +14,32 @@
                 <th class="w-1/4 px-4 py-2">Fecha de lanzamiento</th>
                 <th class="w-1/4 px-4 py-2">Fecha final</th>
                 <th class="w-1/4 px-4 py-2">Duracion</th>
-                <th class="w-1/4 px-4 py-2">Descripcion</th>
+                <th class="w-auto">Activar</th>
+
             </thead>
             <tbody>
+                @foreach($exams as $exam)
                 <tr>
                     <td class="border px-4 py-2">
-                        Examen de concurso
+                        {{ $exam->name }}
                     </td>
                     <td class="border px-4 py-2">
-                        26/07/2020 06:00 hrs
+                        {{ $exam->deploy_exam }}
                     </td>
                     <td class="border px-4 py-2">
-                        30/07/2020 00:00 hrs
+                        {{ $exam->finish_exam }}
                     </td>
                     <td class="border px-4 py-2">
-                        60 mins
+                        {{ $exam->duration }}
                     </td>
                     <td class="border px-4 py-2">
-                        ES el primer examen para analisis de conocimientos
+                        <deploy-exam
+                            :exam_id="{{ $exam->id }}"
+                            :active="{{ $exam->active }}"
+                        ></deploy-exam>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

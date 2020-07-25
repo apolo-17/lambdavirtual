@@ -19,7 +19,11 @@ class CreateExamsTable extends Migration
             $table->dateTime('deploy_exam');
             $table->dateTime('finish_exam');
             $table->time('duration');
+            $table->integer('number_questions');
+            $table->integer('number_subsections');
             $table->longText('description')->nullable();
+
+            $table->json('questionary');
 
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
