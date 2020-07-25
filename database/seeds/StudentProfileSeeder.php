@@ -19,5 +19,12 @@ class StudentProfileSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
             'password' => bcrypt('secret'),
         ]);
+
+        User::create([
+            'name' => 'Christian Maticorena',
+            'email' => 'eliottack@gmail.com',
+            'email_verified_at' => Carbon::now(),
+            'password' => bcrypt('sims3'),
+        ]);
     }
 }
