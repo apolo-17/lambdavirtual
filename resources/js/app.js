@@ -17,6 +17,7 @@ Vue.component('exam-creation', require('./components/ExamCreation.vue').default)
 Vue.component('exam-form', require('./components/ExamForm.vue').default);
 Vue.component('exam-question-and-answers', require('./components/ExamQuestionsAnswers.vue').default);
 Vue.component('answers', require('./components/Answers.vue').default);
+Vue.component('deploy-exam', require('./components/DeployExam').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

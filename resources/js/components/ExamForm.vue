@@ -16,14 +16,14 @@
 
                     <div class="w-1/3 px-2 py-2">
                         <label for="">Fecha de inicio:</label>
-                        <input v-model="deploy_exam" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="datetime-local" placeholder="Fecha inicio">
+                        <input v-model="deploy_exam" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="date" placeholder="Fecha inicio">
                         <span class="text-xs text-red-600" v-if="errors">
                             <span v-if="errors.deploy_exam">La fecha de lanzamiento es obligatoria</span>
                         </span>
                     </div>
                     <div class="w-1/3 px-2 py-2">
                         <label for="">Fecha fin:</label>
-                        <input v-model="finish_exam" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="datetime-local" placeholder="Fecha fin">
+                        <input v-model="finish_exam" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="date" placeholder="Fecha fin">
                         <span class="text-xs text-red-600" v-if="errors">
                             <span v-if="errors.finish_exam">La fecha final es obligatorio</span>
                         </span>

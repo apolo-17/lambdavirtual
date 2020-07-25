@@ -114,8 +114,8 @@ export default {
 
             let params = {
                 questionary: this.questionary,
-                deploy_exam: this.deploy_exam,
-                finish_exam: this.finish_exam,
+                deploy_exam: _.isEmpty(this.deploy_exam) ? this.questionary.deploy_exam : this.deploy_exam,
+                finish_exam: _.isEmpty(this.finish_exam) ? this.questionary.finish_exam : this.finish_exam,
                 questions: this.questions
             };
 

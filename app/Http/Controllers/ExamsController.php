@@ -43,7 +43,7 @@ class ExamsController extends Controller
             'number_questions' => ['required'],
             'number_subsections' => ['required']
         ]);
-
+        //dd($request->all());
         $exam = new Exams;
         $exam->name = $request->name;
         $exam->deploy_exam = $request->deploy_exam;
@@ -85,6 +85,7 @@ class ExamsController extends Controller
             'deploy_exam' => $request->deploy_exam,
             'finish_exam' => $request->finish_exam,
             'duration' => $request->questionary['duration'],
+            'active' => 'false',
             'number_questions' => $request->questionary['number_questions'],
             'number_subsections' => $request->questionary['number_subsections'],
             'description' => $request->questionary['description'],
@@ -93,6 +94,20 @@ class ExamsController extends Controller
         ]);
 
         return redirect('/admin-exam-index');
+    }
+
+    public function updateStatus(Request $request) {
+        $value_active = '';
+        if ($request->active) {
+            $value_active = 'true';
+        } else {
+            $value_active = 'false';
+        }
+
+        $exams = Exams::find($request->exam_id)->update([
+            'active' => $value_active
+        ]);
+        return $exams;
     }
 
     /**
