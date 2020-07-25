@@ -12,9 +12,12 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    {{-- <button class="bg-red-700  hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">
-                        Presentar examen
-                    </button> --}}
+                    <a href="{{ route('exam-init',['17']) }}">
+                        <button class="bg-red-700  hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">
+                            Presentar examen
+                        </button>
+                    </a>
+
                 </div>
             </div>
         </div>

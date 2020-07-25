@@ -40,3 +40,6 @@ Route::post('/admin-exam-update','ExamsController@update')->name('exam-update')-
 Route::post('/admin-exam-edit-information', function(Request $request) {
     return Exams::find($request->id);
 })->name('exam-get-information-show')->middleware('verified');
+
+
+Route::get('/exam-init/{id}','ExamsController@examInit')->name('exam-init')->middleware('verified');

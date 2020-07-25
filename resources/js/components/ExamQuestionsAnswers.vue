@@ -8,7 +8,7 @@
                 <div class="flex justify-center px-2 py-2">
                     <div class="w-1/3 px-2 py-2">
                         <label for="">Nombre del examen:</label>
-                        <input v-model="questionary.name"  class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="text" placeholder="Nombre del examen">
+                        <input v-model="questionary.name" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="text" placeholder="Nombre del examen">
                         <span class="text-xs text-red-600" v-if="errors">
                             <span v-if="errors.name">El nombre es obligatorio</span>
                         </span>
@@ -16,14 +16,14 @@
 
                     <div class="w-1/3 px-2 py-2">
                         <label for="">Fecha de inicio:</label>
-                        <input v-model="questionary.deploy_exam" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="datetime-local" placeholder="Fecha inicio">
+                        <input :value="formatDateTime(questionary.deploy_exam)" @change="captchaValue" name="deploy_exam" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="date" placeholder="Fecha inicio">
                         <span class="text-xs text-red-600" v-if="errors">
                             <span v-if="errors.deploy_exam">La fecha de lanzamiento es obligatoria</span>
                         </span>
                     </div>
                     <div class="w-1/3 px-2 py-2">
                         <label for="">Fecha fin:</label>
-                        <input v-model="questionary.finish_exam" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="datetime-local" placeholder="Fecha fin">
+                        <input :value="formatDateTime(questionary.finish_exam)" @change="captchaValue" name="finish_exam" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="date" placeholder="Fecha fin">
                         <span class="text-xs text-red-600" v-if="errors">
                             <span v-if="errors.finish_exam">La fecha final es obligatorio</span>
                         </span>
@@ -63,14 +63,10 @@
                             <label for="">Pregunta numero {{ question.id }}:</label>
                             <input v-model="question.question" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"  type="text" placeholder="Ingrese pregunta ">
                         </div>
-                        <div class="ml-24 my-4">
-                            <ul class="" v-for="(answer, index) in question.answers" :key="index.id">
-                                <li class="my-4 flex items-center" >
-                                    <input class="mr-4" type="radio" v-model="answer.value">
-                                    <input v-model="answer.answer" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-1/2 appearance-none leading-normal" type="text" placeholder="Respuesta">
-                                </li>
-                            </ul>
-                        </div>
+                        <answers v-for="(answer, index) in question.answers" :key="index.id"
+                            :answer="answer"
+                            :number_question="question.id"
+                        ></answers>
                     </div>
 
                 </div>
@@ -85,12 +81,13 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
     props:['questionary'],
     data() {
         return {
             name: null,
-            deploy_exam:null,
+            deploy_exam: null,
             finish_exam: null,
             duration: null,
             number_questions: null,
@@ -98,13 +95,16 @@ export default {
             description: null,
             errors:null,
             questions: [],
-            value_answer: false
+            value_answer: false,
         }
     },
     computed: {
         createQuestion(){
             return _.isEmpty(this.questionary) ? null : this.questions = JSON.parse(this.questionary.questionary)
-        }
+        },
+
+    },
+    mounted() {
     },
     methods: {
         parseJson(questionary){
@@ -114,15 +114,29 @@ export default {
 
             let params = {
                 questionary: this.questionary,
+                deploy_exam: this.deploy_exam,
+                finish_exam: this.finish_exam,
                 questions: this.questions
             };
 
             axios.post('/admin-exam-update',{...params}).then(response => {
-                response.data
+
                 this.$router.replace({name:'exam-index'});
                 location.reload();
             });
         },
+        formatDateTime(date) {
+            return moment(date).format('YYYY-MM-DD');
+        },
+        captchaValue(event) {
+            if(event.target.name == 'deploy_exam') {
+                this.deploy_exam = event.target.value
+            }
+
+            if(event.target.name == 'finish_exam') {
+                this.finish_exam = event.target.value
+            }
+        }
     },
 }
 </script>

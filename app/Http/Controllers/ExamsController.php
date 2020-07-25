@@ -13,8 +13,8 @@ class ExamsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('adminexam.adminExamindex');
+    {   $exams = Exams::get();
+        return view('adminexam.adminExamindex')->with(['exams' => $exams]);
     }
 
     /**
@@ -24,7 +24,7 @@ class ExamsController extends Controller
      */
     public function create()
     {
-        return view('adminexam.adminExamshow');
+        return view('adminexam.adminExamcreate');
     }
 
     /**
@@ -61,18 +61,6 @@ class ExamsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Exams  $exams
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Exams $exams, Request $request)
-    {
-        dd($request->all());
-
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Exams  $exams
@@ -80,7 +68,7 @@ class ExamsController extends Controller
      */
     public function edit(Exams $exams)
     {
-        return view('adminexam.adminExamshow')->with(['exams' => $exams->all()]);
+        return view('adminexam.adminExamcreate')->with(['exams' => $exams->all()]);
     }
 
     /**
@@ -94,8 +82,8 @@ class ExamsController extends Controller
     {
         Exams::find($request->questionary['id'])->update([
             'name' => $request->questionary['name'],
-            'deploy_exam' => $request->questionary['deploy_exam'],
-            'finish_exam' => $request->questionary['finish_exam'],
+            'deploy_exam' => $request->deploy_exam,
+            'finish_exam' => $request->finish_exam,
             'duration' => $request->questionary['duration'],
             'number_questions' => $request->questionary['number_questions'],
             'number_subsections' => $request->questionary['number_subsections'],
@@ -116,5 +104,10 @@ class ExamsController extends Controller
     public function destroy(Exams $exams)
     {
         //
+    }
+
+    public function examInit($exam)
+    {
+        return view('adminexam.exam')->with(['exam_id' => $exam]);
     }
 }
