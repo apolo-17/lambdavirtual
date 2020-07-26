@@ -6,10 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable, HasRoles;
+    use Notifiable;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -47,6 +50,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function hasRole($role)
     {
-        return User::where('role', $role)->get();
+        return Role::where('name', $role)->get();
+    }
+
+    public function hasPermission($role)
+    {
+        return Permission::where('role', $role)->get();
     }
 }

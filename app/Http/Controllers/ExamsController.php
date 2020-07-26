@@ -121,8 +121,4 @@ class ExamsController extends Controller
         //
     }
 
-    public function examInit($exam)
-    {
-        return view('adminexam.exam')->with(['exam_id' => $exam]);
-    }
 }

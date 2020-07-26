@@ -24,8 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /* if (auth()->user()->hasRole('Admin')) {
-            return view('layouts.dashboard.app');
+        /* if (auth()->user()->hasRole('edmin')) {
+            return redirect()->route('homeAdmin');;
+
         } else { */
 
             if (StudentProfile::where('user_id',auth()->user()->id)->first() != null) {
@@ -35,8 +36,4 @@ class HomeController extends Controller
         //}
     }
 
-    public function indexAdmin()
-    {
-        return view('layouts.dashboardAdmin.app');
-    }
 }
