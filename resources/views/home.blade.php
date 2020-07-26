@@ -11,14 +11,14 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <a href="{{ route('exam-student-init',['2']) }}">
+                    {{--  <a href="{{ route('exam-student-init',['2']) }}">
                         <button class="bg-red-700  hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">
                             Presentar examen
-                        </button>
+                        </button>  --}}
                         {{--  @if(@Auth::user()->hasRole('amin'))
                             <h2>Eres un cliente</h2>
                         @endif  --}}
-                    </a>
+                    {{--  </a>  --}}
 
                 </div>
             </div>
