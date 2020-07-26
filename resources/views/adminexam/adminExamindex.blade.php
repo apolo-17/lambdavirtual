@@ -52,7 +52,7 @@
                         {{ $exam->duration }}
                     </td>
                     <td class="border px-4 py-2">
-                        editar
+                        <a href="{{ route('exam-edit', $exam->id ) }}">Editar</a>
                         <delete-exam :exam_id="{{ $exam->id }}"></delete-exam>
                         ver
                     </td>

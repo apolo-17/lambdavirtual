@@ -26,45 +26,45 @@
 		<div class="adminwrap" id="app">
 			<div class="adminlateral">
 				<header class="adminlateral__header">
-					<img src="./images/logo.png" alt="logo lambda">
+					<img src="{{ asset('images/logo.png') }}" alt="logo lambda">
 				</header>
 				<div class="adminlateral__menu">
 					<ul>
 						<li>
                             <a href="{{ action('ExamsController@index') }}">
                                 <div class="adminlateral__item">
-                                    <img src="./images/ico-tablero.png" alt="" class="adminlateral__img">Examenes
+                                    <img src="{{ asset('images/ico-tablero.png') }}" alt="" class="adminlateral__img">Examenes
                                 </div>
                             </a>
 						</li>
 						<li>
 							<div class="adminlateral__item">
-								<img src="./images/ico-cursos.png" alt="" class="adminlateral__img"><a href="#">Mis Cursos</a>
+								<img src="{{ asset('images/ico-cursos.png') }}" alt="" class="adminlateral__img"><a href="#">Mis Cursos</a>
 							</div>
 						</li>
 						<li>
 							<div class="adminlateral__item">
-								<img src="./images/ico-chat.png" alt="" class="adminlateral__img"><a href="#">Chat</a>
+								<img src="{{ asset('images/ico-chat.png') }}" alt="" class="adminlateral__img"><a href="#">Chat</a>
 							</div>
 						</li>
 						<li>
 							<div class="adminlateral__item">
-								<img src="./images/ico-anuncio.png" alt="" class="adminlateral__img"><a href="#">Anuncios</a>
+								<img src="{{ asset('images/ico-anuncio.png') }}" alt="" class="adminlateral__img"><a href="#">Anuncios</a>
 							</div>
 						</li>
 						<li>
 							<div class="adminlateral__item">
-								<img src="./images/ico-foro.png" alt="" class="adminlateral__img"><a href="#">Foro</a>
+								<img src="{{ asset('images/ico-foro.png') }}" alt="" class="adminlateral__img"><a href="#">Foro</a>
 							</div>
 						</li>
 						<li>
 							<div class="adminlateral__item">
-								<img src="./images/ico-configuracion.png" alt="" class="adminlateral__img"><a href="#">Configuraciones</a>
+								<img src="{{ asset('images/ico-configuracion.png') }}" alt="" class="adminlateral__img"><a href="#">Configuraciones</a>
 							</div>
 						</li>
 						<li>
 							<div class="adminlateral__item">
-								<img src="./images/ico-usuario.png" alt="" class="adminlateral__img"><a href="#">Usuarios</a>
+								<img src="{{ asset('images/ico-usuario.png') }}" alt="" class="adminlateral__img"><a href="#">Usuarios</a>
 							</div>
 						</li>
 					</ul>
@@ -74,7 +74,7 @@
 				<div class="contentAdmin">
 					<form action="" class="contentAdmin__search">
 						<input type="text" placeholder="Buscar">
-						<button type="submit" class="contentAdmin__btn"><img src="./images/search.png" alt=""></button>
+						<button type="submit" class="contentAdmin__btn"><img src="{{ asset('images/search.png') }}" alt=""></button>
 					</form>
 				</div>
 				<div class="cardExamen-wrap">
