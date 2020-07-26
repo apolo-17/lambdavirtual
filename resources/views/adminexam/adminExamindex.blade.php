@@ -1,7 +1,7 @@
 @extends('layouts.dashboardAdmin.app')
 
 @section('content')
-@if($exams == null)
+@if($exams->isEmpty())
 
 <div class="cardExamen">
     <img src="{{ asset('images/premio.png') }}" alt="" class="cardExamen__image">
