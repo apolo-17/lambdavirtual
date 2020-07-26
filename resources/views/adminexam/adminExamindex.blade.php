@@ -1,7 +1,25 @@
-@extends('layouts.dashboard.app')
+@extends('layouts.dashboardAdmin.app')
 
 @section('content')
-<div>
+@if($exams == null)
+
+<div class="cardExamen">
+    <img src="{{ asset('images/premio.png') }}" alt="" class="cardExamen__image">
+    <h3 class="cardExamen__title">1er Concurso</h3>
+    <p class="cardExamen__text">
+        No tenemos disponible ningun<br>
+        exámen
+    </p>
+    <div class="cardExamen__wrapbtn">
+        <div class="cardExamen__btn">
+            <a href="{{ action('ExamsController@create') }}">Crear Examen</a>
+        </div>
+    </div>
+</div>
+
+@else
+
+<div class="mt-6">
     <div class="flex justify-end">
         <a href="{{ action('ExamsController@create') }}">
             <button class="bg-red-700  hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Crear Examen</button>
@@ -14,6 +32,7 @@
                 <th class="w-1/4 px-4 py-2">Fecha de lanzamiento</th>
                 <th class="w-1/4 px-4 py-2">Fecha final</th>
                 <th class="w-1/4 px-4 py-2">Duracion</th>
+                <th class="w-auto"></th>
                 <th class="w-auto">Activar</th>
 
             </thead>
@@ -33,6 +52,11 @@
                         {{ $exam->duration }}
                     </td>
                     <td class="border px-4 py-2">
+                        editar
+                        eliminar
+                        ver
+                    </td>
+                    <td class="border px-4 py-2">
                         <deploy-exam
                             :exam_id="{{ $exam->id }}"
                             :active="{{ $exam->active }}"
@@ -44,4 +68,8 @@
         </table>
     </div>
 </div>
+
+@endif
+
+
 @endsection

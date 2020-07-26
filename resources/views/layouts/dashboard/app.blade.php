@@ -59,7 +59,6 @@
                         </div>
                     </li>
                 </li>
-                <img src="{{ asset('images/ico-configuracion-white.png') }}" alt="" class="iconosmenu"><a href="{{ action('ExamsController@index') }}" >Administracion de examenes</a>
                 </li>
                 </ul>
             </div>

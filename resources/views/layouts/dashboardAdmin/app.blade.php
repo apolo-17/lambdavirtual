@@ -1,15 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin lambda</title>
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all-admin.css') }}" rel="stylesheet">
 </head>
 <body>
 <body>
-		<div class="adminwrap">
+		<div class="adminwrap" id="app">
 			<div class="adminlateral">
 				<header class="adminlateral__header">
 					<img src="./images/logo.png" alt="logo lambda">
@@ -17,9 +31,11 @@
 				<div class="adminlateral__menu">
 					<ul>
 						<li>
-							<div class="adminlateral__item">
-								<img src="./images/ico-tablero.png" alt="" class="adminlateral__img"><a href="#">Examenes</a>
-							</div>
+                            <a href="{{ action('ExamsController@index') }}">
+                                <div class="adminlateral__item">
+                                    <img src="./images/ico-tablero.png" alt="" class="adminlateral__img">Examenes
+                                </div>
+                            </a>
 						</li>
 						<li>
 							<div class="adminlateral__item">
@@ -62,19 +78,7 @@
 					</form>
 				</div>
 				<div class="cardExamen-wrap">
-					<div class="cardExamen">
-						<img src="./images/premio.png" alt="" class="cardExamen__image">
-						<h3 class="cardExamen__title">1er Concurso</h3>
-						<p class="cardExamen__text">
-							No tenemos disponible ningun<br>
-							exámen
-						</p>
-						<div class="cardExamen__wrapbtn">
-							<div class="cardExamen__btn">
-								Crear Examen
-							</div>
-						</div>
-					</div>
+					@yield('content')
 				</div>
 			</section>
 			<section class="contentRight">
@@ -83,7 +87,7 @@
                     <img src="{{ asset('images/ico-login-mail.png') }}" alt="" class="contentRight__mensaje">
                 </div>
                 <div>
-                    {{ Auth::user()->name }}
+                    {{ auth()->user()->name }}
                 </div>
                 <div>
                     <img src="{{ asset('images/avatar.png') }}" alt="">
