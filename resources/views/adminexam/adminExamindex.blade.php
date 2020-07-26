@@ -53,7 +53,7 @@
                     </td>
                     <td class="border px-4 py-2">
                         editar
-                        eliminar
+                        <delete-exam :exam_id="{{ $exam->id }}"></delete-exam>
                         ver
                     </td>
                     <td class="border px-4 py-2">

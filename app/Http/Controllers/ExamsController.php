@@ -110,15 +110,19 @@ class ExamsController extends Controller
         return $exams;
     }
 
+    public function delete($id)
+    {
+        Exams::where('id', $id)->delete(); // $request->id MUST be an array
+    }
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Exams  $exams
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Exams $exams)
+    public function destroy(Request $request)
     {
-        //
+        dd($request->all());
     }
 
 }

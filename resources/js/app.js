@@ -20,8 +20,12 @@ Vue.component('answers', require('./components/Answers.vue').default);
 Vue.component('deploy-exam', require('./components/DeployExam').default);
 Vue.component('exam-model', require('./components/ExamModel').default);
 Vue.component('message-exam', require('./components/MessageExam').default);
+//Present exam student
 Vue.component('questions-exam', require('./components/QuestionsExam').default);
 Vue.component('answers-exam', require('./components/AnswersExam').default);
+//Action of exam to admin
+Vue.component('delete-exam', require('./components/DeleteExam').default);
+Vue.component('show-exam', require('./components/ShowExam').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
