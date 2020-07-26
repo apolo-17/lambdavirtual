@@ -24,3 +24,7 @@ mix.sass('resources/sass/app.scss', 'public/css')
 mix.styles([
     'public/css/styles_lambda.css'
 ], 'public/css/all.css');
+
+mix.styles([
+    'public/css/styles-admin.css'
+], 'public/css/all-admin.css');
