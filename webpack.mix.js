@@ -28,3 +28,7 @@ mix.styles([
 mix.styles([
     'public/css/styles-admin.css'
 ], 'public/css/all-admin.css');
+
+mix.styles([
+    'public/css/styles-examen.css'
+], 'public/css/all-examen.css');
