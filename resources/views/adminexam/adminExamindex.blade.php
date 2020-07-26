@@ -51,9 +51,17 @@
                     <td class="border px-4 py-2">
                         {{ $exam->duration }}
                     </td>
-                    <td class="border px-4 py-2">
-                        editar
-                        eliminar
+                    <td class="border px-4 py-2 adminexamen__action">
+                        <div class="adminexamen__action-edit">
+                            <a href="">
+                                <img src="{{ asset('images/edit.png') }}" alt="editar">
+                            </a>
+                        </div>
+                        <div class="adminexamen__action-remove">
+                            <a href="">
+                                <img src="{{  asset('images/remove.png') }}" alt="eliminar">
+                            </a>
+                        </div>
                         ver
                     </td>
                     <td class="border px-4 py-2">

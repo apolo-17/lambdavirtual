@@ -279,6 +279,11 @@
   .contentAdmin__btn img {
     width: 20px;
   }
+  
+  .adminexamen__action-edit, .adminexamen__action-remove {
+    margin-bottom: 0.5em;
+  }
+
   @media screen and (max-width: 768px) {
     .hero {
       display: none;
