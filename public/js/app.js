@@ -1996,8 +1996,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exam_id'],
+  data: function data() {
+    return {
+      image_src: '/images/remove.png'
+    };
+  },
   methods: {
     deleteExam: function deleteExam() {
       var confirmation = confirm('Deseas elminar este examen ?');
@@ -59424,7 +59431,10 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("button", { on: { click: _vm.deleteExam } }, [_vm._v("Borrar")])
+    _c("img", {
+      attrs: { src: _vm.image_src, alt: "eliminar" },
+      on: { click: _vm.deleteExam }
+    })
   ])
 }
 var staticRenderFns = []

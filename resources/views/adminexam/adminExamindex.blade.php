@@ -51,10 +51,16 @@
                     <td class="border px-4 py-2">
                         {{ $exam->duration }}
                     </td>
-                    <td class="border px-4 py-2">
-                        <a href="{{ route('exam-edit', $exam->id ) }}">Editar</a>
-                        <delete-exam :exam_id="{{ $exam->id }}"></delete-exam>
-                        ver
+                    <td class="border px-4 py-2 adminexamen__action">
+                        <div class="adminexamen__action-edit">
+                            <a href="{{ route('exam-edit', $exam->id ) }}">
+                                <img src="{{ asset('images/edit.png') }}" alt="editar">
+                            </a>
+                        </div>
+                        <div class="adminexamen__action-remove">
+                            <delete-exam :exam_id="{{ $exam->id }}" ></delete-exam>
+                        </div>
+                        ...
                     </td>
                     <td class="border px-4 py-2">
                         <deploy-exam

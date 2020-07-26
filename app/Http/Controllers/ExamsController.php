@@ -112,7 +112,7 @@ class ExamsController extends Controller
 
     public function delete($id)
     {
-        Exams::where('id', $id)->delete(); // $request->id MUST be an array
+        Exams::where('id', $id)->delete();
     }
     /**
      * Remove the specified resource from storage.

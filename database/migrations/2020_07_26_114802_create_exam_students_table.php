@@ -20,7 +20,7 @@ class CreateExamStudentsTable extends Migration
             $table->foreign('student_id')->references('id')->on('student_profiles');
 
             $table->bigInteger('exam_id')->unsigned();
-            $table->foreign('exam_id')->references('id')->on('exams');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
 
             $table->json('questionary');
 

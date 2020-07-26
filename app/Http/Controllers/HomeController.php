@@ -24,16 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /* if (auth()->user()->hasRole('edmin')) {
+        if (auth()->user()->email == 'admin@grupolambda.com') {
             return redirect()->route('homeAdmin');;
 
-        } else { */
+        } else {
 
             if (StudentProfile::where('user_id',auth()->user()->id)->first() != null) {
                 return view('home');
             }
             return redirect()->route('student-profile-create');
-        //}
+        }
     }
 
 }

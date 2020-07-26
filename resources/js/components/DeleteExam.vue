@@ -1,12 +1,18 @@
 <template>
     <div>
-        <button @click="deleteExam">Borrar</button>
+
+            <img @click="deleteExam" :src="image_src" alt="eliminar">
+
     </div>
 </template>
 <script>
 export default {
     props:['exam_id'],
-
+    data() {
+        return {
+            image_src: '/images/remove.png',
+        }
+    },
     methods: {
         deleteExam(){
             let confirmation = confirm('Deseas elminar este examen ?');
