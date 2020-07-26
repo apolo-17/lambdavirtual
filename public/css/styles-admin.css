@@ -1,0 +1,292 @@
+.adminwrap {
+    display: grid;
+    grid-template-columns: 15% 65% 20%;
+    height: 100vh;
+  }
+  .content {
+    padding: 1em;
+    padding-left: 2em;
+    background-color: #fafafa;
+    color: #707070;
+    border-left: 2px solid #f4f4f4;
+  }
+  .content__header {
+    display: flex;
+    padding-bottom: 1em;
+  }
+  .content__header div {
+    width: 30%;
+  }
+  .content__title {
+    padding-bottom: 1em;
+  }
+  .content__formUsers input[type="text"],
+  .content__formUsers input[type="password"],
+  .content__formUsers input[type="email"],
+  .content__formUsers input[type="number"] {
+    border: 0;
+    box-shadow: 2px 5px 6px rgba(0,0,0,0.1);
+    font-size: 1em;
+    border-radius: 10px;
+    color: #707070;
+    padding: 0.5em;
+    margin-bottom: 1.1em;
+    width: 80%;
+  }
+  .content__formUsers input:focus,
+  .content__formUsers input.form-control:focus {
+    outline: none !important;
+    outline-width: 0 !important;
+  }
+  .adminlateral {
+    padding-top: 1em;
+  }
+  .adminlateral__header {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+  .adminlateral__menu ul {
+    margin: 0;
+    padding: 0;
+  }
+  .adminlateral__menu ul li {
+    margin: 0;
+    list-style: none;
+  }
+  .adminlateral__menu ul li a {
+    color: #707070;
+    text-decoration: none;
+  }
+  .adminlateral__menu ul li:hover {
+    background: #b60011;
+  }
+  .adminlateral__menu ul li:hover a {
+    color: #fff;
+    text-decoration: none;
+  }
+  .adminlateral__item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.7em;
+  }
+  .adminlateral__img {
+    width: 20px;
+    margin-right: 10px;
+  }
+  .contentRight {
+    background-color: #fafafa;
+    text-align: right;
+    padding: 1em 2em;
+  }
+  .contentRight__header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 1em;
+  }
+  .contentRight__header div {
+    margin-left: 0.5em;
+  }
+  .contentRight__mensaje {
+    width: 22px;
+  }
+  .contentRight__avatar {
+    width: 60px;
+  }
+  .terminos {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .terminos p {
+    text-align: justify;
+    width: 20px;
+    margin-right: 10px;
+  }
+  .cardQuestion-wrap {
+    width: 50%;
+    margin: 0 auto;
+  }
+  .cardQuestion-wrap .cardQuestion {
+    border: 1px solid #f4f4f4;
+    box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    padding: 1em;
+    width: 90%;
+    margin-bottom: 2em;
+    display: grid;
+    grid-template-columns: 85% auto;
+  }
+  .cardQuestion-wrap .cardQuestion__title {
+    font-weight: bold;
+    margin-bottom: 1em;
+  }
+  .cardQuestion-wrap .cardQuestion .cardQuestion__divright {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .cardQuestion-wrap .cardQuestion .cardQuestion__divright img {
+    margin-right: 10px;
+  }
+  .cardExamen-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .cardExamen {
+    width: 350px;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    margin-top: 6em;
+  }
+  .cardExamen__image {
+    margin-bottom: 1em;
+  }
+  .cardExamen__title {
+    color: #b60011;
+    margin: 0;
+    font-weight: normal;
+  }
+  .cardExamen__text {
+    margin: 0 0 1em 0;
+  }
+  .cardExamen__wrapbtn {
+    display: flex;
+    justify-content: center;
+  }
+  .cardExamen__btn {
+    border-radius: 20px;
+    padding: 0.6em 1.4em;
+    color: #fff;
+    background-color: #b60011;
+    width: 250px;
+    text-align: center;
+    box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.16);
+    text-decoration: none;
+  }
+  .examenwrap {
+    height: 100vh;
+  }
+  .examenHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+  }
+  .examenHeader img {
+    height: 40px;
+  }
+  .examenHeader__right {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .examenContent__item {
+    width: 35%;
+    margin: 0 auto;
+  }
+  .examenContent__head {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-bottom: 3px dotted #f4f4f4;
+    padding: 0.5em;
+    margin-bottom: 1em;
+  }
+  .examenContent__images {
+    margin: 0 0.5em;
+  }
+  .examenContent__title {
+    color: #b60011;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+  }
+  .examenContent__conteo {
+    background-color: #f4f4f4;
+    padding: 0.5em;
+    border-radius: 10px;
+    color: #707070;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .examenContent__number {
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    color: #000;
+    background: #fff;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+  }
+  .wrap {
+    display: flex;
+    height: 100%;
+  }
+  .btn {
+    color: #fff;
+    border-radius: 10px;
+    background-color: #caa23e;
+    width: 100%;
+    border: 0;
+    padding: 0.5em 0;
+    margin: 1em 0;
+    text-align: center;
+  }
+  .btn:hover {
+    background-color: #deaa28;
+  }
+  .hero {
+    width: 70%;
+  }
+  .hero__img {
+    width: 100%;
+    height: 100%;
+  }
+  .contentAdmin {
+    text: align center;
+  }
+  .contentAdmin__search {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  .contentAdmin__search input[type="text"] {
+    border: 0;
+    box-shadow: 2px 5px 6px rgba(0,0,0,0.1);
+    font-size: 1em;
+    border-radius: 10px 0 0 10px;
+    color: #707070;
+    padding: 0.5em;
+    padding-left: 2em;
+    width: 70%;
+  }
+  .contentAdmin__search input:focus,
+  .contentAdmin__search input.form-control:focus {
+    outline: none !important;
+    outline-width: 0 !important;
+  }
+  .contentAdmin__btn {
+    background-color: #b60011;
+    border: 0;
+    border-radius: 0 10px 10px 0;
+    padding: 0.5em 1.5em;
+  }
+  .contentAdmin__btn img {
+    width: 20px;
+  }
+  @media screen and (max-width: 768px) {
+    .hero {
+      display: none;
+    }
+  }
+  @media screen and (max-width: 320px) {
+    .hero {
+      display: none;
+    }
+  }
+  

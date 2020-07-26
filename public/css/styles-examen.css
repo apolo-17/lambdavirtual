@@ -1,0 +1,51 @@
+.examenwrap {
+    height: 100vh;
+  }
+  .examenHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em;
+  }
+  .examenHeader img {
+    height: 40px;
+  }
+  .examenHeader__right {
+    display: flex;
+    justify-content: flex-end;
+  }
+  .examenContent__item {
+    width: 35%;
+    margin: 0 auto;
+  }
+  .examenContent__head {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    border-bottom: 3px dotted plomo;
+    padding: 0.5em;
+    margin-bottom: 1em;
+  }
+  .examenContent__images {
+    margin: 0 0.5em;
+  }
+  .examenContent__title {
+    color: rojo;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+  }
+  .examenContent__conteo {
+    background-color: plomo;
+    padding: 0.5em;
+    border-radius: 10px;
+    color: plomotexto;
+    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .examenContent__number {
+    font-weight: bold;
+    margin-right: 0.5em;
+  }
+  
