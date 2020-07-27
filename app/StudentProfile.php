@@ -15,6 +15,8 @@ class StudentProfile extends Model
 
     protected $fillable = ['user_id','name','last_name','phone_number','country_id','department','province','district','born_date','gender','dni','university_id','school_cycle_id','academic_degree_id','english_level_id','work'];
 
+    protected $appends = ['full_name'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -43,5 +45,10 @@ class StudentProfile extends Model
     public function englishLevel()
     {
         return $this->belongsTo(EnglishLevel::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->last_name . ' ' . $this->name;
     }
 }

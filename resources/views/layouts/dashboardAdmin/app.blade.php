@@ -63,9 +63,11 @@
 							</div>
 						</li>
 						<li>
-							<div class="adminlateral__item">
-								<img src="{{ asset('images/ico-usuario.png') }}" alt="" class="adminlateral__img"><a href="#">Usuarios</a>
-							</div>
+                            <a href="{{ action('StudentController@index') }}">
+                                <div class="adminlateral__item">
+                                    <img src="{{ asset('images/ico-usuario.png') }}" alt="" class="adminlateral__img">Usuarios
+                                </div>
+                            </a>
 						</li>
 					</ul>
 				</div>

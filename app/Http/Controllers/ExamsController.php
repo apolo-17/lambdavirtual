@@ -13,7 +13,8 @@ class ExamsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   $exams = Exams::get();
+    {
+        $exams = Exams::get();
         return view('adminexam.adminExamindex')->with(['exams' => $exams]);
     }
 
