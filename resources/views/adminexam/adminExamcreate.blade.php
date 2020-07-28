@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.app')
+@extends('layouts.dashboardAdmin.app')
 @section('content')
 
 <exam-creation></exam-creation>

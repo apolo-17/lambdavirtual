@@ -1,7 +1,7 @@
 @extends('layouts.dashboardAdmin.app')
 
 @section('content')
-@if($exams == null)
+@if($exams->isEmpty())
 
 <div class="cardExamen">
     <img src="{{ asset('images/premio.png') }}" alt="" class="cardExamen__image">
@@ -53,16 +53,14 @@
                     </td>
                     <td class="border px-4 py-2 adminexamen__action">
                         <div class="adminexamen__action-edit">
-                            <a href="">
+                            <a href="{{ route('exam-edit', $exam->id ) }}">
                                 <img src="{{ asset('images/edit.png') }}" alt="editar">
                             </a>
                         </div>
                         <div class="adminexamen__action-remove">
-                            <a href="">
-                                <img src="{{  asset('images/remove.png') }}" alt="eliminar">
-                            </a>
+                            <delete-exam :exam_id="{{ $exam->id }}" ></delete-exam>
                         </div>
-                        ver
+                        ...
                     </td>
                     <td class="border px-4 py-2">
                         <deploy-exam

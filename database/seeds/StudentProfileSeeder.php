@@ -26,5 +26,12 @@ class StudentProfileSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
             'password' => bcrypt('sims3'),
         ]);
+
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@grupolambda.com',
+            'email_verified_at' => Carbon::now(),
+            'password' => bcrypt('password'),
+        ]);
     }
 }
