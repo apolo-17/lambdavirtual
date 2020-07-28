@@ -79,7 +79,7 @@
         </header>
         <section>
             <p class="mail__name">
-                {{ auth()->user()->name }}
+                {{ $user }}
             </p>
             <p class="mail__p">
                 Por favor pulsa el siguiente botón para confirmar tu correo electrónico.
