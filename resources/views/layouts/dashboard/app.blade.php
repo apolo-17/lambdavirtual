@@ -30,32 +30,32 @@
                 <ul>
                     <li>
                         <div class="userslateral__item">
-                            <img src="{{ asset('images/ico-tablero-black.png') }}" alt="" class="userslateral__img"><a href="{{ action('HomeController@index') }}">Tablero</a>
+                            <img src="./images/ico-tablero.png" alt="" class="userslateral__img"><a href="{{ action('HomeController@index') }}">Tablero</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="{{ asset('images/ico-cursos-black.png') }}" alt="" class="userslateral__img"><a href="#">Mis Cursos</a>
+                            <img src="./images/ico-cursos.png" alt="" class="userslateral__img"><a href="#">Mis Cursos</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="{{ asset('images/ico-chat-black.png') }}" alt="" class="userslateral__img"><a href="#">Chat</a>
+                            <img src="./images/ico-chat.png" alt="" class="userslateral__img"><a href="#">Chat</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="{{ asset('images/ico-anuncios-black.png') }}" alt="" class="userslateral__img"><a href="#">Anuncios</a>
+                            <img src="./images/ico-anuncio.png" alt="" class="userslateral__img"><a href="#">Anuncios</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="{{ asset('images/ico-foro-black.png') }}" alt="" class="userslateral__img"><a href="#">Foro</a>
+                            <img src="./images/ico-foro.png" alt="" class="userslateral__img"><a href="#">Foro</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="{{ asset('images/ico-confi-black.png') }}" alt="" class="userslateral__img"><a href="{{ action('StudentProfileController@index') }}">Configuraciones</a>
+                            <img src="./images/ico-configuracion.png" alt="" class="userslateral__img"><a href="{{ action('StudentProfileController@index') }}">Configuraciones</a>
                         </div>
                     </li>
                 </li>
@@ -64,16 +64,24 @@
             </div>
         </div>
         <section class="content">
+            <div class="contentAdmin">
+                <form action="" class="contentAdmin__search">
+                    <input type="text" placeholder="Buscar">
+                    <button type="submit" class="contentAdmin__btn"><img src="./images/search.png" alt=""></button>
+                </form>
+                <br /><br />
+			</div>
 
             @yield('content')
         </section>
+        
         <section class="contentRight">
             <header class="contentRight__header">
                 <div>
                     <img src="{{ asset('images/ico-login-mail.png') }}" alt="" class="contentRight__mensaje">
                 </div>
                 <div>
-                    {{ Auth::user()->email }}
+                    {{ Auth::user()->name }}
                 </div>
                 <div>
                     <img src="{{ asset('images/avatar.png') }}" alt="">

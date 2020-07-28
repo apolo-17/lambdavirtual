@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 
 @section('content')
-<div class="container">
+<div class="container" style="height:100vh;">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
