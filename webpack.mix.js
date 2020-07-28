@@ -32,3 +32,7 @@ mix.styles([
 mix.styles([
     'public/css/styles-examen.css'
 ], 'public/css/all-examen.css');
+
+mix.styles([
+    'public/css/styles-verificate-email.css'
+], 'public/css/all-verificate-email.css');
