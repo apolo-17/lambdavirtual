@@ -13,8 +13,8 @@ class Version_1_0_0_Seeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Admin',
-            'email' => 'admin@grupolambda.com',
+            'name' => 'Administrador Lambda',
+            'email' => 'admin@grupolambda.com.pe',
             'email_verified_at' => Carbon::now(),
             'password' => bcrypt('password'),
         ]);
