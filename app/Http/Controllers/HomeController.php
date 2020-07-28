@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->email == 'admin@grupolambda.com') {
+        if (auth()->user()->email == 'admin@grupolambda.com.pe') {
             return redirect()->route('homeAdmin');;
 
         } else {
