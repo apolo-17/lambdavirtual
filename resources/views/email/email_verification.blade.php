@@ -73,13 +73,13 @@
 <body>
     <div class="mail">
         <header class="mail__header">
-            <img src="{{ asset('images/logo.png') }}" alt="logo" class="mail__logo">
+            <img src="{{ $message->embed($url_img) }}" alt="{{config('app.name')}}" class="mail__logo">
             <h1 class="mail__title mail__titleformat">Concurso Lambda</h1>
             <h2 class="mail__text mail__titleformat">Queremos validar tu correo</h2>
         </header>
         <section>
             <p class="mail__name">
-                Hola María Rodríguez
+                {{ auth()->user()->name }}
             </p>
             <p class="mail__p">
                 Por favor pulsa el siguiente botón para confirmar tu correo electrónico.

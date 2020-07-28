@@ -42,12 +42,13 @@ class VerifyEmailNotification extends VerifyEmail
     public function toMail($notifiable)
     {
         $verificationUrl = $this->verificationUrl($notifiable);
+        $img_url = env('APP_URL')."/images/logo.png";
 
-        return (new MailMessage)->view('email.email_verification', ['url' => $verificationUrl]);
-        return (new MailMessage)
+        return (new MailMessage)->view('email.email_verification', ['url' => $verificationUrl, 'url_img'=>$img_url]);
+        /* return (new MailMessage)
                     ->line('Hola lodla.')
                     ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Thank you for using our application!'); */
     }
 
     /**
