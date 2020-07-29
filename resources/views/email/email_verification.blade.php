@@ -6,19 +6,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
      <!-- Styles -->
-    <style type="text/css">
+     <style type="text/css">
         body {
         margin: 0;
         padding: 0;
         color: #000;
-        background: #fff;
+        background: #f5f5f5;
         font-size: 16px;
         font-family: 'Open Sans', sans-serif;
         }
         .mail {
-        width: 40%;
-        margin: 0 auto;
-        padding: 1em;
+        background: #fff;
+        width: 28%;
+        margin: 1em auto;
+        padding: 2.5em;
         color: #707070;
         }
         .mail__header {
@@ -56,11 +57,14 @@
         margin: 2em auto;
         padding: 0.5em;
         text-align: center;
-        width: 50%;
+        width: 40%;
         }
         .mail__btn a {
         color: #fff;
         text-decoration: none;
+        }
+        .mail__btn-recovery {
+        width: 50%;
         }
         .mail__footer {
         font-size: 0.9em;
@@ -68,6 +72,12 @@
         .mail__help {
         text-align: center;
         }
+        .mail__copyright {
+        color: #d8d8d8;
+        text-align: center;
+        font-size: 0.8em;
+        }
+
     </style>
 </head>
 <body>
@@ -97,5 +107,8 @@
             </p>
         </footer>
     </div>
+    <p class="mail__copyright">
+		© 2020 Grupo-Lambda. Todos los derechos reservados.
+	</p>
 </body>
 </html>
