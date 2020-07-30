@@ -144,7 +144,6 @@ class ExamStudentController extends Controller
     public function structuringExam($exam)
     {
         $exam = json_decode($exam);
-
         foreach ($exam as $question) {
             foreach ($question->answers as $answer) {
                 $answer->value = false;

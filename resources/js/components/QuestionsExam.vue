@@ -32,13 +32,14 @@ export default {
     },
     methods: {
         testButton(){
-
-            this.$emit('question_solved',this.question)
+            this.question.question_solved = true
+            this.$emit('question_solved',this.question.question_solved = true)
 
         },
         nextQuestion(answer) {
-
-            this.show_next_question = true
+            this.question.question_solved = true;
+            this.question.answer_selected = answer;
+            this.show_next_question = true;
         }
     },
 

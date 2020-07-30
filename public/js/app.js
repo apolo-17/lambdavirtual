@@ -1921,18 +1921,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['answer', 'number_question'],
   data: function data() {
     return {
-      checked: this.answer.value
+      checked: this.answer.value,
+      answer_correct: ''
     };
   },
   computed: {},
   methods: {
     valueAnswers: function valueAnswers(event) {
       if (event.target.value != 'off') {
-        this.answer.value = true;
+        this.answer.value = this.answer.id;
       }
     }
   }
@@ -1974,7 +1977,7 @@ __webpack_require__.r(__webpack_exports__);
     valueAnswers: function valueAnswers(event) {
       if (event.target.value != 'off') {
         this.answer.value = true;
-        this.$emit('nextQuestion', this.answer.value);
+        this.$emit('nextQuestion', this.answer.id);
       }
     }
   }
@@ -2232,7 +2235,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var question = {
           id: index + 1,
           question: '',
-          answers: []
+          answers: [],
+          question_solved: false,
+          answer_correct: '',
+          answer_selected: ''
         }; //
 
         questionary.push(question);
@@ -2282,12 +2288,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
+//
 //
 //
 //
@@ -2302,7 +2303,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   props: ['exam_id'],
   data: function data() {
     return {
-      question_solved_count: 0,
+      question_solved: 0,
+      question_out_solved: 0,
       question_exam: null,
       show_question_exam: false,
       questionary: null
@@ -2313,92 +2315,40 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
     axios.get("/get-exam-created/".concat(this.exam_id)).then(function (response) {
       _this.questionary = JSON.parse(response.data.questionary);
-      /* let answer_solved = null;
-      let question_solved = null;
-      let question_solved_count = 0;
-      questions.forEach(question => {
-          question.answers.forEach(answer => {
-              if (answer.value == true) {
-                  answer_solved = question.id
-                  question_solved = questions.indexOf(questions.find(questionId => questionId.id === question.id));
-                  questions.splice(question_solved);
-                  console.log(questions)
-                  question_solved_count += question_solved
-              }
-          })
-      }); */
-
-      /* let question_solved = questions.indexOf(questions.find(question => question.id === answer_solved));
-      questions.splice(question_solved,1); */
-
-      console.log(_this.questionary);
-      /* let question_aleatorio = Math.floor(Math.random()*questions.length);
-       this.question_exam = questions[question_aleatorio]; */
-
       _this.show_question_exam = true;
     });
   },
   computed: {
     questionsUpdated: function questionsUpdated() {
-      var _this2 = this;
-
       var questions = this.questionary;
       var answer_solved = null;
-      var question_solved = null;
+      var question_out_solved = [];
+      var question_solved = [];
+      var questions_splice = [];
       questions.forEach(function (question) {
-        question.answers.forEach(function (answer) {
-          if (answer.value == true) {
-            answer_solved = question.id;
-          }
-
-          _this2.question_solved_count += question_solved;
-        });
+        if (question.question_solved == false) {
+          question_out_solved.push(question);
+        } else {
+          question_solved.push(question);
+        }
       });
-      question_solved = questions.indexOf(questions.find(function (questionId) {
-        return questionId.id === answer_solved;
-      }));
-      questions.splice(question_solved);
-      console.log('numero de preguntas', questions);
-      var question_aleatorio = Math.floor(Math.random() * questions.length);
-      return questions[question_aleatorio];
+      var question_aleatorio = Math.floor(Math.random() * question_out_solved.length);
+      this.question_out_solved = question_out_solved.length;
+      this.question_solved = question_solved.length;
+      return question_out_solved[question_aleatorio];
     }
   },
   methods: {
-    updateQuestions: function updateQuestions(question_updated) {
-      var questions = JSON.parse(question_updated.questionary);
-      var answer_solved = null;
-      var question_solved = null;
-      var question_solved_count = 0;
-      questions.forEach(function (question) {
-        question.answers.forEach(function (answer) {
-          if (answer.value == true) {
-            answer_solved = question.id;
-            question_solved = questions.indexOf(questions.find(function (questionId) {
-              return questionId.id === question.id;
-            }));
-            questions.splice(question_solved);
-            question_solved_count += question_solved;
-          }
-        });
-      });
-      /* let question_solved = questions.indexOf(questions.find(question => question.id === answer_solved));
-      questions.splice(question_solved,1); */
-
-      var question_aleatorio = Math.floor(Math.random() * questions.length);
-      console.log(questions);
-      return this.question_exam = questions[question_aleatorio];
-    },
     updateQuestionary: function updateQuestionary(question_solved) {
-      var _this3 = this;
-
       var params = {
         exam_id: this.exam_id,
         question_solved: question_solved
       };
-      axios.post('/exam-student-update', _objectSpread({}, params)).then(function (response) {
-        console.log('This updated: ', response.data);
-        _this3.questionary = JSON.parse(response.data.questionary);
-      });
+      console.log(params);
+      /* axios.post('/exam-student-update', {...params}).then(response => {
+           this.questionary = JSON.parse(response.data.questionary)
+          console.log('This updated: ',this.questionary)
+      }); */
     }
   }
 });
@@ -2504,6 +2454,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['questionary'],
@@ -2518,19 +2472,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       description: null,
       errors: null,
       questions: [],
-      value_answer: false
+      value_answer: false,
+      answer_correct: ''
     };
   },
   computed: {
     createQuestion: function createQuestion() {
+      //console.log(JSON.parse(this.questionary.questionary))
       return _.isEmpty(this.questionary) ? null : this.questions = JSON.parse(this.questionary.questionary);
     }
+    /*
+    answerCorrect(answer_correct){
+      return answer_correct ? '' : answer_correct;
+    } */
+
   },
   mounted: function mounted() {},
   methods: {
     parseJson: function parseJson(questionary) {
       JSON.parse(questionary);
     },
+
+    /* answerCorrect(answer_correct){
+        return this.answer_correct = answer_correct
+    }, */
     editExam: function editExam() {
       var _this = this;
 
@@ -2623,9 +2588,12 @@ __webpack_require__.r(__webpack_exports__);
   computed: {},
   methods: {
     testButton: function testButton() {
-      this.$emit('question_solved', this.question);
+      this.question.question_solved = true;
+      this.$emit('question_solved', this.question.question_solved = true);
     },
     nextQuestion: function nextQuestion(answer) {
+      this.question.question_solved = true;
+      this.question.answer_selected = answer;
       this.show_next_question = true;
     }
   }
@@ -59421,6 +59389,10 @@ var render = function() {
     _c("div", { staticClass: "ml-24 my-4" }, [
       _c("ul", {}, [
         _c("li", { staticClass: "my-4 flex items-center" }, [
+          _c("label", { staticClass: "mr-2", attrs: { for: "" } }, [
+            _vm._v(_vm._s(_vm.answer.id))
+          ]),
+          _vm._v(" "),
           _c("input", {
             staticClass: "mr-4",
             attrs: {
@@ -59976,6 +59948,18 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("div", [
+        _c("h2", [
+          _vm._v(
+            "Preguntas faltantes: " +
+              _vm._s(_vm.question_out_solved) +
+              "/ " +
+              _vm._s(_vm.question_solved) +
+              "preguntas contestadas"
+          )
+        ])
+      ]),
+      _vm._v(" "),
       _vm.show_question_exam
         ? _c("questions-exam", {
             attrs: { question: _vm.questionsUpdated },
@@ -60312,7 +60296,43 @@ var render = function() {
                       key: index.id,
                       attrs: { answer: answer, number_question: question.id }
                     })
-                  })
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "my-4 flex items-center" }, [
+                    _c("label", { staticClass: "mr-2" }, [
+                      _vm._v("Respuesta correcta:")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: question.answer_correct,
+                          expression: "question.answer_correct"
+                        }
+                      ],
+                      staticClass:
+                        "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Numero de respuesta"
+                      },
+                      domProps: { value: question.answer_correct },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            question,
+                            "answer_correct",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ])
                 ],
                 2
               )

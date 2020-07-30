@@ -1,5 +1,6 @@
 <template>
     <div>
+        <div><h2>Preguntas faltantes: {{question_out_solved}}/ {{question_solved}}preguntas contestadas</h2></div>
         <questions-exam v-if="show_question_exam"
             :question="questionsUpdated"
             @question_solved="updateQuestionary"
@@ -14,7 +15,8 @@ export default {
 
     data() {
         return {
-            question_solved_count: 0,
+            question_solved: 0,
+            question_out_solved: 0,
             question_exam: null,
             show_question_exam: false,
             questionary: null
@@ -26,27 +28,6 @@ export default {
         axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
             this.questionary = JSON.parse(response.data.questionary)
 
-            /* let answer_solved = null;
-            let question_solved = null;
-            let question_solved_count = 0;
-            questions.forEach(question => {
-                question.answers.forEach(answer => {
-                    if (answer.value == true) {
-                        answer_solved = question.id
-                        question_solved = questions.indexOf(questions.find(questionId => questionId.id === question.id));
-                        questions.splice(question_solved);
-                        console.log(questions)
-                        question_solved_count += question_solved
-                    }
-                })
-            }); */
-            /* let question_solved = questions.indexOf(questions.find(question => question.id === answer_solved));
-            questions.splice(question_solved,1); */
-
-            console.log(this.questionary)
-            /* let question_aleatorio = Math.floor(Math.random()*questions.length);
-
-            this.question_exam = questions[question_aleatorio]; */
             this.show_question_exam = true
         });
 
@@ -56,66 +37,38 @@ export default {
             let questions = this.questionary
 
             let answer_solved = null;
-            let question_solved = null;
+            let question_out_solved = [];
+            let question_solved = [];
+            let questions_splice = [];
 
             questions.forEach(question => {
-                question.answers.forEach(answer => {
-                    if (answer.value == true) {
-                        answer_solved = question.id
-                    }
+                if(question.question_solved == false){
+                    question_out_solved.push(question)
+                } else {
+                    question_solved.push(question)
+                }
 
-                    this.question_solved_count += question_solved
-                })
             });
 
-            question_solved = questions.indexOf(questions.find(questionId => questionId.id === answer_solved));
-            questions.splice(question_solved);
-
-            console.log('numero de preguntas',questions)
-
-            let question_aleatorio = Math.floor(Math.random()*questions.length);
-
-
-            return questions[question_aleatorio];
+            let question_aleatorio = Math.floor(Math.random()* question_out_solved.length);
+            this.question_out_solved = question_out_solved.length
+            this.question_solved = question_solved.length
+            return question_out_solved[question_aleatorio];
         }
     },
 
     methods: {
-        updateQuestions(question_updated){
-
-            let questions = JSON.parse(question_updated.questionary)
-
-            let answer_solved = null;
-            let question_solved = null;
-            let question_solved_count = 0
-            questions.forEach(question => {
-                question.answers.forEach(answer => {
-                    if (answer.value == true) {
-                        answer_solved = question.id
-                        question_solved = questions.indexOf(questions.find(questionId => questionId.id === question.id));
-                        questions.splice(question_solved);
-                        question_solved_count += question_solved
-                    }
-                })
-            });
-
-            /* let question_solved = questions.indexOf(questions.find(question => question.id === answer_solved));
-            questions.splice(question_solved,1); */
-
-            let question_aleatorio = Math.floor(Math.random()*questions.length);
-            console.log(questions)
-            return this.question_exam = questions[question_aleatorio];
-        },
         updateQuestionary(question_solved){
             let params = {
                 exam_id: this.exam_id,
                 question_solved: question_solved
             }
+            console.log(params)
+            /* axios.post('/exam-student-update', {...params}).then(response => {
 
-            axios.post('/exam-student-update', {...params}).then(response => {
-                console.log('This updated: ',response.data)
                 this.questionary = JSON.parse(response.data.questionary)
-            });
+                console.log('This updated: ',this.questionary)
+            }); */
         }
     },
 }

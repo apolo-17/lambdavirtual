@@ -67,6 +67,10 @@
                             :answer="answer"
                             :number_question="question.id"
                         ></answers>
+                        <div class="my-4 flex items-center">
+                            <label class="mr-2">Respuesta correcta:</label>
+                            <input v-model="question.answer_correct" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block appearance-none leading-normal"  type="text" placeholder="Numero de respuesta">
+                        </div>
                     </div>
 
                 </div>
@@ -96,12 +100,17 @@ export default {
             errors:null,
             questions: [],
             value_answer: false,
+            answer_correct: ''
         }
     },
     computed: {
         createQuestion(){
+            //console.log(JSON.parse(this.questionary.questionary))
             return _.isEmpty(this.questionary) ? null : this.questions = JSON.parse(this.questionary.questionary)
-        },
+        },/*
+        answerCorrect(answer_correct){
+            return answer_correct ? '' : answer_correct;
+        } */
 
     },
     mounted() {
@@ -110,6 +119,9 @@ export default {
         parseJson(questionary){
             JSON.parse(questionary)
         },
+        /* answerCorrect(answer_correct){
+            return this.answer_correct = answer_correct
+        }, */
         editExam() {
 
             let params = {
