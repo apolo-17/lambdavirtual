@@ -17,9 +17,9 @@ class CustomResetPasswordNotification extends ResetPassword
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($token)
     {
-        //
+        $this->token = $token;
     }
 
     /**
@@ -42,7 +42,17 @@ class CustomResetPasswordNotification extends ResetPassword
     public function toMail($notifiable)
     {
         $img_url = env('APP_URL')."/images/logo.png";
-        return (new MailMessage)->view('email.email_reset_password', ['url' => url('password/reset', $this->token), 'url_img'=>$img_url]);
+
+        if (static::$createUrlCallback) {
+            $url = call_user_func(static::$createUrlCallback, $notifiable, $this->token);
+        } else {
+            $url = url(route('password.reset', [
+                'token' => $this->token,
+                'email' => $notifiable->getEmailForPasswordReset(),
+            ], false));
+        }
+
+        return (new MailMessage)->view('email.email_reset_password', ['url' => $url, 'url_img'=>$img_url]);
         /* return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
