@@ -83,7 +83,7 @@
 <body>
     <div class="mail">
         <header class="mail__header">
-            <img src="{{ $message->embed($url_img) }}" alt="{{config('app.name')}}" class="mail__logo">
+
             <h2 class="mail__text mail__titleformat">Cambio de contraseña</h2>
         </header>
         <section>
@@ -93,7 +93,7 @@
             <p class="mail__p">
             Recupera el acceso reestableciendo tu contraseña. Para reestablecer tu contraseña, clica en el siguiente enlace y sigue las instrucciones.
             </p>
-            <div class="mail__btn">
+            <div class="mail__btn mail__btn-recovery">
                 <a href="{{ $url }}">Restablecer contraseña</a>
             </div>
         </section>

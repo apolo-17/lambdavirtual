@@ -177,8 +177,8 @@
   padding: 0.7em;
 }
 .userslateral__img {
-  width: 20px;
-  margin-right: 10px;
+  width: 26px;
+  margin-right: 13px;
 }
 @media screen and (max-width: 768px) {
   .userslateral {
@@ -341,6 +341,79 @@
   .lateralLogin__form {
     width: 80%;
   }
+}
+body {
+  margin: 0;
+  padding: 0;
+  color: #000;
+  background: #f5f5f5;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
+.recoverypass {
+  background: #fff;
+  margin: 0;
+  padding: 0;
+}
+.recoverypass__wrap {
+  text-align: center;
+  width: 28%;
+  margin: 0 auto;
+  padding: 2.5em;
+  color: #707070;
+  border: 1px solid #f00;
+  border-radius: 20px;
+  border: 1px solid #e6e6e6;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+.recoverypass__logowrap {
+  display: flex;
+  justify-content: center;
+}
+.recoverypass__container {
+  text-align: center;
+}
+.recoverypass__title {
+  color: #b60011;
+  font-size: 2em;
+}
+.recoverypass__text {
+  color: #707070;
+}
+.recoverypass__ico-email {
+  border: 1px solid #bebebe;
+  padding: 0.5em;
+  border-radius: 10px 0 0 10px;
+  border-right: 0;
+}
+.recoverypass__input-email {
+  border-radius: 0px 10px 10px 0px;
+  border: 1px solid #bebebe;
+  padding-left: 1em;
+}
+.recoverypass__form input:focus,
+.recoverypass__form button:focus {
+  outline: none !important;
+  outline-width: 0 !important;
+}
+.recoverypass__email {
+  display: flex;
+  justify-content: center;
+}
+.recoverypass__btn {
+  background: #b60011;
+  border-radius: 20px;
+  color: #fff;
+  width: 80%;
+  padding: 0.5em 1em;
+  margin: 1em 0;
+  border: 0;
+}
+.recoverypass__link {
+  color: #b60011;
+}
+.recoverypass__link a {
+  text-decoration: none;
 }
 body {
   margin: 0;
