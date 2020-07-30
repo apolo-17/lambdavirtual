@@ -92,7 +92,7 @@
 				{{ auth()->user()->name }}
 			</div>
 			<div>
-				<img src="{{ asset('images/avatar.png') }}" alt="">
+				<img src="{{ asset('images/avatar.png') }}" alt="" class="contentRight__avatar">
 			</div>
 			<div>
 				<form action="{{ route('logout') }}" method="POST">

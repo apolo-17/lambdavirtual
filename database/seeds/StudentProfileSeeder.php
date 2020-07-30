@@ -13,25 +13,6 @@ class StudentProfileSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'Apolinar Morales Añaqui',
-            'email' => 'apolinar.morales.a@gmail.com',
-            'email_verified_at' => Carbon::now(),
-            'password' => bcrypt('secret'),
-        ]);
-
-        User::create([
-            'name' => 'Christian Maticorena',
-            'email' => 'eliottack@gmail.com',
-            'email_verified_at' => Carbon::now(),
-            'password' => bcrypt('sims3'),
-        ]);
-
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@grupolambda.com',
-            'email_verified_at' => Carbon::now(),
-            'password' => bcrypt('password'),
-        ]);
+        //
     }
 }

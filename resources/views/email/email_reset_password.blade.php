@@ -83,19 +83,18 @@
 <body>
     <div class="mail">
         <header class="mail__header">
-            <img src="{{ $message->embed($url_img) }}" alt="{{config('app.name')}}" class="mail__logo">
-            <h1 class="mail__title mail__titleformat">Concurso Lambda</h1>
-            <h2 class="mail__text mail__titleformat">Queremos validar tu correo</h2>
+
+            <h2 class="mail__text mail__titleformat">Cambio de contraseña</h2>
         </header>
         <section>
             <p class="mail__name">
 
             </p>
             <p class="mail__p">
-                Por favor pulsa el siguiente botón para confirmar tu correo electrónico.
+            Recupera el acceso reestableciendo tu contraseña. Para reestablecer tu contraseña, clica en el siguiente enlace y sigue las instrucciones.
             </p>
-            <div class="mail__btn">
-                <a href="{{ $url }}">Confirmar</a>
+            <div class="mail__btn mail__btn-recovery">
+                <a href="{{ $url }}">Restablecer contraseña</a>
             </div>
         </section>
         <footer class="mail__footer">
