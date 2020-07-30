@@ -27,7 +27,7 @@ export default {
         valueAnswers(event) {
             if (event.target.value != 'off' ) {
                 this.answer.value = true
-                this.$emit('questionDisable',this.answer.value)
+                this.$emit('nextQuestion',this.answer.value)
             }
         }
     },

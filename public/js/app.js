@@ -1974,7 +1974,7 @@ __webpack_require__.r(__webpack_exports__);
     valueAnswers: function valueAnswers(event) {
       if (event.target.value != 'off') {
         this.answer.value = true;
-        this.$emit('questionDisable', this.answer.value);
+        this.$emit('nextQuestion', this.answer.value);
       }
     }
   }
@@ -2058,8 +2058,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         exam_id: this.exam_id,
         active: event.target.checked
       };
-      axios.post('/admin-exam-status-update', _objectSpread({}, params)).then(function (response) {
-        console.log(response.data);
+      axios.post('/admin-exam-status-update', _objectSpread({}, params)).then(function (response) {//console.log(response.data)
       });
     }
   }
@@ -2283,6 +2282,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
 //
 //
 //
@@ -2292,17 +2299,106 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['exam_ready'],
+  props: ['exam_id'],
   data: function data() {
     return {
-      response: null,
-      questions: []
+      question_solved_count: 0,
+      question_exam: null,
+      show_question_exam: false,
+      questionary: null
     };
   },
-  mounted: function mounted() {},
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get("/get-exam-created/".concat(this.exam_id)).then(function (response) {
+      _this.questionary = JSON.parse(response.data.questionary);
+      /* let answer_solved = null;
+      let question_solved = null;
+      let question_solved_count = 0;
+      questions.forEach(question => {
+          question.answers.forEach(answer => {
+              if (answer.value == true) {
+                  answer_solved = question.id
+                  question_solved = questions.indexOf(questions.find(questionId => questionId.id === question.id));
+                  questions.splice(question_solved);
+                  console.log(questions)
+                  question_solved_count += question_solved
+              }
+          })
+      }); */
+
+      /* let question_solved = questions.indexOf(questions.find(question => question.id === answer_solved));
+      questions.splice(question_solved,1); */
+
+      console.log(_this.questionary);
+      /* let question_aleatorio = Math.floor(Math.random()*questions.length);
+       this.question_exam = questions[question_aleatorio]; */
+
+      _this.show_question_exam = true;
+    });
+  },
   computed: {
-    createQuestion: function createQuestion() {
-      return _.isEmpty(this.exam_ready) ? null : this.questions = JSON.parse(this.exam_ready.questionary);
+    questionsUpdated: function questionsUpdated() {
+      var _this2 = this;
+
+      var questions = this.questionary;
+      var answer_solved = null;
+      var question_solved = null;
+      questions.forEach(function (question) {
+        question.answers.forEach(function (answer) {
+          if (answer.value == true) {
+            answer_solved = question.id;
+          }
+
+          _this2.question_solved_count += question_solved;
+        });
+      });
+      question_solved = questions.indexOf(questions.find(function (questionId) {
+        return questionId.id === answer_solved;
+      }));
+      questions.splice(question_solved);
+      console.log('numero de preguntas', questions);
+      var question_aleatorio = Math.floor(Math.random() * questions.length);
+      return questions[question_aleatorio];
+    }
+  },
+  methods: {
+    updateQuestions: function updateQuestions(question_updated) {
+      var questions = JSON.parse(question_updated.questionary);
+      var answer_solved = null;
+      var question_solved = null;
+      var question_solved_count = 0;
+      questions.forEach(function (question) {
+        question.answers.forEach(function (answer) {
+          if (answer.value == true) {
+            answer_solved = question.id;
+            question_solved = questions.indexOf(questions.find(function (questionId) {
+              return questionId.id === question.id;
+            }));
+            questions.splice(question_solved);
+            question_solved_count += question_solved;
+          }
+        });
+      });
+      /* let question_solved = questions.indexOf(questions.find(question => question.id === answer_solved));
+      questions.splice(question_solved,1); */
+
+      var question_aleatorio = Math.floor(Math.random() * questions.length);
+      console.log(questions);
+      return this.question_exam = questions[question_aleatorio];
+    },
+    updateQuestionary: function updateQuestionary(question_solved) {
+      var _this3 = this;
+
+      var params = {
+        exam_id: this.exam_id,
+        question_solved: question_solved
+      };
+      axios.post('/exam-student-update', _objectSpread({}, params)).then(function (response) {
+        console.log('This updated: ', response.data);
+        _this3.questionary = JSON.parse(response.data.questionary);
+      });
     }
   }
 });
@@ -2521,20 +2617,16 @@ __webpack_require__.r(__webpack_exports__);
   props: ['question'],
   data: function data() {
     return {
-      disabled: false,
-      show_question: false
+      show_next_question: false
     };
   },
   computed: {},
   methods: {
     testButton: function testButton() {
-      if (this.disabled) {
-        console.log('ES verdadero');
-        this.show_question = true;
-      }
+      this.$emit('question_solved', this.question);
     },
-    questionDisable: function questionDisable(answer) {
-      this.disabled = answer;
+    nextQuestion: function nextQuestion(answer) {
+      this.show_next_question = true;
     }
   }
 });
@@ -59883,9 +59975,14 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    _vm._l(_vm.createQuestion, function(question, index) {
-      return _c("questions-exam", { key: index, attrs: { question: question } })
-    }),
+    [
+      _vm.show_question_exam
+        ? _c("questions-exam", {
+            attrs: { question: _vm.questionsUpdated },
+            on: { question_solved: _vm.updateQuestionary }
+          })
+        : _vm._e()
+    ],
     1
   )
 }
@@ -60309,40 +60406,40 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    !_vm.show_question
-      ? _c("div", { staticClass: "flex px-2 py-2" }, [
-          _c(
-            "div",
-            { staticClass: "w-full" },
-            [
-              _c("div", { staticClass: "w-4/5" }, [
-                _c("label", { attrs: { for: "" } }, [
-                  _vm._v(_vm._s(_vm.question.question))
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._l(_vm.question.answers, function(answer, index) {
-                return _c("answers-exam", {
-                  key: index.id,
-                  attrs: { answer: answer, number_question: _vm.question.id },
-                  on: { questionDisable: _vm.questionDisable }
-                })
-              }),
-              _vm._v(" "),
-              _c(
+    _c("div", { staticClass: "flex px-2 py-2" }, [
+      _c(
+        "div",
+        { staticClass: "w-full" },
+        [
+          _c("div", { staticClass: "w-4/5" }, [
+            _c("label", { attrs: { for: "" } }, [
+              _c("strong", [_vm._v(_vm._s(_vm.question.question))])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.question.answers, function(answer, index) {
+            return _c("answers-exam", {
+              key: index.id,
+              attrs: { answer: answer, number_question: _vm.question.id },
+              on: { nextQuestion: _vm.nextQuestion }
+            })
+          }),
+          _vm._v(" "),
+          _vm.show_next_question
+            ? _c(
                 "button",
                 {
                   staticClass:
                     "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded",
                   on: { click: _vm.testButton }
                 },
-                [_vm._v("\n                Button\n            ")]
+                [_vm._v("\n                Siguiente pregunta\n            ")]
               )
-            ],
-            2
-          )
-        ])
-      : _vm._e()
+            : _vm._e()
+        ],
+        2
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -81212,8 +81309,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\lambdavirtual\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\lambdavirtual\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/lambdavirtual/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/lambdavirtual/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

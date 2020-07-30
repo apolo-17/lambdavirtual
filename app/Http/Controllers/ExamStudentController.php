@@ -17,41 +17,16 @@ class ExamStudentController extends Controller
     public function index($exam_id)
     {
         $student = StudentProfile::where('user_id',auth()->user()->id)->first();
-        $exam = Exams::find($exam_id);
+        //dd($exam);
         $message = false;
         $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',true]])->first();
         if ($exam_student != null) {
             $message = true;
-            $exam_ready = false;
-            return view('exam')->with(['exam_id' => $exam_id, 'message' => $message, 'exam_ready' => $exam_ready]);
-        }
-        //Only temporary
-        if (ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first() != null) {
-            $exam_created = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first();
-            return view('exam')->with(['exam_id' => $exam_id, 'message' => $message, 'exam_ready' => $exam_created]);
-        }
-        $questionary = $this->structuringExam($exam->questionary);
-        $exam_ready = ExamStudent::create([
-            'student_id' => $student->id,
-            'exam_id' => $exam_id,
-            'questionary' => $questionary,
-            'done' => false
-        ]);
 
-        return view('exam')->with(['exam_id' => $exam_id, 'message' => $message, 'exam_ready' => $exam_ready->questionary]);
-    }
-
-    public function structuringExam($exam)
-    {
-        $exam = json_decode($exam);
-
-        foreach ($exam as $question) {
-            foreach ($question->answers as $answer) {
-                $answer->value = false;
-            }
+            return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
         }
 
-        return json_encode($exam);
+        return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
     }
 
     /**
@@ -59,9 +34,36 @@ class ExamStudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create($exam_id)
     {
-        dd($request->all());
+
+        $student = StudentProfile::where('user_id',auth()->user()->id)->first();
+        $exam = Exams::find($exam_id);
+        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first();
+
+        if ($exam_student == null) {
+            $questionary = $this->structuringExam($exam->questionary);
+
+            $exam_created = ExamStudent::create([
+                'student_id' => $student->id,
+                'exam_id' => $exam_id,
+                'questionary' => $questionary,
+                'done' => false
+            ]);
+
+            return $exam_created;
+        } else {
+            $exam_update = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first();
+            return $exam_update;
+        }
+
+    }
+
+    public function updateExam($exam_student)
+    {
+        /* $exam_student->update([
+            'questionary' =>
+        ]); */
     }
 
     /**
@@ -106,7 +108,26 @@ class ExamStudentController extends Controller
      */
     public function update(Request $request, ExamStudent $examStudent)
     {
-        //
+
+        $student = StudentProfile::where('user_id',auth()->user()->id)->first();
+        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$request->exam_id],['done',false]])->first();
+
+        $exam = json_decode($exam_student->questionary);
+
+        $question_solved = null;
+        foreach ($exam as $key => $question) {
+            if ($question->id == $request->question_solved['id']) {
+                $question_solved = $key;
+            }
+        }
+
+        $exam_replace = array_replace($exam,array($question_solved => $request->question_solved));
+
+        $exam_student->update([
+            'questionary' => json_encode($exam_replace)
+        ]);
+
+        return ExamStudent::find($exam_student->id);
     }
 
     /**
@@ -118,5 +139,18 @@ class ExamStudentController extends Controller
     public function destroy(ExamStudent $examStudent)
     {
         //
+    }
+
+    public function structuringExam($exam)
+    {
+        $exam = json_decode($exam);
+
+        foreach ($exam as $question) {
+            foreach ($question->answers as $answer) {
+                $answer->value = false;
+            }
+        }
+
+        return json_encode($exam);
     }
 }

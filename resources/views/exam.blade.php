@@ -22,12 +22,12 @@
 </head>
 <body>
     <div id="app">
-        <h3>Estas en el examen {{ $exam_id }}</h3>
+        <h3>Estas en el examen id: <strong> {{ $exam_id }}</strong></h3>
         @if($message)
             <message-exam></message-exam>
         @else
             <exam-model
-                :exam_ready="{{ $exam_ready }}"
+                :exam_id="{{ $exam_id }}"
             ></exam-model>
         @endif
     </div>

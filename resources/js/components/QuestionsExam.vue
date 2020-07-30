@@ -1,17 +1,17 @@
 <template>
     <div>
-        <div class="flex px-2 py-2" v-if="!show_question">
+        <div class="flex px-2 py-2" >
             <div class="w-full">
                 <div class="w-4/5">
-                    <label for="">{{ question.question }}</label>
+                    <label for=""><strong>{{ question.question }}</strong></label>
                 </div>
                 <answers-exam v-for="(answer, index) in question.answers" :key="index.id"
                     :answer="answer"
                     :number_question="question.id"
-                    @questionDisable="questionDisable"
+                    @nextQuestion="nextQuestion"
                 ></answers-exam>
-                <button @click="testButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                    Button
+                <button v-if="show_next_question" @click="testButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                    Siguiente pregunta
                 </button>
             </div>
         </div>
@@ -23,8 +23,7 @@ export default {
 
     data(){
         return {
-            disabled: false,
-            show_question: false
+            show_next_question: false,
         }
     },
 
@@ -33,14 +32,13 @@ export default {
     },
     methods: {
         testButton(){
-            if (this.disabled) {
-                console.log('ES verdadero')
-                this.show_question = true
-            }
+
+            this.$emit('question_solved',this.question)
 
         },
-        questionDisable(answer) {
-            this.disabled = answer
+        nextQuestion(answer) {
+
+            this.show_next_question = true
         }
     },
 
