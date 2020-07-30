@@ -83,7 +83,7 @@
 <body>
     <div class="mail">
         <header class="mail__header">
-
+            <img src="{{ $message->embed($url_img) }}" alt="{{config('app.name')}}" class="mail__logo">
             <h2 class="mail__text mail__titleformat">Cambio de contraseña</h2>
         </header>
         <section>
