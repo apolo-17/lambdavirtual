@@ -41,8 +41,8 @@ class CustomResetPasswordNotification extends ResetPassword
      */
     public function toMail($notifiable)
     {
-        //$reset_password_url = $this->token();
-        return (new MailMessage)->view('email.email_reset_password', ['url' => url('/')]);
+        $img_url = env('APP_URL')."/images/logo.png";
+        return (new MailMessage)->view('email.email_reset_password', ['url' => url('password/reset', $this->token), 'url_img'=>$img_url]);
         /* return (new MailMessage)
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))

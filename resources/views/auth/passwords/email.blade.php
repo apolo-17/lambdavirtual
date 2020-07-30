@@ -30,13 +30,13 @@
 									</span>
 								@enderror
 							</div>
-						</div>						
+						</div>
 						<button type="submit" class="recoverypass__btn">
 							Recuperar
 						</button>
 					</form>
 					<p>
-						¿Ya tienes una cuenta? <a href="#" class="recoverypass__link">Iniciar Sesión</a>
+						¿Ya tienes una cuenta? <a href="http://lambdavirtual.com/login" class="recoverypass__link">Iniciar Sesión</a>
 					</p>
 				</section>
 			</section>
