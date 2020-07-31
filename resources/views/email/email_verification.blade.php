@@ -77,7 +77,11 @@
         text-align: center;
         font-size: 0.8em;
         }
-
+        @media screen and (max-width: 768px) {
+        .mail {
+            width: 80%;
+        }
+        }
     </style>
 </head>
 <body>
