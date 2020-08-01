@@ -2324,6 +2324,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exam_id'],
   data: function data() {
@@ -60044,37 +60054,28 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { staticClass: "examenContent__conteo" }, [
-        _c("div", { staticClass: "examenContent__number" }, [
-          _vm._v(
-            _vm._s(_vm.question_out_solved) +
-              "/ " +
-              _vm._s(_vm.question_solved) +
-              " "
-          )
-        ]),
-        _c("div", { staticClass: "examenContent__numbertext" }, [
-          _vm._v("preguntas")
-        ])
-      ]),
-      _vm._v(" "),
       !_vm.show_question_exam
         ? _c("span", [
-            _c("p", [
-              _vm._v(
-                "En cuanto des click al examen , iniciara el contador y el examen habra empezado, recuerda que tienes limite de tiempo"
-              )
-            ]),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded",
-                on: { click: _vm.startExam }
-              },
-              [_vm._v("Iniciar Exame")]
-            )
+            _c("section", { staticClass: "examenContent__respuestas" }, [
+              _c("h1", [_vm._v("¡Llegó el gran dia!")]),
+              _vm._v(" "),
+              _c("p", [
+                _vm._v(
+                  "\n            Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.\n        "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", [
+                _c(
+                  "div",
+                  {
+                    staticClass: "examenContent__btn",
+                    on: { click: _vm.startExam }
+                  },
+                  [_vm._v("\n                ¡Empezar!\n            ")]
+                )
+              ])
+            ])
           ])
         : _vm._e(),
       _vm._v(" "),

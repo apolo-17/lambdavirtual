@@ -1,12 +1,22 @@
 <template>
     <div>
-
-        <div class="examenContent__conteo">
+        <!-- <div class="examenContent__conteo">
             <div class="examenContent__number">{{question_out_solved}}/ {{question_solved}} </div><div class="examenContent__numbertext">preguntas</div>
-        </div>
+        </div> -->
         <span v-if="!show_question_exam">
-        <p>En cuanto des click al examen , iniciara el contador y el examen habra empezado, recuerda que tienes limite de tiempo</p>
-        <button @click="startExam" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Iniciar Exame</button>
+
+        <section class="examenContent__respuestas">
+            <h1>¡Llegó el gran dia!</h1>
+            <p>
+                Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.
+            </p>
+            <div>
+                <div class="examenContent__btn" @click="startExam">
+                    ¡Empezar!
+                </div>
+            </div>
+        </section>
+        <!-- <button  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Iniciar Exame</button> -->
         </span>
         <questions-exam v-if="show_question_exam"
             :question="question"
