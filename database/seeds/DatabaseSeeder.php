@@ -17,8 +17,9 @@ class DatabaseSeeder extends Seeder
         $this->call(EnglishLevelSeeder::class);
         $this->call(SchoolCycleSeeder::class);
         $this->call(UniversitySeeder::class);
-        $this->call(PermissionsTableSeeder::class);
+        $this->call(ExamsSeeder::class);
+        $this->call(StudentProfileSeeder::class);
+        //$this->call(PermissionsTableSeeder::class);
         //Only exist in Master branch
-        $this->call(Version_1_0_0_Seeder::class);
-    }
+        //$this->call(Version_1_0_0_Seeder::class);    }
 }
