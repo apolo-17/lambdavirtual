@@ -124,6 +124,9 @@
 .contentRight__avatar {
   width: 60px;
 }
+.datosusuario {
+  display: none;
+}
 .terminos {
   width: 80%;
   margin: 0 auto;
@@ -149,7 +152,9 @@
 }
 .userslateral__header {
   text-align: center;
-  margin-bottom: 1em;
+}
+.userslateral__header margin-bottom 1em img {
+  text-align: center;
 }
 .userslateral__menu ul {
   margin: 0;

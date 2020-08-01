@@ -23,7 +23,7 @@
 <body>
     <div id="app" class="userswrap">
         <div class="userslateral">
-            <header class="userslateral__header">
+            <header class="userslateral__header"><center>
                 <img src="{{ asset('images/logo.png') }}" alt="logo lambda">
             </header>
             <div class="userslateral__menu">
