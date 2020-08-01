@@ -25,6 +25,7 @@ export default {
             question_solved: 0,
             question_out_solved: 0,
             show_question_exam: false,
+            end_exam: null,
             question: null,
             displayDays:0,
             displayHours:0,
@@ -57,17 +58,20 @@ export default {
     },
 
     methods: {
-        ahowRemaining(){
+        showRemaining(){
             const time = setInterval(() => {
                 const now = new Date();
+                const end = this.end_exam;
             }, interval);
         },
         startExam(){
 
             axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
                 console.log(response.data.start, JSON.parse(response.data.questions))
-                this.question = JSON.parse(response.data.questions)
-                this.show_question_exam = true
+                this.question = JSON.parse(response.data.questions);
+                this.end_exam = response.data.finish;
+                console.log(this.end_exam)
+                this.show_question_exam = true;
             });
         },
         updateQuestionary(){
