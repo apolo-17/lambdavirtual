@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExamStudent extends Model
 {
-    protected $fillable = ['student_id','exam_id','questionary','done'];
+    protected $fillable = ['student_id','exam_id','questionary','start','finish','done'];
+
+    protected $dates = ['start','finish'];
 
     public function studentProfiles()
     {

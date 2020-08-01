@@ -44,7 +44,7 @@ class ExamsController extends Controller
             'number_questions' => ['required'],
             'number_subsections' => ['required']
         ]);
-        //dd($request->all());
+
         $exam = new Exams;
         $exam->name = $request->name;
         $exam->deploy_exam = $request->deploy_exam;

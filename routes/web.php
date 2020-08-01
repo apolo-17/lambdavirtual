@@ -1,6 +1,7 @@
 <?php
 
 use App\Exams;
+use App\Http\Controllers\ExamStudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -64,4 +65,7 @@ Route::post('/admin-exam-edit-information', function(Request $request) {
 
 
 Route::get('/exam-init/{id}','ExamStudentController@index')->name('exam-student-init')->middleware('verified');
-Route::get('/presence-exam/{id}','ExamStudentController@create')->name('exam-student-create')->middleware('verified');
+Route::get('/get-exam-created/{id}/{start}','ExamStudentController@create')->name('exam-student-create')->middleware('verified');
+Route::post('/exam-student-update','ExamStudentController@update')->name('exam-student-update')->middleware('verified');
+Route::get('/start-time-exam/{id}','ExamStudentController@starExam')->name('start-exam')->middleware('verified');
+Route::get('/over-time/{id}','ExamStudentController@overTime')->name('exam-over-time')->middleware('verified');

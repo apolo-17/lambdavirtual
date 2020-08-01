@@ -1,46 +1,51 @@
 <template>
     <div>
-        <div class="flex px-2 py-2" v-if="!show_question">
-            <div class="w-full">
-                <div class="w-4/5">
-                    <label for="">{{ question.question }}</label>
-                </div>
-                <answers-exam v-for="(answer, index) in question.answers" :key="index.id"
-                    :answer="answer"
-                    :number_question="question.id"
-                    @questionDisable="questionDisable"
-                ></answers-exam>
-                <button @click="testButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                    Button
-                </button>
-            </div>
+        <div class="examenContent__conteo">
+            <div class="examenContent__number">{{question_solved}}/{{total_questions}} </div><div class="examenContent__numbertext"> preguntas</div>
         </div>
+        <div class="examenContent__pregunta">
+            {{ question.question }}
+        </div>
+        <answers-exam
+            :answers="question.answers"
+            :number_question="question.id"
+            @showButtonNextQuestion="showNextQuestion"
+            @question_solved="questionSolved"
+        ></answers-exam>
     </div>
 </template>
 <script>
 export default {
-    props:['question'],
+    props:['question','total_questions','question_solved'],
 
     data(){
         return {
-            disabled: false,
-            show_question: false
+            show_next_question: false,
         }
     },
 
     computed: {
-
+        /* questionSolved(){
+            return this.question_solved
+        },
+        questionOutSolved(){
+            return this.question_out_solved
+        } */
     },
     methods: {
-        testButton(){
-            if (this.disabled) {
-                console.log('ES verdadero')
-                this.show_question = true
-            }
+        nextQuestion(){
+            this.show_next_question = false;
+
+            this.$emit('question_solved',this.question.question_solved = true)
+        },
+        showNextQuestion(answer) {
+            this.question.answer_selected = answer;
 
         },
-        questionDisable(answer) {
-            this.disabled = answer
+        questionSolved(){
+            this.question.question_solved = true
+            this.$emit('updateQuestionSolved')
+
         }
     },
 

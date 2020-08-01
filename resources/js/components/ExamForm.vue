@@ -91,7 +91,11 @@
                     let question = {
                         id: index+1,
                         question: '',
-                        answers: []
+                        answers: [],
+                        question_solved: false,
+                        answer_correct: '',
+                        answer_selected: ''
+
                     }//
                     questionary.push(question);
                     for (let index = 0; index <= this.number_subsections-1; index++) {
@@ -99,6 +103,7 @@
                             id: index+1,
                             value: false,
                             answer: ''
+
                         }
                         question.answers.push(answer)
                     }

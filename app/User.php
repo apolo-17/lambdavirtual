@@ -43,6 +43,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    protected $with = ['studentProfile'];
+
     public function sendEmailVerificationNotification()
     {
         $this->notify(new VerifyEmailNotification());
@@ -52,8 +54,6 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         $this->notify(new CustomResetPasswordNotification($token));
     }
-
-    protected $with = ['studentProfile'];
 
     public function studentProfile()
     {

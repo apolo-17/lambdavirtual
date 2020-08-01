@@ -105,7 +105,7 @@
 			</header>
 		</section>
 	</div>
-	<section class="content">
+	{{--  <section class="content">
 		<div class="contentAdmin">
 			<form action="" class="contentAdmin__search">
 				<input type="text" placeholder="Buscar">
@@ -115,8 +115,8 @@
 		<div class="cardExamen-wrap">
 			@yield('content')
 		</div>
-	</section>
-	<section class="contentRight">
+	</section>  --}}
+	{{--  <section class="contentRight">
 		<header class="contentRight__header">
 		<div>
 			<img src="{{ asset('images/ico-login-mail.png') }}" alt="" class="contentRight__mensaje">
@@ -136,7 +136,7 @@
 			</form>
 		</div>
 		</header>
-	</section>
+	</section>  --}}
 	</div>
 
 </body>

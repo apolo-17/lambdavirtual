@@ -20,7 +20,7 @@ export default {
             }
 
             axios.post('/admin-exam-status-update',{...params}).then(response => {
-                console.log(response.data)
+                //console.log(response.data)
             })
         }
     },
