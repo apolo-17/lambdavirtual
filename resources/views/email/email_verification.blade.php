@@ -107,7 +107,7 @@
                 Si tienes problemas haciendo click en el botón "Confirmar correo electrónico", copia y pega el siguiente enlace en tu navegador: {{ $url }}
             </p>
             <p class="mail__help">
-                Si necesitas ayuda escríbenos informes@grupolambda.com.pe
+                Si necesitas ayuda escríbenos academico@grupolambda.com.pe
             </p>
         </footer>
     </div>
