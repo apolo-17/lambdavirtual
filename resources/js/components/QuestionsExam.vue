@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="examenContent__conteo">
-            <div class="examenContent__number">{{question_solved}}/{{question_out_solved}} </div><div class="examenContent__numbertext"> preguntas</div>
+            <div class="examenContent__number">{{question_solved}}/{{total_questions}} </div><div class="examenContent__numbertext"> preguntas</div>
         </div>
         <div class="examenContent__pregunta">
             {{ question.question }}
@@ -16,7 +16,7 @@
 </template>
 <script>
 export default {
-    props:['question','question_out_solved','question_solved'],
+    props:['question','total_questions','question_solved'],
 
     data(){
         return {

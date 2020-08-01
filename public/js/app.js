@@ -2377,7 +2377,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       var start = new Date();
       axios.get("/get-exam-created/".concat(this.exam_id, "/").concat(start)).then(function (response) {
-        console.log(response.data);
         _this.question = JSON.parse(response.data.questions);
         _this.end_time_exam = response.data.finish;
         _this.show_question_exam = true;
@@ -2650,7 +2649,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['question', 'question_out_solved', 'question_solved'],
+  props: ['question', 'total_questions', 'question_solved'],
   data: function data() {
     return {
       show_next_question: false
@@ -60579,7 +60578,7 @@ var render = function() {
           _vm._v(
             _vm._s(_vm.question_solved) +
               "/" +
-              _vm._s(_vm.question_out_solved) +
+              _vm._s(_vm.total_questions) +
               " "
           )
         ]),

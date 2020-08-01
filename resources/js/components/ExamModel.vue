@@ -74,7 +74,7 @@ export default {
             let start = new Date();
 
             axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
-                console.log(response.data)
+
                 this.question = JSON.parse(response.data.questions);
                 this.end_time_exam = response.data.finish;
                 this.show_question_exam = true;
