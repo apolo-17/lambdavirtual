@@ -52,10 +52,15 @@ class ExamStudentController extends Controller
             ]);
 
             $questionary = json_decode($exam_created->questionary);
+
             $question_out_solved = [];
+            $question_solved = [];
+            $total_questions = count($questionary);
+
             foreach ($questionary as $key => $question) {
-                $question->question_solved ? null : array_push($question_out_solved,$key);
+                $question->question_solved ? array_push($question_solved,$key) : array_push($question_out_solved,$key);
             }
+
             $alter = array_rand($question_out_solved);
 
             $question = $questionary[$question_out_solved[$alter]];
@@ -63,16 +68,19 @@ class ExamStudentController extends Controller
 
             $finish_parse = Carbon::parse($exam_created->finish)->format('Y-m-d H:i:s');
             $start_parse = Carbon::parse($exam_created->start)->format('Y-m-d H:i:s');
+            return response()->json(['questions' => $questions,'start' => $start_parse, 'finish' => $finish_parse, 'question_solved' => count($question_solved), 'total_questions' => $total_questions]);
 
-            return response()->json(['questions' => $questions,'start' => $start_parse, 'finish' => $finish_parse]);
         } else {
 
             $exam_update = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first();
             $questionary = json_decode($exam_update->questionary);
-            $question_out_solved = [];
 
+            $question_out_solved = [];
+            $question_solved = [];
+            $total_questions = count($questionary);
+            //dd(count($questionary));
             foreach ($questionary as $key => $question) {
-                $question->question_solved ? null : array_push($question_out_solved,$key);
+                $question->question_solved ? array_push($question_solved,$key) : array_push($question_out_solved,$key);
             }
 
             if (count($question_out_solved) > 0) {
@@ -84,7 +92,7 @@ class ExamStudentController extends Controller
                 $finish_parse = Carbon::parse($exam_update->finish)->format('Y-m-d H:i:s');
                 $start_parse = Carbon::parse($exam_update->start)->format('Y-m-d H:i:s');
 
-                return response()->json(['questions' => $questions,'start' => $start_parse, 'finish' => $finish_parse]);
+                return response()->json(['questions' => $questions,'start' => $start_parse, 'finish' => $finish_parse, 'question_solved' => count($question_solved), 'total_questions' => $total_questions]);
             }
 
             return redirect()->route('/home');

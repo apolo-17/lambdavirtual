@@ -8,7 +8,7 @@
                 <button v-if="show_next_question" @click="nextQuestion" class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 border border-red-600 rounded">
                     Siguiente pregunta
                 </button>
-                <!-- <input v-if="show_next_question" @click="nextQuestion" type="submit" class="examenContent__btn"> -->
+
             </div>
         </section>
     </div>
