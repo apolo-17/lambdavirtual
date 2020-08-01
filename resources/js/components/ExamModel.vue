@@ -93,6 +93,10 @@ export default {
 
                 if (distance < 0) {
                     clearInterval(timer);
+                    axios.get(`/over-time/${this.exam_id}`).then(response => {
+                        this.$router.replace({name:'home'});
+                        location.reload();
+                    })
                     return
                 }
 
@@ -116,7 +120,14 @@ export default {
             };
 
             axios.post('/exam-student-update', {...params}).then(response => {
+                if (response.data.route_finish == true) {
+
+                    this.$router.replace({name:'home'});
+                    location.reload();
+                }
+
                 this.question = JSON.parse(response.data.questions)
+                this.question_solved =response.data.question_solved
 
             });
         }

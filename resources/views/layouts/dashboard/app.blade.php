@@ -74,7 +74,7 @@
 
             @yield('content')
         </section>
-        
+
         <section class="contentRight">
             <header class="contentRight__header">
                 <div>

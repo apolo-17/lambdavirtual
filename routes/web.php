@@ -68,3 +68,4 @@ Route::get('/exam-init/{id}','ExamStudentController@index')->name('exam-student-
 Route::get('/get-exam-created/{id}/{start}','ExamStudentController@create')->name('exam-student-create')->middleware('verified');
 Route::post('/exam-student-update','ExamStudentController@update')->name('exam-student-update')->middleware('verified');
 Route::get('/start-time-exam/{id}','ExamStudentController@starExam')->name('start-exam')->middleware('verified');
+Route::get('/over-time/{id}','ExamStudentController@overTime')->name('exam-over-time')->middleware('verified');

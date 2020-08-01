@@ -162,10 +162,11 @@ class ExamStudentController extends Controller
         $exam_student->fresh();
 
         $question_out_solved = [];
+        $question_answer_solved = [];
         $update_exam = json_decode($exam_student->questionary);
         foreach ($update_exam as $key => $question) {
 
-            $question->question_solved ? null : array_push($question_out_solved,$key);
+            $question->question_solved ? array_push($question_answer_solved,$key) : array_push($question_out_solved,$key);
         }
 
         if (count($question_out_solved) > 0) {
@@ -173,10 +174,18 @@ class ExamStudentController extends Controller
 
             $question = $update_exam[$question_out_solved[$alter]];
             $questions = json_encode($question);
-            return response()->json(['questions' => $questions,'start' => $exam_student->start, 'finish' => $exam_student->start]);
-        }
-        return redirect()->route('home');
 
+            return response()->json(['questions' => $questions, 'question_solved' => count($question_answer_solved)]);
+        }
+        $exam_student->update(['done' => true]);
+        return response()->json(['route_finish' => true]);
+
+    }
+
+    public function overTime($exam_id)
+    {
+        ExamStudent::where([['student_id',auth()->user()->studentProfile->id],['exam_id',$exam_id]])->update(['done'=> true]);
+        return true;
     }
 
     /**

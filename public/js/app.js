@@ -2399,6 +2399,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         if (distance < 0) {
           clearInterval(timer);
+          axios.get("/over-time/".concat(_this2.exam_id)).then(function (response) {
+            _this2.$router.replace({
+              name: 'home'
+            });
+
+            location.reload();
+          });
           return;
         }
 
@@ -2420,7 +2427,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         question_solved: this.question
       };
       axios.post('/exam-student-update', _objectSpread({}, params)).then(function (response) {
+        if (response.data.route_finish == true) {
+          _this3.$router.replace({
+            name: 'home'
+          });
+
+          location.reload();
+        }
+
         _this3.question = JSON.parse(response.data.questions);
+        _this3.question_solved = response.data.question_solved;
       });
     }
   }
@@ -2551,24 +2567,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {
     createQuestion: function createQuestion() {
-      //console.log(JSON.parse(this.questionary.questionary))
       return _.isEmpty(this.questionary) ? null : this.questions = JSON.parse(this.questionary.questionary);
     }
-    /*
-    answerCorrect(answer_correct){
-      return answer_correct ? '' : answer_correct;
-    } */
-
   },
   mounted: function mounted() {},
   methods: {
     parseJson: function parseJson(questionary) {
       JSON.parse(questionary);
     },
-
-    /* answerCorrect(answer_correct){
-        return this.answer_correct = answer_correct
-    }, */
     editExam: function editExam() {
       var _this = this;
 
@@ -81451,6 +81457,10 @@ var routes = [{
   name: 'exam-index',
   path: 'admin-exam-index',
   redirect: 'admin-exam-index'
+}, {
+  name: 'home',
+  path: 'home',
+  redirect: 'home'
 }];
 
 /***/ }),
