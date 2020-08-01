@@ -1,26 +1,27 @@
 <template>
     <div>
         <span v-if="!show_question_exam">
-
-        <section class="examenContent__respuestas">
-            <h1>¡Llegó el gran dia!</h1>
-            <p>
-                Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.
-            </p>
-            <div>
-                <div class="examenContent__btn" @click="startExam">
-                    ¡Empezar!
+            <section class="examenContent__respuestas">
+                <h1>¡Llegó el gran dia!</h1>
+                <p>
+                    Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.
+                </p>
+                <div>
+                    <div class="examenContent__btn" @click="startExam">
+                        ¡Empezar!
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
         </span>
-        <div >Tiempo del examen: 00:{{ displayMinutes }}:{{displaySeconds}}</div>
-        <questions-exam v-if="show_question_exam"
-            :question="question"
-            :question_solved="question_solved"
-            :total_questions="total_questions"
-            @updateQuestionSolved="updateQuestionary"
-        ></questions-exam>
+        <div v-if="show_question_exam">
+            <div >Tiempo del examen: 00:{{ displayMinutes }}:{{displaySeconds}}</div>
+            <questions-exam v-if="show_question_exam"
+                :question="question"
+                :question_solved="question_solved"
+                :total_questions="total_questions"
+                @updateQuestionSolved="updateQuestionary"
+            ></questions-exam>
+        </div>
     </div>
 </template>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>

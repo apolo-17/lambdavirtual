@@ -2332,6 +2332,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exam_id'],
   data: function data() {
@@ -60060,56 +60061,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      !_vm.show_question_exam
-        ? _c("span", [
-            _c("section", { staticClass: "examenContent__respuestas" }, [
-              _c("h1", [_vm._v("¡Llegó el gran dia!")]),
-              _vm._v(" "),
-              _c("p", [
-                _vm._v(
-                  "\n            Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.\n        "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", [
-                _c(
-                  "div",
-                  {
-                    staticClass: "examenContent__btn",
-                    on: { click: _vm.startExam }
-                  },
-                  [_vm._v("\n                ¡Empezar!\n            ")]
-                )
-              ])
+  return _c("div", [
+    !_vm.show_question_exam
+      ? _c("span", [
+          _c("section", { staticClass: "examenContent__respuestas" }, [
+            _c("h1", [_vm._v("¡Llegó el gran dia!")]),
+            _vm._v(" "),
+            _c("p", [
+              _vm._v(
+                "\n                Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.\n            "
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", [
+              _c(
+                "div",
+                {
+                  staticClass: "examenContent__btn",
+                  on: { click: _vm.startExam }
+                },
+                [_vm._v("\n                    ¡Empezar!\n                ")]
+              )
             ])
           ])
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", [
-        _vm._v(
-          "Tiempo del examen: 00:" +
-            _vm._s(_vm.displayMinutes) +
-            ":" +
-            _vm._s(_vm.displaySeconds)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.show_question_exam
+      ? _c(
+          "div",
+          [
+            _c("div", [
+              _vm._v(
+                "Tiempo del examen: 00:" +
+                  _vm._s(_vm.displayMinutes) +
+                  ":" +
+                  _vm._s(_vm.displaySeconds)
+              )
+            ]),
+            _vm._v(" "),
+            _vm.show_question_exam
+              ? _c("questions-exam", {
+                  attrs: {
+                    question: _vm.question,
+                    question_solved: _vm.question_solved,
+                    total_questions: _vm.total_questions
+                  },
+                  on: { updateQuestionSolved: _vm.updateQuestionary }
+                })
+              : _vm._e()
+          ],
+          1
         )
-      ]),
-      _vm._v(" "),
-      _vm.show_question_exam
-        ? _c("questions-exam", {
-            attrs: {
-              question: _vm.question,
-              question_solved: _vm.question_solved,
-              total_questions: _vm.total_questions
-            },
-            on: { updateQuestionSolved: _vm.updateQuestionary }
-          })
-        : _vm._e()
-    ],
-    1
-  )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
