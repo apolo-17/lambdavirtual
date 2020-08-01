@@ -4,11 +4,11 @@
             <div v-for="(answer, index) in answers" :key="index.id">
                 <input @change="valueAnswers" :name="'group_question_'+number_question" v-model="clear_radio" :value="answer.id" class="mr-4" type="radio">{{ answer.answer }}
             </div>
-            <div class="examenContent__btn">
-                <!-- <button v-if="show_next_question" @click="nextQuestion" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+            <div class="flex justify-center">
+                <button v-if="show_next_question" @click="nextQuestion" class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 border border-red-600 rounded">
                     Siguiente pregunta
-                </button> -->
-                <input type="submit" class="examenContent__btn">
+                </button>
+                <!-- <input v-if="show_next_question" @click="nextQuestion" type="submit" class="examenContent__btn"> -->
             </div>
         </section>
     </div>

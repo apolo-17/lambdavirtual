@@ -59550,25 +59550,25 @@ var render = function() {
           ])
         }),
         _vm._v(" "),
-        _vm._m(0)
+        _c("div", { staticClass: "flex justify-center" }, [
+          _vm.show_next_question
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 border border-red-600 rounded",
+                  on: { click: _vm.nextQuestion }
+                },
+                [_vm._v("\n                Siguiente pregunta\n            ")]
+              )
+            : _vm._e()
+        ])
       ],
       2
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "examenContent__btn" }, [
-      _c("input", {
-        staticClass: "examenContent__btn",
-        attrs: { type: "submit" }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
