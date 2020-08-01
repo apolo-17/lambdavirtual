@@ -106,7 +106,7 @@
                         <option value="no">No</option>
                     </select>
             </div>
-            <label><input type="radio" name="terms" value="true" required>Acepto las condiciones de tratamiento para mis datos personales. <a href="#" target="_blank">(Ver términos)</a></label>
+            <label><input type="radio" name="terms" value="true" required> Acepto las condiciones de tratamiento para mis datos personales. <a href="./terminos.html" target="_blank"> (Ver términos)</a></label>
             <br />	<br />
             <br />	<br />
         </div>

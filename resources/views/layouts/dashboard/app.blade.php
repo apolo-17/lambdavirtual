@@ -24,39 +24,39 @@
 <body>
     <div id="app" class="userswrap">
         <div class="userslateral">
-            <header class="userslateral__header">
+            <header class="userslateral__header"><center>
                 <img src="{{ asset('images/logo.png') }}" alt="logo lambda">
             </header>
             <div class="userslateral__menu">
                 <ul>
                     <li>
                         <div class="userslateral__item">
-                            <img src="./images/ico-tablero.png" alt="" class="userslateral__img"><a href="{{ action('HomeController@index') }}">Tablero</a>
+                            <img src="{{ asset('images/ico-tablero.png') }}" alt="" class="userslateral__img"><a href="{{ action('HomeController@index') }}">Tablero</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="./images/ico-cursos.png" alt="" class="userslateral__img"><a href="#">Mis Cursos</a>
+                            <img src="{{ asset('images/ico-cursos.png') }}" alt="" class="userslateral__img"><a href="#">Mis Cursos</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="./images/ico-chat.png" alt="" class="userslateral__img"><a href="#">Chat</a>
+                            <img src="{{ asset('images/ico-chat.png') }}" alt="" class="userslateral__img"><a href="#">Chat</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="./images/ico-anuncio.png" alt="" class="userslateral__img"><a href="#">Anuncios</a>
+                            <img src="{{ asset('images/ico-anuncio.png') }}" alt="" class="userslateral__img"><a href="#">Anuncios</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="./images/ico-foro.png" alt="" class="userslateral__img"><a href="#">Foro</a>
+                            <img src="{{ asset('images/ico-foro.png') }}" alt="" class="userslateral__img"><a href="#">Foro</a>
                         </div>
                     </li>
                     <li>
                         <div class="userslateral__item">
-                            <img src="./images/ico-configuracion.png" alt="" class="userslateral__img"><a href="{{ action('StudentProfileController@index') }}">Configuraciones</a>
+                            <img src="{{ asset('images/ico-configuracion.png') }}" alt="" class="userslateral__img"><a href="{{ action('StudentProfileController@index') }}">Configuraciones</a>
                         </div>
                     </li>
                 </li>
