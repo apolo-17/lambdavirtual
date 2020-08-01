@@ -1,11 +1,18 @@
 <template>
     <div>
-        <div><h2>Preguntas faltantes: {{question_out_solved}}/ {{question_solved}}preguntas contestadas</h2></div>
-        <questions-exam v-if="show_question_exam"
-            :question="questionsUpdated"
-            @question_solved="updateQuestionary"
-        ></questions-exam>
 
+        <div class="examenContent__conteo">
+            <div class="examenContent__number">{{question_out_solved}}/ {{question_solved}} </div><div class="examenContent__numbertext">preguntas</div>
+        </div>
+        <span v-if="!show_question_exam">
+        <p>En cuanto des click al examen , iniciara el contador y el examen habra empezado, recuerda que tienes limite de tiempo</p>
+        <button @click="startExam" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Iniciar Exame</button>
+        </span>
+        <questions-exam v-if="show_question_exam"
+            :question="question"
+            @updateQuestionSolved="updateQuestionary"
+        ></questions-exam>
+        <div>tiempo del examen: 00:00:00</div>
     </div>
 </template>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
@@ -17,58 +24,63 @@ export default {
         return {
             question_solved: 0,
             question_out_solved: 0,
-            question_exam: null,
             show_question_exam: false,
-            questionary: null
+            question: null,
+            displayDays:0,
+            displayHours:0,
+            displayMinuts:0,
+            displaySeconds:0
         }
     },
 
     mounted() {
 
-        axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
-            this.questionary = JSON.parse(response.data.questionary)
-
-            this.show_question_exam = true
-        });
+        /* axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
+            if (response.data.start != null) {
+                this.question = JSON.parse(response.data.questions)
+                this.show_question_exam = true
+            }
+        }); */
 
     },
     computed: {
-        questionsUpdated(){
-            let questions = this.questionary
-
-            let answer_solved = null;
-            let question_out_solved = [];
-            let question_solved = [];
-            let questions_splice = [];
-
-            questions.forEach(question => {
-                if(question.question_solved == false){
-                    question_out_solved.push(question)
-                } else {
-                    question_solved.push(question)
-                }
-
-            });
-
-            let question_aleatorio = Math.floor(Math.random()* question_out_solved.length);
-            this.question_out_solved = question_out_solved.length
-            this.question_solved = question_solved.length
-            return question_out_solved[question_aleatorio];
+        _seconds: () => 1000,
+        _minutes() {
+            return this._secods * 60;
+        },
+        _hours() {
+            return this._minutes * 60;
+        },
+        _days() {
+            return this._hours * 24 ;
         }
     },
 
     methods: {
-        updateQuestionary(question_solved){
+        ahowRemaining(){
+            const time = setInterval(() => {
+                const now = new Date();
+            }, interval);
+        },
+        startExam(){
+
+            axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
+                console.log(response.data.start, JSON.parse(response.data.questions))
+                this.question = JSON.parse(response.data.questions)
+                this.show_question_exam = true
+            });
+        },
+        updateQuestionary(){
+
             let params = {
                 exam_id: this.exam_id,
-                question_solved: question_solved
-            }
-            console.log(params)
-            /* axios.post('/exam-student-update', {...params}).then(response => {
+                question_solved: this.question
+            };
 
-                this.questionary = JSON.parse(response.data.questionary)
-                console.log('This updated: ',this.questionary)
-            }); */
+            axios.post('/exam-student-update', {...params}).then(response => {
+                console.log(response.data)
+                this.question = JSON.parse(response.data.questions)
+            });
         }
     },
 }

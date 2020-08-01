@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exams;
 use App\ExamStudent;
 use App\StudentProfile;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ExamStudentController extends Controller
@@ -17,15 +18,13 @@ class ExamStudentController extends Controller
     public function index($exam_id)
     {
         $student = StudentProfile::where('user_id',auth()->user()->id)->first();
-        //dd($exam);
+
         $message = false;
         $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',true]])->first();
         if ($exam_student != null) {
             $message = true;
-
             return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
         }
-
         return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
     }
 
@@ -40,7 +39,9 @@ class ExamStudentController extends Controller
         $student = StudentProfile::where('user_id',auth()->user()->id)->first();
         $exam = Exams::find($exam_id);
         $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first();
-
+        /* $start = Carbon::now();
+        $finish = Carbon::now()->addMinutes(6);
+        dd('Hora inicial: ',$start, 'Hora final: ', $finish); */
         if ($exam_student == null) {
             $questionary = $this->structuringExam($exam->questionary);
 
@@ -48,13 +49,40 @@ class ExamStudentController extends Controller
                 'student_id' => $student->id,
                 'exam_id' => $exam_id,
                 'questionary' => $questionary,
+                'start' => Carbon::now(),
+                'finish' => Carbon::now()->addMinutes(6),
                 'done' => false
             ]);
 
-            return $exam_created;
+            $questionary = json_decode($exam_created->questionary);
+            $question_out_solved = [];
+            foreach ($questionary as $key => $question) {
+                $question->question_solved ? null : array_push($question_out_solved,$key);
+            }
+            $alter = array_rand($question_out_solved);
+
+            $question = $questionary[$question_out_solved[$alter]];
+            $questions = json_encode($question);
+            return response()->json(['questions' => $questions,'start' => $exam_created->start, 'finish' => $exam_created->start]);
         } else {
+
             $exam_update = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first();
-            return $exam_update;
+            $questionary = json_decode($exam_update->questionary);
+            $question_out_solved = [];
+
+            foreach ($questionary as $key => $question) {
+                $question->question_solved ? null : array_push($question_out_solved,$key);
+            }
+
+            if (count($question_out_solved) > 0) {
+                $alter = array_rand($question_out_solved);
+
+                $question = $questionary[$question_out_solved[$alter]];
+                $questions = json_encode($question);
+                return response()->json(['questions' => $questions,'start' => $exam_update->start, 'finish' => $exam_update->start]);
+            }
+
+            return redirect()->route('/home');
         }
 
     }
@@ -106,7 +134,7 @@ class ExamStudentController extends Controller
      * @param  \App\ExamStudent  $examStudent
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ExamStudent $examStudent)
+    public function update(Request $request)
     {
 
         $student = StudentProfile::where('user_id',auth()->user()->id)->first();
@@ -114,20 +142,29 @@ class ExamStudentController extends Controller
 
         $exam = json_decode($exam_student->questionary);
 
-        $question_solved = null;
-        foreach ($exam as $key => $question) {
-            if ($question->id == $request->question_solved['id']) {
-                $question_solved = $key;
-            }
+        $question_solved = [$request->question_solved['id']-1 => $request->question_solved];
+        $exam_question_replace = array_replace($exam,$question_solved);
+        $exam_student->update([
+            'questionary' => json_encode($exam_question_replace)
+        ]);
+        $exam_student->fresh();
+
+        $question_out_solved = [];
+        $update_exam = json_decode($exam_student->questionary);
+        foreach ($update_exam as $key => $question) {
+
+            $question->question_solved ? null : array_push($question_out_solved,$key);
         }
 
-        $exam_replace = array_replace($exam,array($question_solved => $request->question_solved));
+        if (count($question_out_solved) > 0) {
+            $alter = array_rand($question_out_solved);
 
-        $exam_student->update([
-            'questionary' => json_encode($exam_replace)
-        ]);
+            $question = $update_exam[$question_out_solved[$alter]];
+            $questions = json_encode($question);
+            return response()->json(['questions' => $questions,'start' => $exam_student->start, 'finish' => $exam_student->start]);
+        }
+        return redirect()->route('home');
 
-        return ExamStudent::find($exam_student->id);
     }
 
     /**
@@ -145,6 +182,7 @@ class ExamStudentController extends Controller
     {
         $exam = json_decode($exam);
         foreach ($exam as $question) {
+            $question->answer_correct = null;
             foreach ($question->answers as $answer) {
                 $answer->value = false;
             }
@@ -152,4 +190,9 @@ class ExamStudentController extends Controller
 
         return json_encode($exam);
     }
+
+    /* public function starExam($id)
+    {
+        return $time = ExamStudent::where([['student_id',auth()->user()->id],['exam_id',$id]])->first()->created_at;
+    } */
 }

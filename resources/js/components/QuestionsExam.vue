@@ -1,20 +1,14 @@
 <template>
     <div>
-        <div class="flex px-2 py-2" >
-            <div class="w-full">
-                <div class="w-4/5">
-                    <label for=""><strong>{{ question.question }}</strong></label>
-                </div>
-                <answers-exam v-for="(answer, index) in question.answers" :key="index.id"
-                    :answer="answer"
-                    :number_question="question.id"
-                    @nextQuestion="nextQuestion"
-                ></answers-exam>
-                <button v-if="show_next_question" @click="testButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-                    Siguiente pregunta
-                </button>
-            </div>
+        <div class="examenContent__pregunta">
+            {{ question.question }}
         </div>
+        <answers-exam
+            :answers="question.answers"
+            :number_question="question.id"
+            @showButtonNextQuestion="showNextQuestion"
+            @question_solved="questionSolved"
+        ></answers-exam>
     </div>
 </template>
 <script>
@@ -31,15 +25,19 @@ export default {
 
     },
     methods: {
-        testButton(){
-            this.question.question_solved = true
+        nextQuestion(){
+            this.show_next_question = false;
+
             this.$emit('question_solved',this.question.question_solved = true)
+        },
+        showNextQuestion(answer) {
+            this.question.answer_selected = answer;
 
         },
-        nextQuestion(answer) {
-            this.question.question_solved = true;
-            this.question.answer_selected = answer;
-            this.show_next_question = true;
+        questionSolved(){
+            this.question.question_solved = true
+            this.$emit('updateQuestionSolved')
+
         }
     },
 

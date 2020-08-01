@@ -18,9 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/all.css') }}" rel="stylesheet" >
+    <link href="{{ asset('css/all-examen.css') }}" rel="stylesheet" >
 </head>
-<body>
+{{--  <body>
     <div id="app">
         <h3>Estas en el examen id: <strong> {{ $exam_id }}</strong></h3>
         @if($message)
@@ -31,5 +31,49 @@
             ></exam-model>
         @endif
     </div>
+</body>  --}}
+<body>
+    <div class="examenwrap" id="app">
+    <header class="examenHeader">
+        <img src="{{ asset('images/logo-horizontal.png') }}" alt="logo lambda" class="examenHeader__logo">
+        <section class="examenHeader__right">
+            <header class="examenHeader__tag">
+                <div>
+                    <img src="#" alt="" class="contentRight__mensaje">
+                </div>
+                <div>
+                    {{ auth()->user()->name }}
+                </div>
+                <div>
+                    <img src="#" alt="">
+                </div>
+                <div>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit">
+                            <img src="{{ asset('images/logout.png') }}" alt="">
+                        </button>
+                    </form>
+                </div>
+            </header>
+        </section>
+    </header>
+    <section class="examenContent">
+        <section class="examenContent__item">
+            <div class="examenContent__head">
+                <img src="{{ asset('images/premio-small.png') }}" alt="" class="examenContent__images">
+                <p class="examenContent__title">
+                    1er Concurso Internacional de conocimiento
+                </p>
+            </div>
+            <exam-model
+                :exam_id="{{ $exam_id }}"
+            ></exam-model>
+
+        </section>
+    </section>
+
+    </div>
 </body>
+
 </html>

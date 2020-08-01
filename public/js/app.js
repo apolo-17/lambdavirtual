@@ -1965,20 +1965,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['answer', 'number_question'],
+  props: ['answers', 'number_question'],
   data: function data() {
     return {
-      checked: this.answer.value
+      show_next_question: false,
+      clear_radio: null
     };
   },
   computed: {},
+  watch: {},
   methods: {
     valueAnswers: function valueAnswers(event) {
-      if (event.target.value != 'off') {
-        this.answer.value = true;
-        this.$emit('nextQuestion', this.answer.id);
-      }
+      this.show_next_question = true;
+      this.$emit('showButtonNextQuestion', event.target.value);
+    },
+    nextQuestion: function nextQuestion() {
+      this.show_next_question = false;
+      this.clear_radio = null;
+      this.$emit('question_solved');
+    },
+    clear: function clear() {
+      var clean = null;
+      return clean;
     }
   }
 });
@@ -2288,6 +2310,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2305,50 +2340,62 @@ __webpack_require__.r(__webpack_exports__);
     return {
       question_solved: 0,
       question_out_solved: 0,
-      question_exam: null,
       show_question_exam: false,
-      questionary: null
+      question: null,
+      displayDays: 0,
+      displayHours: 0,
+      displayMinuts: 0,
+      displaySeconds: 0
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    axios.get("/get-exam-created/".concat(this.exam_id)).then(function (response) {
-      _this.questionary = JSON.parse(response.data.questionary);
-      _this.show_question_exam = true;
-    });
+    /* axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
+        if (response.data.start != null) {
+            this.question = JSON.parse(response.data.questions)
+            this.show_question_exam = true
+        }
+    }); */
   },
   computed: {
-    questionsUpdated: function questionsUpdated() {
-      var questions = this.questionary;
-      var answer_solved = null;
-      var question_out_solved = [];
-      var question_solved = [];
-      var questions_splice = [];
-      questions.forEach(function (question) {
-        if (question.question_solved == false) {
-          question_out_solved.push(question);
-        } else {
-          question_solved.push(question);
-        }
-      });
-      var question_aleatorio = Math.floor(Math.random() * question_out_solved.length);
-      this.question_out_solved = question_out_solved.length;
-      this.question_solved = question_solved.length;
-      return question_out_solved[question_aleatorio];
+    _seconds: function _seconds() {
+      return 1000;
+    },
+    _minutes: function _minutes() {
+      return this._secods * 60;
+    },
+    _hours: function _hours() {
+      return this._minutes * 60;
+    },
+    _days: function _days() {
+      return this._hours * 24;
     }
   },
   methods: {
-    updateQuestionary: function updateQuestionary(question_solved) {
+    ahowRemaining: function ahowRemaining() {
+      var time = setInterval(function () {
+        var now = new Date();
+      }, interval);
+    },
+    startExam: function startExam() {
+      var _this = this;
+
+      axios.get("/get-exam-created/".concat(this.exam_id)).then(function (response) {
+        console.log(response.data.start, JSON.parse(response.data.questions));
+        _this.question = JSON.parse(response.data.questions);
+        _this.show_question_exam = true;
+      });
+    },
+    updateQuestionary: function updateQuestionary() {
+      var _this2 = this;
+
       var params = {
         exam_id: this.exam_id,
-        question_solved: question_solved
+        question_solved: this.question
       };
-      console.log(params);
-      /* axios.post('/exam-student-update', {...params}).then(response => {
-           this.questionary = JSON.parse(response.data.questionary)
-          console.log('This updated: ',this.questionary)
-      }); */
+      axios.post('/exam-student-update', _objectSpread({}, params)).then(function (response) {
+        console.log(response.data);
+        _this2.question = JSON.parse(response.data.questions);
+      });
     }
   }
 });
@@ -2572,12 +2619,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['question'],
   data: function data() {
@@ -2587,14 +2628,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {},
   methods: {
-    testButton: function testButton() {
-      this.question.question_solved = true;
+    nextQuestion: function nextQuestion() {
+      this.show_next_question = false;
       this.$emit('question_solved', this.question.question_solved = true);
     },
-    nextQuestion: function nextQuestion(answer) {
-      this.question.question_solved = true;
+    showNextQuestion: function showNextQuestion(answer) {
       this.question.answer_selected = answer;
-      this.show_next_question = true;
+    },
+    questionSolved: function questionSolved() {
+      this.question.question_solved = true;
+      this.$emit('updateQuestionSolved');
     }
   }
 });
@@ -59453,23 +59496,59 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("div", { staticClass: "ml-24 my-4" }, [
-      _c("ul", {}, [
-        _c("li", { staticClass: "my-4 flex items-center" }, [
-          _c("input", {
-            staticClass: "mr-4",
-            attrs: {
-              name: "group_question_" + _vm.number_question,
-              type: "radio"
-            },
-            domProps: { checked: _vm.checked },
-            on: { change: _vm.valueAnswers }
-          }),
-          _vm._v(" "),
-          _c("label", [_vm._v(_vm._s(_vm.answer.answer))])
+    _c(
+      "section",
+      { staticClass: "examenContent__respuestas" },
+      [
+        _vm._l(_vm.answers, function(answer, index) {
+          return _c("div", { key: index.id }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.clear_radio,
+                  expression: "clear_radio"
+                }
+              ],
+              staticClass: "mr-4",
+              attrs: {
+                name: "group_question_" + _vm.number_question,
+                type: "radio"
+              },
+              domProps: {
+                value: answer.id,
+                checked: _vm._q(_vm.clear_radio, answer.id)
+              },
+              on: {
+                change: [
+                  function($event) {
+                    _vm.clear_radio = answer.id
+                  },
+                  _vm.valueAnswers
+                ]
+              }
+            }),
+            _vm._v(_vm._s(answer.answer) + "\n        ")
+          ])
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "examenContent__btn" }, [
+          _vm.show_next_question
+            ? _c(
+                "button",
+                {
+                  staticClass:
+                    "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded",
+                  on: { click: _vm.nextQuestion }
+                },
+                [_vm._v("\n                Siguiente pregunta\n            ")]
+              )
+            : _vm._e()
         ])
-      ])
-    ])
+      ],
+      2
+    )
   ])
 }
 var staticRenderFns = []
@@ -59948,24 +60027,48 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", [
-        _c("h2", [
+      _c("div", { staticClass: "examenContent__conteo" }, [
+        _c("div", { staticClass: "examenContent__number" }, [
           _vm._v(
-            "Preguntas faltantes: " +
-              _vm._s(_vm.question_out_solved) +
+            _vm._s(_vm.question_out_solved) +
               "/ " +
               _vm._s(_vm.question_solved) +
-              "preguntas contestadas"
+              " "
           )
+        ]),
+        _c("div", { staticClass: "examenContent__numbertext" }, [
+          _vm._v("preguntas")
         ])
       ]),
       _vm._v(" "),
+      !_vm.show_question_exam
+        ? _c("span", [
+            _c("p", [
+              _vm._v(
+                "En cuanto des click al examen , iniciara el contador y el examen habra empezado, recuerda que tienes limite de tiempo"
+              )
+            ]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass:
+                  "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded",
+                on: { click: _vm.startExam }
+              },
+              [_vm._v("Iniciar Exame")]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _vm.show_question_exam
         ? _c("questions-exam", {
-            attrs: { question: _vm.questionsUpdated },
-            on: { question_solved: _vm.updateQuestionary }
+            attrs: { question: _vm.question },
+            on: { updateQuestionSolved: _vm.updateQuestionary }
           })
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", [_vm._v("tiempo del examen: 00:00:00")])
     ],
     1
   )
@@ -60425,42 +60528,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "flex px-2 py-2" }, [
-      _c(
-        "div",
-        { staticClass: "w-full" },
-        [
-          _c("div", { staticClass: "w-4/5" }, [
-            _c("label", { attrs: { for: "" } }, [
-              _c("strong", [_vm._v(_vm._s(_vm.question.question))])
-            ])
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.question.answers, function(answer, index) {
-            return _c("answers-exam", {
-              key: index.id,
-              attrs: { answer: answer, number_question: _vm.question.id },
-              on: { nextQuestion: _vm.nextQuestion }
-            })
-          }),
-          _vm._v(" "),
-          _vm.show_next_question
-            ? _c(
-                "button",
-                {
-                  staticClass:
-                    "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded",
-                  on: { click: _vm.testButton }
-                },
-                [_vm._v("\n                Siguiente pregunta\n            ")]
-              )
-            : _vm._e()
-        ],
-        2
-      )
-    ])
-  ])
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "examenContent__pregunta" }, [
+        _vm._v("\n        " + _vm._s(_vm.question.question) + "\n    ")
+      ]),
+      _vm._v(" "),
+      _c("answers-exam", {
+        attrs: {
+          answers: _vm.question.answers,
+          number_question: _vm.question.id
+        },
+        on: {
+          showButtonNextQuestion: _vm.showNextQuestion,
+          question_solved: _vm.questionSolved
+        }
+      })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
