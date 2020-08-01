@@ -14,7 +14,7 @@
             </section>
         </span>
         <div v-if="show_question_exam">
-            <div >Tiempo del examen: 00:{{ displayMinutes }}:{{displaySeconds}}</div>
+            <div style="background:#CAA23E; border-radius:8px; box-shadow:2px 5px 6px rgba(black,0.1); color: white; padding: 0.5em; text-align: center; width: 300px; margin: 1em 0"><span style="font-size: 0.9em">Tiempo del examen:</span><strong> {{ displayHours }}:{{ displayMinutes }}:{{displaySeconds}}</strong></div>
             <questions-exam v-if="show_question_exam"
                 :question="question"
                 :question_solved="question_solved"

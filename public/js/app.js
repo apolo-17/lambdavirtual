@@ -60090,14 +60090,36 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("div", [
-              _vm._v(
-                "Tiempo del examen: 00:" +
-                  _vm._s(_vm.displayMinutes) +
-                  ":" +
-                  _vm._s(_vm.displaySeconds)
-              )
-            ]),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  background: "#CAA23E",
+                  "border-radius": "8px",
+                  "box-shadow": "2px 5px 6px rgba(black,0.1)",
+                  color: "white",
+                  padding: "0.5em",
+                  "text-align": "center",
+                  width: "300px",
+                  margin: "1em 0"
+                }
+              },
+              [
+                _c("span", { staticStyle: { "font-size": "0.9em" } }, [
+                  _vm._v("Tiempo del examen:")
+                ]),
+                _c("strong", [
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.displayHours) +
+                      ":" +
+                      _vm._s(_vm.displayMinutes) +
+                      ":" +
+                      _vm._s(_vm.displaySeconds)
+                  )
+                ])
+              ]
+            ),
             _vm._v(" "),
             _vm.show_question_exam
               ? _c("questions-exam", {
