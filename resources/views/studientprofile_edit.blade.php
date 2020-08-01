@@ -55,7 +55,7 @@
                     @if($student->gender == 'M')
                         <option value="{{ $student->gender }}">Masculino</option>
                     @else
-                        <option value="{{ $tudent->gender }}">Femenino</option>
+                        <option value="{{ $student->gender }}">Femenino</option>
                     @endif
                     <option value="M">Masculino</option>
                     <option value="F">Femenino</option>
