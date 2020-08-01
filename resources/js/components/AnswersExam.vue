@@ -5,22 +5,12 @@
                 <input @change="valueAnswers" :name="'group_question_'+number_question" v-model="clear_radio" :value="answer.id" class="mr-4" type="radio">{{ answer.answer }}
             </div>
             <div class="examenContent__btn">
-                <button v-if="show_next_question" @click="nextQuestion" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
+                <!-- <button v-if="show_next_question" @click="nextQuestion" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
                     Siguiente pregunta
-                </button>
+                </button> -->
+                <input type="submit" class="examenContent__btn">
             </div>
         </section>
-        <!-- <div class="ml-24 my-4">
-            <ul class="" v-for="(answer, index) in answers" :key="index.id">
-                <li class="my-4 flex items-center" >
-                    <input @change="valueAnswers" :name="'group_question_'+number_question" v-model="clear_radio" :value="answer.id" class="mr-4" type="radio">
-                    <label>{{ answer.answer }}</label>
-                </li>
-            </ul>
-        </div> -->
-        <!-- <button v-if="show_next_question" @click="nextQuestion" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-            Siguiente pregunta
-        </button> -->
     </div>
 </template>
 

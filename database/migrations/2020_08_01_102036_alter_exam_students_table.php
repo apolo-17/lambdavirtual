@@ -14,8 +14,8 @@ class AlterExamStudentsTable extends Migration
     public function up()
     {
         Schema::table('exam_students', function (Blueprint $table) {
-            $table->time('start',2)->after('questionary')->nullable();
-            $table->time('finish',2)->after('start')->nullable();
+            $table->time('start')->after('questionary')->nullable();
+            $table->time('finish')->after('start')->nullable();
         });
     }
 

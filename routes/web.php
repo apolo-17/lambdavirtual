@@ -65,6 +65,6 @@ Route::post('/admin-exam-edit-information', function(Request $request) {
 
 
 Route::get('/exam-init/{id}','ExamStudentController@index')->name('exam-student-init')->middleware('verified');
-Route::get('/get-exam-created/{id}','ExamStudentController@create')->name('exam-student-create')->middleware('verified');
+Route::get('/get-exam-created/{id}/{start}','ExamStudentController@create')->name('exam-student-create')->middleware('verified');
 Route::post('/exam-student-update','ExamStudentController@update')->name('exam-student-update')->middleware('verified');
 Route::get('/start-time-exam/{id}','ExamStudentController@starExam')->name('start-exam')->middleware('verified');

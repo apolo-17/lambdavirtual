@@ -36,4 +36,5 @@ var moment = require('moment');
 const app = new Vue({
     el: '#app',
     router,
+    moment
 });

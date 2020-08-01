@@ -1968,16 +1968,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['answers', 'number_question'],
   data: function data() {
@@ -2341,19 +2331,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       question_solved: 0,
       question_out_solved: 0,
       show_question_exam: false,
+      end_time_exam: null,
       question: null,
       displayDays: 0,
       displayHours: 0,
-      displayMinuts: 0,
+      displayMinutes: 0,
       displaySeconds: 0
     };
   },
   mounted: function mounted() {
-    /* axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
-        if (response.data.start != null) {
-            this.question = JSON.parse(response.data.questions)
-            this.show_question_exam = true
-        }
+    /* let start = new Date();
+    axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
+         this.question = JSON.parse(response.data.questions);
+        this.end_time_exam = response.data.finish;
+        this.show_question_exam = true;
+        this.showRemaining()
     }); */
   },
   computed: {
@@ -2361,7 +2353,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return 1000;
     },
     _minutes: function _minutes() {
-      return this._secods * 60;
+      return this._seconds * 60;
     },
     _hours: function _hours() {
       return this._minutes * 60;
@@ -2371,30 +2363,55 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    ahowRemaining: function ahowRemaining() {
-      var time = setInterval(function () {
-        var now = new Date();
-      }, interval);
+    formatNum: function formatNum(num) {
+      return num < 10 ? '0' + num : num;
     },
-    startExam: function startExam() {
+    showRemaining: function showRemaining() {
       var _this = this;
 
-      axios.get("/get-exam-created/".concat(this.exam_id)).then(function (response) {
-        console.log(response.data.start, JSON.parse(response.data.questions));
-        _this.question = JSON.parse(response.data.questions);
-        _this.show_question_exam = true;
+      var timer = setInterval(function () {
+        var now = new Date();
+        var end = new Date(_this.end_time_exam);
+        console.log(now);
+        var distance = end.getTime() - now.getTime();
+
+        if (distance < 0) {
+          clearInterval(timer);
+          return;
+        }
+
+        var days = Math.floor(distance / _this._days);
+        var hours = Math.floor(distance % _this._days / _this.hours);
+        var minutes = Math.floor(distance % _this._hours / _this._minutes);
+        var seconds = Math.floor(distance % _this._minutes / _this._seconds);
+        console.log(distance, _this._seconds);
+        _this.displayMinutes = _this.formatNum(minutes);
+        _this.displaySeconds = _this.formatNum(seconds);
+        _this.displayHours = _this.formatNum(hours);
+        _this.displayDays = _this.formatNum(days);
+      }, 1000);
+    },
+    startExam: function startExam() {
+      var _this2 = this;
+
+      var start = new Date();
+      axios.get("/get-exam-created/".concat(this.exam_id, "/").concat(start)).then(function (response) {
+        _this2.question = JSON.parse(response.data.questions);
+        _this2.end_time_exam = response.data.finish;
+        _this2.show_question_exam = true;
+
+        _this2.showRemaining();
       });
     },
     updateQuestionary: function updateQuestionary() {
-      var _this2 = this;
+      var _this3 = this;
 
       var params = {
         exam_id: this.exam_id,
         question_solved: this.question
       };
       axios.post('/exam-student-update', _objectSpread({}, params)).then(function (response) {
-        console.log(response.data);
-        _this2.question = JSON.parse(response.data.questions);
+        _this3.question = JSON.parse(response.data.questions);
       });
     }
   }
@@ -59533,25 +59550,25 @@ var render = function() {
           ])
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "examenContent__btn" }, [
-          _vm.show_next_question
-            ? _c(
-                "button",
-                {
-                  staticClass:
-                    "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded",
-                  on: { click: _vm.nextQuestion }
-                },
-                [_vm._v("\n                Siguiente pregunta\n            ")]
-              )
-            : _vm._e()
-        ])
+        _vm._m(0)
       ],
       2
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "examenContent__btn" }, [
+      _c("input", {
+        staticClass: "examenContent__btn",
+        attrs: { type: "submit" }
+      })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -60068,7 +60085,16 @@ var render = function() {
           })
         : _vm._e(),
       _vm._v(" "),
-      _c("div", [_vm._v("tiempo del examen: 00:00:00")])
+      _c("div", [
+        _vm._v(
+          "Tiempo del examen: " +
+            _vm._s(_vm.displayHours) +
+            ":" +
+            _vm._s(_vm.displayMinutes) +
+            ":" +
+            _vm._s(_vm.displaySeconds)
+        )
+      ])
     ],
     1
   )
@@ -80601,7 +80627,8 @@ var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js"
 
 var app = new Vue({
   el: '#app',
-  router: router
+  router: router,
+  moment: moment
 });
 
 /***/ }),

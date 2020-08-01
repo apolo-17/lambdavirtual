@@ -12,11 +12,12 @@
             :question="question"
             @updateQuestionSolved="updateQuestionary"
         ></questions-exam>
-        <div>tiempo del examen: 00:00:00</div>
+        <div>Tiempo del examen: {{ displayHours }}:{{ displayMinutes }}:{{displaySeconds}}</div>
     </div>
 </template>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 <script>
+
 export default {
     props:['exam_id'],
 
@@ -25,53 +26,75 @@ export default {
             question_solved: 0,
             question_out_solved: 0,
             show_question_exam: false,
-            end_exam: null,
+            end_time_exam: null,
             question: null,
             displayDays:0,
             displayHours:0,
-            displayMinuts:0,
+            displayMinutes:0,
             displaySeconds:0
         }
     },
 
     mounted() {
 
-        /* axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
-            if (response.data.start != null) {
-                this.question = JSON.parse(response.data.questions)
-                this.show_question_exam = true
-            }
+        /* let start = new Date();
+        axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
+
+            this.question = JSON.parse(response.data.questions);
+            this.end_time_exam = response.data.finish;
+            this.show_question_exam = true;
+            this.showRemaining()
         }); */
 
     },
     computed: {
         _seconds: () => 1000,
         _minutes() {
-            return this._secods * 60;
+            return this._seconds * 60;
         },
         _hours() {
             return this._minutes * 60;
         },
         _days() {
-            return this._hours * 24 ;
+            return this._hours * 24;
         }
     },
 
     methods: {
+        formatNum: num  => (num < 10 ? '0' + num : num),
         showRemaining(){
-            const time = setInterval(() => {
+            const timer = setInterval(() => {
                 const now = new Date();
-                const end = this.end_exam;
-            }, interval);
+                const end = new Date(this.end_time_exam)
+                console.log(now)
+                const distance = end.getTime() - now.getTime();
+
+                if (distance < 0) {
+                    clearInterval(timer);
+                    return
+                }
+
+                const days = Math.floor((distance / this._days));
+                const hours = Math.floor((distance % this._days) / this.hours);
+                const minutes = Math.floor((distance % this._hours) / this._minutes);
+                const seconds = Math.floor((distance % this._minutes) / this._seconds);
+                console.log(distance, this._seconds)
+                this.displayMinutes = this.formatNum(minutes);
+                this.displaySeconds = this.formatNum(seconds);
+                this.displayHours = this.formatNum(hours);
+                this.displayDays = this.formatNum(days);
+
+            },1000);
         },
         startExam(){
+            let start = new Date();
 
-            axios.get(`/get-exam-created/${this.exam_id}`).then(response => {
-                console.log(response.data.start, JSON.parse(response.data.questions))
+            axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
+
                 this.question = JSON.parse(response.data.questions);
-                this.end_exam = response.data.finish;
-                console.log(this.end_exam)
+                this.end_time_exam = response.data.finish;
                 this.show_question_exam = true;
+                this.showRemaining()
             });
         },
         updateQuestionary(){
@@ -82,8 +105,9 @@ export default {
             };
 
             axios.post('/exam-student-update', {...params}).then(response => {
-                console.log(response.data)
+
                 this.question = JSON.parse(response.data.questions)
+
             });
         }
     },
