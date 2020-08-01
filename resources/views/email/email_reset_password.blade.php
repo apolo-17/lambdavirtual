@@ -4,9 +4,116 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Document</title>
+     <!-- Styles -->
+     <style type="text/css">
+        body {
+        margin: 0;
+        padding: 0;
+        color: #000;
+        background: #f5f5f5;
+        font-size: 16px;
+        font-family: 'Open Sans', sans-serif;
+        }
+        .mail {
+        background: #fff;
+        width: 28%;
+        margin: 1em auto;
+        padding: 2.5em;
+        color: #707070;
+        }
+        .mail__header {
+        text-align: center;
+        }
+        .mail__logo {
+        width: 120px;
+        margin-bottom: 2em;
+        }
+        .mail__titleformat {
+        margin: 0;
+        font-weight: normal;
+        }
+        .mail__title {
+        color: #b60011;
+        font-size: 1em;
+        }
+        .mail__text {
+        color: #caa23e;
+        margin-bottom: 1em;
+        }
+        .mail__name {
+        margin: 0;
+        color: #b60011;
+        font-weight: bold;
+        }
+        .mail__p {
+        margin: 0;
+        }
+        .mail__btn {
+        background: #b60011;
+        border-radius: 20px;
+        color: #fff;
+        font-weight: bold;
+        margin: 2em auto;
+        padding: 0.5em;
+        text-align: center;
+        width: 40%;
+        }
+        .mail__btn a {
+        color: #fff;
+        text-decoration: none;
+        }
+        .mail__btn-recovery {
+        width: 50%;
+        }
+        .mail__footer {
+        font-size: 0.9em;
+        }
+        .mail__help {
+        text-align: center;
+        }
+        .mail__copyright {
+        color: #d8d8d8;
+        text-align: center;
+        font-size: 0.8em;
+        }
+        @media screen and (max-width: 768px) {
+        .mail {
+            width: 80%;
+        }
+        }
+    </style>
 </head>
 <body>
-    <h2>Email para resetear el password, <a href="{{ $url }}">click aqui</a></h2>
+    <div class="mail">
+        <header class="mail__header">
+            <img src="{{ $message->embed($url_img) }}" alt="{{config('app.name')}}" class="mail__logo">
+            <h2 class="mail__text mail__titleformat">Cambio de contraseña</h2>
+        </header>
+        <section>
+            <p class="mail__name">
+
+            </p>
+            <p class="mail__p">
+            Recupera el acceso reestableciendo tu contraseña. Para reestablecer tu contraseña, clica en el siguiente enlace y sigue las instrucciones.
+            </p>
+            <div class="mail__btn mail__btn-recovery">
+                <a href="{{ $url }}">Restablecer contraseña</a>
+            </div>
+        </section>
+        <footer class="mail__footer">
+            <p class="mail__textfooter">
+                Si tienes problemas haciendo click en el botón "Confirmar correo electrónico", copia y pega el siguiente enlace en tu navegador: {{ $url }}
+            </p>
+            <p class="mail__help">
+                Si necesitas ayuda escríbenos academico@grupolambda.com.pe
+            </p>
+        </footer>
+    </div>
+    <p class="mail__copyright">
+		© 2020 Grupo-Lambda. Todos los derechos reservados.
+	</p>
 </body>
 </html>

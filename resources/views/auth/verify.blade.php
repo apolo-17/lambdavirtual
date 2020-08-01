@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- <div class="flex h-screen"> -->
-    <!-- <div class="flex"> -->
-        <!-- <div class="col-md-8"> -->
             <div class="exitoCuenta">
                 <div class="exitoCuenta__wrap">
                     <div class="exitoCuenta__header">
@@ -37,7 +34,4 @@
                     </div>
                 </div
             </div>
-        <!-- </div> -->
-    <!-- </div> -->
-<!-- </div> -->
 @endsection
