@@ -1,50 +1,112 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #000;
+  background: #fff;
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+}
 .examenwrap {
-    height: 100vh;
-  }
-  .examenHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1em;
-  }
-  .examenHeader img {
-    height: 40px;
-  }
-  .examenHeader__right {
-    display: flex;
-    justify-content: flex-end;
-  }
-  .examenContent__item {
-    width: 35%;
-    margin: 0 auto;
-  }
-  .examenContent__head {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    border-bottom: 3px dotted plomo;
-    padding: 0.5em;
-    margin-bottom: 1em;
-  }
-  .examenContent__images {
-    margin: 0 0.5em;
-  }
-  .examenContent__title {
-    color: rojo;
-    font-weight: bold;
-    text-align: center;
-    margin: 0;
-  }
-  .examenContent__conteo {
-    background-color: plomo;
-    padding: 0.5em;
-    border-radius: 10px;
-    color: plomotexto;
-    text-align: right;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .examenContent__number {
-    font-weight: bold;
-    margin-right: 0.5em;
-  }
+  height: 100vh;
+}
+.examenHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em;
+}
+.examenHeader img {
+  height: 40px;
+}
+.examenHeader__right {
+  display: flex;
+  justify-content: flex-end;
+}
+.examenContent__cronometro {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1em 0;
+  width: 90%;
+}
+.examenContent__cronometro-timer {
+  background: #caa23e;
+  border-radius: 8px;
+  box-shadow: 2px 5px 6px rgba(0,0,0,0.1);
+  color: #fff;
+  padding: 0.5em;
+  text-align: center;
+  width: 200px;
+}
+.examenContent__cronometro-timer span {
+  font-size: 0.9em;
+}
+.examenContent__item {
+  margin: 0 auto;
+  width: 35%;
+}
+.examenContent__head {
+  align-items: flex-end;
+  display: flex;
+  justify-content: center;
+  border-bottom: 3px dotted #f4f4f4;
+  margin-bottom: 1em;
+  padding: 0.5em;
+}
+.examenContent__images {
+  margin: 0 0.5em;
+}
+.examenContent__title {
+  color: #b60011;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
+.examenContent__conteo {
+  background-color: #f4f4f4;
+  border-radius: 10px;
+  display: flex;
+  color: #707070;
+  justify-content: flex-end;
+  padding: 0.5em;
+  text-align: right;
+}
+.examenContent__number {
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+.examenContent__respuestas h1 {
+  color: #caa23e;
+  margin: 0;
+}
+.examenContent__respuestas p {
+  margin: 0;
+}
+.examenContent__respuestas-item {
+  border-radius: 8px;
+  box-shadow: 2px 5px 6px rgba(0,0,0,0.1);
+  border: #f4f4f4;
+  padding: 0.5em;
+  margin-bottom: 1.5em;
+}
+.examenContent__btn {
+  background: #b60011;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: bold;
+  margin: 2em auto;
+  padding: 0.5em;
+  text-align: center;
+  width: 40%;
+}
+.examenContent__btn a {
+  color: #fff;
+  text-decoration: none;
+}
+.examenContent__btn2 {
+  border: 0px;
+}
+.examenContent__btn2 input:focus,
+.examenContent__btn2 input.form-control:focus {
+  outline: none !important;
+  outline-width: 0 !important;
+}
