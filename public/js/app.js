@@ -2324,12 +2324,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exam_id'],
   data: function data() {
     return {
       question_solved: 0,
-      question_out_solved: 0,
+      total_questions: 0,
       show_question_exam: false,
       end_time_exam: null,
       question: null,
@@ -2363,16 +2372,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
+    startExam: function startExam() {
+      var _this = this;
+
+      var start = new Date();
+      axios.get("/get-exam-created/".concat(this.exam_id, "/").concat(start)).then(function (response) {
+        _this.question = JSON.parse(response.data.questions);
+        _this.end_time_exam = response.data.finish;
+        _this.show_question_exam = true;
+        _this.question_solved = response.data.question_solved;
+        _this.total_questions = response.data.total_questions;
+
+        _this.showRemaining();
+      });
+    },
     formatNum: function formatNum(num) {
       return num < 10 ? '0' + num : num;
     },
     showRemaining: function showRemaining() {
-      var _this = this;
+      var _this2 = this;
 
       var timer = setInterval(function () {
         var now = new Date();
-        var end = new Date(_this.end_time_exam);
-        console.log(now);
+        var end = new Date(_this2.end_time_exam);
         var distance = end.getTime() - now.getTime();
 
         if (distance < 0) {
@@ -2380,28 +2402,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return;
         }
 
-        var days = Math.floor(distance / _this._days);
-        var hours = Math.floor(distance % _this._days / _this.hours);
-        var minutes = Math.floor(distance % _this._hours / _this._minutes);
-        var seconds = Math.floor(distance % _this._minutes / _this._seconds);
-        console.log(distance, _this._seconds);
-        _this.displayMinutes = _this.formatNum(minutes);
-        _this.displaySeconds = _this.formatNum(seconds);
-        _this.displayHours = _this.formatNum(hours);
-        _this.displayDays = _this.formatNum(days);
+        var days = Math.floor(distance / _this2._days);
+        var hours = Math.floor(distance % _this2._days / _this2.hours);
+        var minutes = Math.floor(distance % _this2._hours / _this2._minutes);
+        var seconds = Math.floor(distance % _this2._minutes / _this2._seconds);
+        _this2.displayMinutes = _this2.formatNum(minutes);
+        _this2.displaySeconds = _this2.formatNum(seconds);
+        _this2.displayHours = _this2.formatNum(hours);
+        _this2.displayDays = _this2.formatNum(days);
       }, 1000);
-    },
-    startExam: function startExam() {
-      var _this2 = this;
-
-      var start = new Date();
-      axios.get("/get-exam-created/".concat(this.exam_id, "/").concat(start)).then(function (response) {
-        _this2.question = JSON.parse(response.data.questions);
-        _this2.end_time_exam = response.data.finish;
-        _this2.show_question_exam = true;
-
-        _this2.showRemaining();
-      });
     },
     updateQuestionary: function updateQuestionary() {
       var _this3 = this;
@@ -2636,14 +2645,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['question'],
+  props: ['question', 'total_questions', 'question_solved'],
   data: function data() {
     return {
       show_next_question: false
     };
   },
-  computed: {},
+  computed: {
+    /* questionSolved(){
+        return this.question_solved
+    },
+    questionOutSolved(){
+        return this.question_out_solved
+    } */
+  },
   methods: {
     nextQuestion: function nextQuestion() {
       this.show_next_question = false;
@@ -60041,63 +60060,60 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "examenContent__conteo" }, [
-        _c("div", { staticClass: "examenContent__number" }, [
-          _vm._v(
-            _vm._s(_vm.question_out_solved) +
-              "/ " +
-              _vm._s(_vm.question_solved) +
-              " "
-          )
-        ]),
-        _c("div", { staticClass: "examenContent__numbertext" }, [
-          _vm._v("preguntas")
-        ])
-      ]),
-      _vm._v(" "),
-      !_vm.show_question_exam
-        ? _c("span", [
+  return _c("div", [
+    !_vm.show_question_exam
+      ? _c("span", [
+          _c("section", { staticClass: "examenContent__respuestas" }, [
+            _c("h1", [_vm._v("¡Llegó el gran dia!")]),
+            _vm._v(" "),
             _c("p", [
               _vm._v(
-                "En cuanto des click al examen , iniciara el contador y el examen habra empezado, recuerda que tienes limite de tiempo"
+                "\n                Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.\n            "
               )
             ]),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded",
-                on: { click: _vm.startExam }
-              },
-              [_vm._v("Iniciar Exame")]
-            )
+            _c("div", [
+              _c(
+                "div",
+                {
+                  staticClass: "examenContent__btn",
+                  on: { click: _vm.startExam }
+                },
+                [_vm._v("\n                    ¡Empezar!\n                ")]
+              )
+            ])
           ])
-        : _vm._e(),
-      _vm._v(" "),
-      _vm.show_question_exam
-        ? _c("questions-exam", {
-            attrs: { question: _vm.question },
-            on: { updateQuestionSolved: _vm.updateQuestionary }
-          })
-        : _vm._e(),
-      _vm._v(" "),
-      _c("div", [
-        _vm._v(
-          "Tiempo del examen: " +
-            _vm._s(_vm.displayHours) +
-            ":" +
-            _vm._s(_vm.displayMinutes) +
-            ":" +
-            _vm._s(_vm.displaySeconds)
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.show_question_exam
+      ? _c(
+          "div",
+          [
+            _c("div", [
+              _vm._v(
+                "Tiempo del examen: 00:" +
+                  _vm._s(_vm.displayMinutes) +
+                  ":" +
+                  _vm._s(_vm.displaySeconds)
+              )
+            ]),
+            _vm._v(" "),
+            _vm.show_question_exam
+              ? _c("questions-exam", {
+                  attrs: {
+                    question: _vm.question,
+                    question_solved: _vm.question_solved,
+                    total_questions: _vm.total_questions
+                  },
+                  on: { updateQuestionSolved: _vm.updateQuestionary }
+                })
+              : _vm._e()
+          ],
+          1
         )
-      ])
-    ],
-    1
-  )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -60557,6 +60573,20 @@ var render = function() {
   return _c(
     "div",
     [
+      _c("div", { staticClass: "examenContent__conteo" }, [
+        _c("div", { staticClass: "examenContent__number" }, [
+          _vm._v(
+            _vm._s(_vm.question_solved) +
+              "/" +
+              _vm._s(_vm.total_questions) +
+              " "
+          )
+        ]),
+        _c("div", { staticClass: "examenContent__numbertext" }, [
+          _vm._v(" preguntas")
+        ])
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "examenContent__pregunta" }, [
         _vm._v("\n        " + _vm._s(_vm.question.question) + "\n    ")
       ]),

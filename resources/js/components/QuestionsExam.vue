@@ -1,5 +1,8 @@
 <template>
     <div>
+        <div class="examenContent__conteo">
+            <div class="examenContent__number">{{question_solved}}/{{total_questions}} </div><div class="examenContent__numbertext"> preguntas</div>
+        </div>
         <div class="examenContent__pregunta">
             {{ question.question }}
         </div>
@@ -13,7 +16,7 @@
 </template>
 <script>
 export default {
-    props:['question'],
+    props:['question','total_questions','question_solved'],
 
     data(){
         return {
@@ -22,7 +25,12 @@ export default {
     },
 
     computed: {
-
+        /* questionSolved(){
+            return this.question_solved
+        },
+        questionOutSolved(){
+            return this.question_out_solved
+        } */
     },
     methods: {
         nextQuestion(){

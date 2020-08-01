@@ -20,18 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/all-examen.css') }}" rel="stylesheet" >
 </head>
-{{--  <body>
-    <div id="app">
-        <h3>Estas en el examen id: <strong> {{ $exam_id }}</strong></h3>
-        @if($message)
-            <message-exam></message-exam>
-        @else
-            <exam-model
-                :exam_id="{{ $exam_id }}"
-            ></exam-model>
-        @endif
-    </div>
-</body>  --}}
+
 <body>
     <div class="examenwrap" id="app">
     <header class="examenHeader">
