@@ -182,8 +182,8 @@
   padding: 0.7em;
 }
 .userslateral__img {
-  width: 26px;
-  margin-right: 13px;
+  width: 50px;
+  margin-right: 25px;
 }
 @media screen and (max-width: 768px) {
   .userslateral {
@@ -194,6 +194,10 @@
     justify-content: center;
     width: 100%;
   }
+  .userslateral__item {
+    padding: 0.4em;
+  }
+
   .userslateral__img {
     width: 40px;
     margin-right: 10px;
