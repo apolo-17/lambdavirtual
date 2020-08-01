@@ -4,7 +4,7 @@
             <ul class="" >
                 <li class="my-4 flex items-center" >
                     <label for="" class="mr-2">{{answer.id}}</label>
-                    <input @change="valueAnswers" :name="'group_question_'+number_question" :checked="checked" class="mr-4" type="radio">
+                        <input @change="valueAnswers" :name="'group_question_'+number_question" :checked="checked" class="mr-4" type="radio">
                     <input v-model="answer.answer" class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-1/2 appearance-none leading-normal" type="text" placeholder="Respuesta">
 
                 </li>

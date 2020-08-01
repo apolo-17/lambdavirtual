@@ -2351,7 +2351,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     /* let start = new Date();
     axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
-         this.question = JSON.parse(response.data.questions);
+          this.question = JSON.parse(response.data.questions);
         this.end_time_exam = response.data.finish;
         this.show_question_exam = true;
         this.showRemaining()
@@ -60096,14 +60096,36 @@ var render = function() {
       ? _c(
           "div",
           [
-            _c("div", [
-              _vm._v(
-                "Tiempo del examen: 00:" +
-                  _vm._s(_vm.displayMinutes) +
-                  ":" +
-                  _vm._s(_vm.displaySeconds)
-              )
-            ]),
+            _c(
+              "div",
+              {
+                staticStyle: {
+                  background: "#CAA23E",
+                  "border-radius": "8px",
+                  "box-shadow": "2px 5px 6px rgba(black,0.1)",
+                  color: "white",
+                  padding: "0.5em",
+                  "text-align": "center",
+                  width: "300px",
+                  margin: "1em 0"
+                }
+              },
+              [
+                _c("span", { staticStyle: { "font-size": "0.9em" } }, [
+                  _vm._v("Tiempo del examen:")
+                ]),
+                _c("strong", [
+                  _vm._v(
+                    " " +
+                      _vm._s(_vm.displayHours) +
+                      ":" +
+                      _vm._s(_vm.displayMinutes) +
+                      ":" +
+                      _vm._s(_vm.displaySeconds)
+                  )
+                ])
+              ]
+            ),
             _vm._v(" "),
             _vm.show_question_exam
               ? _c("questions-exam", {
@@ -81483,8 +81505,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/lambdavirtual/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/lambdavirtual/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\lambdavirtual\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\lambdavirtual\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
