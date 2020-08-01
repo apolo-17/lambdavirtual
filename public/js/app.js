@@ -2342,7 +2342,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   mounted: function mounted() {
     /* let start = new Date();
     axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
-         this.question = JSON.parse(response.data.questions);
+          this.question = JSON.parse(response.data.questions);
         this.end_time_exam = response.data.finish;
         this.show_question_exam = true;
         this.showRemaining()
@@ -81443,8 +81443,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/lambdavirtual/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/lambdavirtual/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\lambdavirtual\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\lambdavirtual\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
