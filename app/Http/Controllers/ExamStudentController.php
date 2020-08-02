@@ -56,7 +56,6 @@ class ExamStudentController extends Controller
             $question_out_solved = [];
             $question_solved = [];
 
-
             foreach ($questionary as $key => $question) {
                 $question->question_solved ? array_push($question_solved,$key) : array_push($question_out_solved,$key);
             }

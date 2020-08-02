@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        if (App::isLocal()) {
+        //if (App::isLocal()) {
             User::create([
                 'name' => 'Apolinar Morales Añaqui',
                 'email' => 'apolinar.morales.a@gmail.com',
@@ -34,6 +34,6 @@ class UserSeeder extends Seeder
                 'email_verified_at' => Carbon::now(),
                 'password' => bcrypt('password'),
             ]);
-        }
+        //}
     }
 }
