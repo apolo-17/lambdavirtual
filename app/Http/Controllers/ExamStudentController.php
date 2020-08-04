@@ -18,21 +18,38 @@ class ExamStudentController extends Controller
     public function index($exam_id)
     {
         $student = StudentProfile::where('user_id',auth()->user()->id)->first();
+        $exam = Exams::find($exam_id);
         $message = false;
-
         $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id]])->first();
+
         if ($exam_student == null) {
-            return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
+
+            return view('exam')->with([
+                'exam_id' => $exam_id,
+                'message' => $message,
+                'exam_questions' => $exam->number_questions,
+                'exam_title' => $exam->name
+            ]);
         }
 
         if ($exam_student->done == null) {
 
-            return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
+            return view('exam')->with([
+                'exam_id' => $exam_id,
+                'message' => $message,
+                'exam_questions' => $exam->number_questions,
+                'exam_title' => $exam->name
+            ]);
         }
 
         if ($exam_student->done == 1) {
             $message = true;
-            return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
+            return view('exam')->with([
+                'exam_id' => $exam_id,
+                'message' => $message,
+                'exam_questions' => $exam->number_questions,
+                'exam_title' => $exam->name
+            ]);
         }
 
     }
@@ -57,7 +74,7 @@ class ExamStudentController extends Controller
                 'exam_id' => $exam_id,
                 'questionary' => $questionary,
                 'start' => Carbon::createFromFormat('D M d Y H:i:s e+', $start),
-                'finish' => Carbon::createFromFormat('D M d Y H:i:s e+', $start)->addMinutes(30),
+                'finish' => Carbon::createFromFormat('D M d Y H:i:s e+', $start)->addMinutes($exam->duration),
                 'done' => false
             ]);
 
@@ -154,7 +171,32 @@ class ExamStudentController extends Controller
     public function show($examStudent)
     {
         $exam_student = ExamStudent::find($examStudent);
-        return view('exam-show-result')->with(['exam' => $exam_student]);
+        $exam = Exams::find($exam_student->exam_id);
+        $exam_questionary = json_decode($exam->questionary);
+        $exam_student_questionary = json_decode($exam_student->questionary);
+        $answerselected = [];
+        $answercorrect = [];
+        foreach ($exam_questionary as $value) {
+            array_push($answercorrect,$value->answer_correct);
+        }
+
+        foreach ($exam_student_questionary as $value) {
+            array_push($answerselected,$value->answer_selected);
+        }
+
+        $answer_correct = 0;
+        for ($i=0; $i < count($answercorrect); $i++) {
+            ($answercorrect[$i] == $answerselected[$i]) ? ++$answer_correct : null ;
+        }
+
+        $answer_incorrect = count($answercorrect) - $answer_correct;
+
+        return view('exam-show-result')->with([
+            'answer_correct' => $answer_correct,
+            'answer_incorrect' => $answer_incorrect,
+            'questions_total' => count($answercorrect),
+            'total_score' => 20*$answer_correct
+        ]);
     }
 
     /**

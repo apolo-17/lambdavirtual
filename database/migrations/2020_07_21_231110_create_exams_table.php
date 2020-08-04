@@ -18,7 +18,7 @@ class CreateExamsTable extends Migration
             $table->string('name');
             $table->dateTime('deploy_exam');
             $table->dateTime('finish_exam');
-            $table->time('duration');
+            $table->string('duration');
             $table->integer('number_questions');
             $table->integer('number_subsections');
             $table->longText('description')->nullable();

@@ -2333,7 +2333,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['exam_id'],
+  props: {
+    exam_id: {
+      type: Number
+    },
+    exam_questions: {
+      type: Number
+    }
+  },
   data: function data() {
     return {
       question_solved: 0,
@@ -2356,7 +2363,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this.question = JSON.parse(response.data.questions);
         _this.end_time_exam = response.data.finish;
         _this.show_question_exam = true;
-        _this.question_solved = response.data.question_solved;
+        _this.question_solved = response.data.question_solved + 1;
         _this.total_questions = response.data.total_questions;
 
         _this.showRemaining();
@@ -2386,7 +2393,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.question = JSON.parse(response.data.questions);
         _this2.end_time_exam = response.data.finish;
         _this2.show_question_exam = true;
-        _this2.question_solved = response.data.question_solved;
+        _this2.question_solved = response.data.question_solved + 1;
         _this2.total_questions = response.data.total_questions;
 
         _this2.$router.push('/exam-runing/' + _this2.exam_id);
@@ -59893,7 +59900,7 @@ var render = function() {
                 ],
                 staticClass:
                   "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal",
-                attrs: { type: "time", placeholder: "Duracion del examen" },
+                attrs: { type: "number", placeholder: "Duracion del examen" },
                 domProps: { value: _vm.duration },
                 on: {
                   input: function($event) {
@@ -60080,7 +60087,9 @@ var render = function() {
             _vm._v(" "),
             _c("p", [
               _vm._v(
-                "\n                Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.\n            "
+                "\n                Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras " +
+                  _vm._s(_vm.exam_questions) +
+                  " preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.\n            "
               )
             ]),
             _vm._v(" "),

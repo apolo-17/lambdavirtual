@@ -74,11 +74,12 @@
             <div class="examenContent__head">
                 <img src="{{ asset('images/premio-small.png') }}" alt="" class="examenContent__images">
                 <p class="examenContent__title">
-                    1er Concurso Internacional de conocimiento
+                    {{ $exam_title }}
                 </p>
             </div>
             <exam-model
                 :exam_id="{{ $exam_id }}"
+                :exam_questions="{{ $exam_questions }}"
             ></exam-model>
 
         </section>

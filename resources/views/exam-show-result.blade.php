@@ -61,16 +61,14 @@
 					<div class="examenContent__number">50 puntos </div><div class="examenContent__numbertext">Reprobada</div>
 				</div>
 				<section class="examenContent__result">
-					<div class="examenContent__result-item">Punto</div>
-					<div class="examenContent__result-item examenContent__result-point">50</div>
+					<div class="examenContent__result-item">Puntaje</div>
+					<div class="examenContent__result-item examenContent__result-point">{{ $total_score }}</div>
 					<div class="examenContent__result-item">Preguntas</div>
-					<div class="examenContent__result-item examenContent__result-point">1</div>
+					<div class="examenContent__result-item examenContent__result-point">{{ $questions_total }}</div>
 					<div class="examenContent__result-item">Correcto</div>
-					<div class="examenContent__result-item examenContent__result-point">4</div>
+					<div class="examenContent__result-item examenContent__result-point">{{ $answer_correct }}</div>
 					<div class="examenContent__result-item">Incorrecto</div>
-					<div class="examenContent__result-item examenContent__result-point">3</div>
-					<div class="examenContent__result-item ">Omitido</div>
-					<div class="examenContent__result-item examenContent__result-point">2</div>
+					<div class="examenContent__result-item examenContent__result-point">{{ $answer_incorrect }}</div>
 				</section>
 				<div class="examenContent__conteo examenContent__conteoPositionbottom">
 					<div class="examenContent__note">Necesita 80 puntos para aprobar el examen</div>

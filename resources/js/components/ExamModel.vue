@@ -4,7 +4,7 @@
             <section class="examenContent__respuestas">
                 <h1>¡Llegó el gran dia!</h1>
                 <p>
-                    Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras 20 preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.
+                    Este 1er Concurso Internacional de conocimiento tiene finalidad de retarte. Tendras {{ exam_questions }} preguntas por responder y un cronometro a tu disposición para optimizar tu tiempo.
                 </p>
                 <div>
                     <div class="examenContent__btn" @click="startExam">
@@ -28,7 +28,14 @@
 <script>
 
 export default {
-    props:['exam_id'],
+    props:{
+        exam_id: {
+            type: Number
+        },
+        exam_questions: {
+            type: Number
+        }
+    },
 
     data() {
         return {
@@ -54,7 +61,7 @@ export default {
                 this.question = JSON.parse(response.data.questions);
                 this.end_time_exam = response.data.finish;
                 this.show_question_exam = true;
-                this.question_solved = response.data.question_solved;
+                this.question_solved = response.data.question_solved +1;
                 this.total_questions = response.data.total_questions;
 
                 this.showRemaining()
@@ -83,7 +90,7 @@ export default {
                 this.question = JSON.parse(response.data.questions);
                 this.end_time_exam = response.data.finish;
                 this.show_question_exam = true;
-                this.question_solved = response.data.question_solved;
+                this.question_solved = response.data.question_solved +1;
                 this.total_questions = response.data.total_questions;
 
                 this.$router.push('/exam-runing/'+this.exam_id);
