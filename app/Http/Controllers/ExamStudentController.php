@@ -151,9 +151,10 @@ class ExamStudentController extends Controller
      * @param  \App\ExamStudent  $examStudent
      * @return \Illuminate\Http\Response
      */
-    public function show(ExamStudent $examStudent)
+    public function show($examStudent)
     {
-        //
+        $exam_student = ExamStudent::find($examStudent);
+        return view('exam-show-result')->with(['exam' => $exam_student]);
     }
 
     /**
@@ -206,13 +207,14 @@ class ExamStudentController extends Controller
             return response()->json(['questions' => $questions, 'question_solved' => count($question_answer_solved)]);
         }
         $exam_student->update(['done' => true]);
-        return response()->json(['route_finish' => true]);
+        //dd($exam_student->id);
+        return response()->json(['route_finish' => true, 'exam_studient_id' => $exam_student->id]);
 
     }
 
     public function overTime($exam_id)
     {
-        ExamStudent::where([['student_id',auth()->user()->studentProfile->id],['exam_id',$exam_id]])->update(['done'=> true]);
+        ExamStudent::where([['student_id',auth()->user()->studentProfile->id],['exam_id',$exam_id]])->update(['done'=> 1]);
         return true;
     }
 

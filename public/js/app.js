@@ -2387,7 +2387,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         _this2.end_time_exam = response.data.finish;
         _this2.show_question_exam = true;
         _this2.question_solved = response.data.question_solved;
-        _this2.total_questions = response.data.total_questions; //hacer push a la ruta, y bloquear el click de inicio
+        _this2.total_questions = response.data.total_questions;
 
         _this2.$router.push('/exam-runing/' + _this2.exam_id);
 
@@ -2436,9 +2436,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       axios.post('/exam-student-update', _objectSpread({}, params)).then(function (response) {
         if (response.data.route_finish == true) {
-          _this4.$router.replace({
-            name: 'home'
-          });
+          _this4.$router.push('/exam-show-result/' + response.data.exam_studient_id);
 
           location.reload();
         }
@@ -81495,6 +81493,10 @@ var routes = [{
   name: 'exam-runing',
   path: '/exam-runing/:id',
   component: _components_QuestionsExam__WEBPACK_IMPORTED_MODULE_1__["default"],
+  props: true
+}, {
+  name: 'show-result',
+  path: '/exam-show-result/:id',
   props: true
 }];
 

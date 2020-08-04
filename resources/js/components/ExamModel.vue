@@ -85,7 +85,7 @@ export default {
                 this.show_question_exam = true;
                 this.question_solved = response.data.question_solved;
                 this.total_questions = response.data.total_questions;
-                //hacer push a la ruta, y bloquear el click de inicio
+
                 this.$router.push('/exam-runing/'+this.exam_id);
                 this.showRemaining()
             });
@@ -131,7 +131,8 @@ export default {
             axios.post('/exam-student-update', {...params}).then(response => {
                 if (response.data.route_finish == true) {
 
-                    this.$router.replace({name:'home'});
+
+                    this.$router.push('/exam-show-result/'+response.data.exam_studient_id);
                     location.reload();
                 }
 
