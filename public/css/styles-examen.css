@@ -13,14 +13,27 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1em;
+  padding: 1em 2em;
+  border-bottom: 1px solid #f4f4f4;
+  margin-bottom: 3em;
 }
-.examenHeader img {
+.examenHeader div {
+  margin-left: 0.5em;
+}
+.examenHeader__logo {
   height: 40px;
 }
-.examenHeader__right {
+.examenHeader__tag {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  padding-bottom: 1em;
+}
+.examenHeader__mensaje {
+  width: 22px;
+}
+.examenHeader__avatar {
+  width: 60px;
 }
 .examenContent__cronometro {
   display: flex;
@@ -70,6 +83,12 @@ body {
   padding: 0.5em;
   text-align: right;
 }
+.examenContent__conteoPositiontop {
+  justify-content: flex-end;
+}
+.examenContent__conteoPositionbottom {
+  justify-content: center;
+}
 .examenContent__number {
   font-weight: bold;
   margin-right: 0.5em;
@@ -82,11 +101,23 @@ body {
   margin: 0;
 }
 .examenContent__respuestas-item {
+  color: #707070;
   border-radius: 8px;
   box-shadow: 2px 5px 6px rgba(0,0,0,0.1);
   border: #f4f4f4;
   padding: 0.5em;
   margin-bottom: 1.5em;
+}
+.examenContent__result {
+  margin: 2em 0;
+  display: grid;
+  grid-template-columns: 80% 20%;
+}
+.examenContent__result-item {
+  margin-bottom: 0.2em;
+}
+.examenContent__result-point {
+  text-align: right;
 }
 .examenContent__btn {
   background: #b60011;
@@ -109,4 +140,15 @@ body {
 .examenContent__btn2 input.form-control:focus {
   outline: none !important;
   outline-width: 0 !important;
+}
+@media screen and (max-width: 768px) {
+  .examenContent__cronometro {
+    justify-content: center;
+  }
+  .examenContent__tag {
+    display: block;
+  }
+  .examenContent__item {
+    width: 90%;
+  }
 }

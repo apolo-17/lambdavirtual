@@ -27,14 +27,14 @@
         <img src="{{ asset('images/logo-horizontal.png') }}" alt="logo lambda" class="examenHeader__logo">
         <section class="examenHeader__right">
             <header class="examenHeader__tag">
-                <div>
-                    <img src="#" alt="" class="contentRight__mensaje">
-                </div>
-                <div>
+                <div class="examenHeader__mensaje">
+					<img src="{{ asset('images/ico-login-mail.png') }}" alt="">
+				</div>
+                <div class="examenHeader__name">
                     {{ auth()->user()->name }}
                 </div>
-                <div>
-                    <img src="#" alt="">
+                <div class="examenHeader__avatar">
+                    <img src="{{ asset('images/avatar.png') }}" alt="">
                 </div>
                 <div>
                     <form action="{{ route('logout') }}" method="POST">
