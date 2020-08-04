@@ -5,6 +5,7 @@
 
 @else
 @foreach($exams as $exam)
+
 <div class="cardExamen-wrap">
     <div class="cardExamen">
         <img src="{{ asset('images/premio.png') }}" alt="" class="cardExamen__image">

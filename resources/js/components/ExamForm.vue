@@ -96,7 +96,7 @@
                         answer_correct: '',
                         answer_selected: ''
 
-                    }//
+                    }
                     questionary.push(question);
                     for (let index = 0; index <= this.number_subsections-1; index++) {
                         let answer = {

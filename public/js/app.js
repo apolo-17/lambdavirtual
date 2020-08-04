@@ -2251,8 +2251,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           question_solved: false,
           answer_correct: '',
           answer_selected: ''
-        }; //
-
+        };
         questionary.push(question);
 
         for (var _index = 0; _index <= this.number_subsections - 1; _index++) {
@@ -2349,13 +2348,20 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   mounted: function mounted() {
-    /* let start = new Date();
-    axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
-          this.question = JSON.parse(response.data.questions);
-        this.end_time_exam = response.data.finish;
-        this.show_question_exam = true;
-        this.showRemaining()
-    }); */
+    var _this = this;
+
+    if (this.$route.name == 'exam-runing') {
+      var start = new Date();
+      axios.get("/get-exam-created/".concat(this.exam_id, "/").concat(start)).then(function (response) {
+        _this.question = JSON.parse(response.data.questions);
+        _this.end_time_exam = response.data.finish;
+        _this.show_question_exam = true;
+        _this.question_solved = response.data.question_solved;
+        _this.total_questions = response.data.total_questions;
+
+        _this.showRemaining();
+      });
+    }
   },
   computed: {
     _seconds: function _seconds() {
@@ -2373,34 +2379,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   methods: {
     startExam: function startExam() {
-      var _this = this;
+      var _this2 = this;
 
       var start = new Date();
       axios.get("/get-exam-created/".concat(this.exam_id, "/").concat(start)).then(function (response) {
-        _this.question = JSON.parse(response.data.questions);
-        _this.end_time_exam = response.data.finish;
-        _this.show_question_exam = true;
-        _this.question_solved = response.data.question_solved;
-        _this.total_questions = response.data.total_questions;
+        _this2.question = JSON.parse(response.data.questions);
+        _this2.end_time_exam = response.data.finish;
+        _this2.show_question_exam = true;
+        _this2.question_solved = response.data.question_solved;
+        _this2.total_questions = response.data.total_questions; //hacer push a la ruta, y bloquear el click de inicio
 
-        _this.showRemaining();
+        _this2.$router.push('/exam-runing/' + _this2.exam_id);
+
+        _this2.showRemaining();
       });
     },
     formatNum: function formatNum(num) {
       return num < 10 ? '0' + num : num;
     },
     showRemaining: function showRemaining() {
-      var _this2 = this;
+      var _this3 = this;
 
       var timer = setInterval(function () {
         var now = new Date();
-        var end = new Date(_this2.end_time_exam);
+        var end = new Date(_this3.end_time_exam);
         var distance = end.getTime() - now.getTime();
 
         if (distance < 0) {
           clearInterval(timer);
-          axios.get("/over-time/".concat(_this2.exam_id)).then(function (response) {
-            _this2.$router.replace({
+          axios.get("/over-time/".concat(_this3.exam_id)).then(function (response) {
+            _this3.$router.replace({
               name: 'home'
             });
 
@@ -2409,18 +2417,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           return;
         }
 
-        var days = Math.floor(distance / _this2._days);
-        var hours = Math.floor(distance % _this2._days / _this2.hours);
-        var minutes = Math.floor(distance % _this2._hours / _this2._minutes);
-        var seconds = Math.floor(distance % _this2._minutes / _this2._seconds);
-        _this2.displayMinutes = _this2.formatNum(minutes);
-        _this2.displaySeconds = _this2.formatNum(seconds);
-        _this2.displayHours = _this2.formatNum(hours);
-        _this2.displayDays = _this2.formatNum(days);
+        var days = Math.floor(distance / _this3._days);
+        var hours = Math.floor(distance % _this3._days / _this3.hours);
+        var minutes = Math.floor(distance % _this3._hours / _this3._minutes);
+        var seconds = Math.floor(distance % _this3._minutes / _this3._seconds);
+        _this3.displayMinutes = _this3.formatNum(minutes);
+        _this3.displaySeconds = _this3.formatNum(seconds);
+        _this3.displayHours = _this3.formatNum(hours);
+        _this3.displayDays = _this3.formatNum(days);
       }, 1000);
     },
     updateQuestionary: function updateQuestionary() {
-      var _this3 = this;
+      var _this4 = this;
 
       var params = {
         exam_id: this.exam_id,
@@ -2428,15 +2436,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       };
       axios.post('/exam-student-update', _objectSpread({}, params)).then(function (response) {
         if (response.data.route_finish == true) {
-          _this3.$router.replace({
+          _this4.$router.replace({
             name: 'home'
           });
 
           location.reload();
         }
 
-        _this3.question = JSON.parse(response.data.questions);
-        _this3.question_solved = response.data.question_solved;
+        _this4.question = JSON.parse(response.data.questions);
+        _this4.question_solved = response.data.question_solved;
       });
     }
   }
@@ -60116,9 +60124,7 @@ var render = function() {
                 ]),
                 _c("strong", [
                   _vm._v(
-                    " " +
-                      _vm._s(_vm.displayHours) +
-                      ":" +
+                    " 00:" +
                       _vm._s(_vm.displayMinutes) +
                       ":" +
                       _vm._s(_vm.displaySeconds)
@@ -81469,6 +81475,8 @@ component.options.__file = "resources/js/components/ShowExam.vue"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /* harmony import */ var _components_ExamQuestionsAnswers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/ExamQuestionsAnswers */ "./resources/js/components/ExamQuestionsAnswers.vue");
+/* harmony import */ var _components_QuestionsExam__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/QuestionsExam */ "./resources/js/components/QuestionsExam.vue");
+
 
 var routes = [{
   name: 'exam-edit',
@@ -81483,6 +81491,11 @@ var routes = [{
   name: 'home',
   path: 'home',
   redirect: 'home'
+}, {
+  name: 'exam-runing',
+  path: '/exam-runing/:id',
+  component: _components_QuestionsExam__WEBPACK_IMPORTED_MODULE_1__["default"],
+  props: true
 }];
 
 /***/ }),
@@ -81505,8 +81518,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\lambdavirtual\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\lambdavirtual\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/lambdavirtual/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/lambdavirtual/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -47,6 +47,28 @@
             </header>
         </section>
     </header>
+    @if($message)
+    <section class="examenContent">
+        <section class="examenContent__item">
+            <div class="examenContent__head">
+                <img src="{{ asset('images/premio-small.png') }}" alt="" class="examenContent__images">
+                <p class="examenContent__title">
+                    1er Concurso Internacional de conocimiento
+                </p>
+            </div>
+            <span class="text-red-700 font-semibold text-2xl text-center"> Ya has presentado el examen, no puedes volver hacerlo</span>
+            <span class="text-center">
+                <a href="{{ action('HomeController@index') }}">
+                    <br>
+                    <button class="bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full">
+                        Regresar
+                    </button>
+                </a>
+            </span>
+
+        </section>
+    </section>
+    @else
     <section class="examenContent">
         <section class="examenContent__item">
             <div class="examenContent__head">
@@ -61,7 +83,7 @@
 
         </section>
     </section>
-
+    @endif
     </div>
 </body>
 
