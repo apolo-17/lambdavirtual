@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exams;
+use App\ExamStudent;
 use App\StudentProfile;
 use Illuminate\Http\Request;
 use Auth;
@@ -33,6 +34,7 @@ class HomeController extends Controller
 
             if (StudentProfile::where('user_id',auth()->user()->id)->first() != null) {
                 $exams_enabled = Exams::where('active',true)->get();
+                //ExamStudent::where
                 return view('home')->with(['exams' => $exams_enabled]);
             }
             return redirect()->route('student-profile-create');

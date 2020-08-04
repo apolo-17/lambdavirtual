@@ -14,7 +14,7 @@
             </section>
         </span>
         <div v-if="show_question_exam">
-            <div style="background:#CAA23E; border-radius:8px; box-shadow:2px 5px 6px rgba(black,0.1); color: white; padding: 0.5em; text-align: center; width: 300px; margin: 1em 0"><span style="font-size: 0.9em">Tiempo del examen:</span><strong> {{ displayHours }}:{{ displayMinutes }}:{{displaySeconds}}</strong></div>
+            <div style="background:#CAA23E; border-radius:8px; box-shadow:2px 5px 6px rgba(black,0.1); color: white; padding: 0.5em; text-align: center; width: 300px; margin: 1em 0"><span style="font-size: 0.9em">Tiempo del examen:</span><strong> 00:{{ displayMinutes }}:{{displaySeconds}}</strong></div>
             <questions-exam v-if="show_question_exam"
                 :question="question"
                 :question_solved="question_solved"
@@ -46,15 +46,20 @@ export default {
 
     mounted() {
 
-        /* let start = new Date();
-        axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
+        if (this.$route.name == 'exam-runing') {
+            let start = new Date();
 
-            this.question = JSON.parse(response.data.questions);
-            this.end_time_exam = response.data.finish;
-            this.show_question_exam = true;
-            this.showRemaining()
-        }); */
+            axios.get(`/get-exam-created/${this.exam_id}/${start}`).then(response => {
 
+                this.question = JSON.parse(response.data.questions);
+                this.end_time_exam = response.data.finish;
+                this.show_question_exam = true;
+                this.question_solved = response.data.question_solved;
+                this.total_questions = response.data.total_questions;
+
+                this.showRemaining()
+            });
+        }
     },
     computed: {
         _seconds: () => 1000,
@@ -80,10 +85,14 @@ export default {
                 this.show_question_exam = true;
                 this.question_solved = response.data.question_solved;
                 this.total_questions = response.data.total_questions;
+                //hacer push a la ruta, y bloquear el click de inicio
+                this.$router.push('/exam-runing/'+this.exam_id);
                 this.showRemaining()
             });
         },
+
         formatNum: num  => (num < 10 ? '0' + num : num),
+
         showRemaining(){
             const timer = setInterval(() => {
                 const now = new Date();

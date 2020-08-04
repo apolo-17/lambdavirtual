@@ -18,14 +18,23 @@ class ExamStudentController extends Controller
     public function index($exam_id)
     {
         $student = StudentProfile::where('user_id',auth()->user()->id)->first();
-
         $message = false;
-        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',true]])->first();
-        if ($exam_student != null) {
+
+        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id]])->first();
+        if ($exam_student == null) {
+            return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
+        }
+
+        if ($exam_student->done == null) {
+
+            return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
+        }
+
+        if ($exam_student->done == 1) {
             $message = true;
             return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
         }
-        return view('exam')->with(['exam_id' => $exam_id, 'message' => $message]);
+
     }
 
     /**
@@ -35,19 +44,20 @@ class ExamStudentController extends Controller
      */
     public function create($exam_id,$start)
     {
-        $student = StudentProfile::where('user_id',auth()->user()->id)->first();
+        $student = auth()->user()->studentProfile;
         $exam = Exams::find($exam_id);
-        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first();
+
+        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',''],['start' ,'!=', null]])->first();
 
         if ($exam_student == null) {
             $questionary = $this->structuringExam($exam->questionary);
-            $finish = Carbon::createFromFormat('D M d Y H:i:s e+', $start)->addMinutes(30);
+
             $exam_created = ExamStudent::create([
                 'student_id' => $student->id,
                 'exam_id' => $exam_id,
                 'questionary' => $questionary,
                 'start' => Carbon::createFromFormat('D M d Y H:i:s e+', $start),
-                'finish' => $finish,
+                'finish' => Carbon::createFromFormat('D M d Y H:i:s e+', $start)->addMinutes(30),
                 'done' => false
             ]);
 
@@ -67,11 +77,18 @@ class ExamStudentController extends Controller
 
             $finish_parse = Carbon::parse($exam_created->finish)->format('Y-m-d H:i:s');
             $start_parse = Carbon::parse($exam_created->start)->format('Y-m-d H:i:s');
-            return response()->json(['questions' => $questions,'start' => $start_parse, 'finish' => $finish_parse, 'question_solved' => count($question_solved), 'total_questions' => count($questionary)]);
+            return response()->json([
+                'questions' => $questions,
+                'start' => $start_parse,
+                'finish' => $finish_parse,
+                'question_solved' => count($question_solved),
+                'total_questions' => count($questionary)
+            ]);
 
         } else {
 
-            $exam_update = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',false]])->first();
+
+            $exam_update = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done','']])->first();
             $questionary = json_decode($exam_update->questionary);
 
             $question_out_solved = [];
@@ -90,11 +107,23 @@ class ExamStudentController extends Controller
                 $finish_parse = Carbon::parse($exam_update->finish)->format('Y-m-d H:i:s');
                 $start_parse = Carbon::parse($exam_update->start)->format('Y-m-d H:i:s');
 
-                return response()->json(['questions' => $questions,'start' => $start_parse, 'finish' => $finish_parse, 'question_solved' => count($question_solved), 'total_questions' => count($questionary)]);
+                return response()->json([
+                    'questions' => $questions,
+                    'start' => $start_parse,
+                    'finish' => $finish_parse,
+                    'question_solved' => count($question_solved),
+                    'total_questions' => count($questionary)
+                ]);
             }
 
             return redirect()->route('/home');
         }
+
+    }
+
+    public function examRuningReload($exam_id)
+    {
+        return $this->index($exam_id);
 
     }
 
