@@ -58,6 +58,8 @@ Route::post('/admin-exam-update','ExamsController@update')->name('exam-update')-
 Route::post('/admin-exam-status-update','ExamsController@updateStatus')->name('update-status-exam')->middleware('verified');
 Route::get('/admin-exam-delete/{id}', 'ExamsController@delete')->name('exam-delete')->middleware('verified');
 
+Route::get('/admin-exam-download/{id}','ExamStudentController@downloadExam')->name('admin-exam-download')->middleware('verified');
+
 Route::get('/admin-students-index','StudentController@index')->name('student-admin-index')->middleware('verified');
 Route::get('/admin-student-profile-show/{id}','StudentController@show')->name('student-profile-show')->middleware('verified');
 Route::get('/admin-student-profile-exam-result-show/{id}','StudentController@showExamProfileResult')->name('student-profile-exam-result-show')->middleware('verified');

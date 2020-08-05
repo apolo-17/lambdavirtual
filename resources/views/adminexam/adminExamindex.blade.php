@@ -34,6 +34,7 @@
                 <th class="w-1/4 px-4 py-2">Duracion</th>
                 <th class="w-auto"></th>
                 <th class="w-auto">Activar</th>
+                <th class="w-auto"></th>
 
             </thead>
             <tbody>
@@ -67,6 +68,11 @@
                             :exam_id="{{ $exam->id }}"
                             :active="{{ $exam->active }}"
                         ></deploy-exam>
+                    </td>
+                    <td class="border px-4 py-2">
+                        <a href="{{ action('ExamStudentController@downloadExam',[$exam->id]) }}">
+                            Descargar
+                        </a>
                     </td>
                 </tr>
                 @endforeach
