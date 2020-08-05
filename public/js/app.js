@@ -60303,7 +60303,7 @@ var render = function() {
                 ],
                 staticClass:
                   "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal",
-                attrs: { type: "time", placeholder: "Duracion del examen" },
+                attrs: { type: "text", placeholder: "Duracion del examen" },
                 domProps: { value: _vm.questionary.duration },
                 on: {
                   input: function($event) {
@@ -60552,7 +60552,7 @@ var staticRenderFns = [
           staticClass:
             "bg-red-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
         },
-        [_vm._v("\n                    Crear examen\n                ")]
+        [_vm._v("\n                    Editar\n                ")]
       )
     ])
   }

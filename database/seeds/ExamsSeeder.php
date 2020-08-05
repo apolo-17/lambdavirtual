@@ -15,7 +15,7 @@ class ExamsSeeder extends Seeder
         if (App::isLocal()) {
 
             Exams::create([
-                'name' => 'test',
+                'name' => 'Primer consurso internacional',
                 'deploy_exam' => '2020/08/14 00:00:00',
                 'finish_exam' => '2020/08/14 00:00:00',
                 'duration' => '5',
@@ -28,7 +28,7 @@ class ExamsSeeder extends Seeder
                 ]);
 
             Exams::create([
-                'name' => 'test',
+                'name' => 'Examen para conocimiento general',
                 'deploy_exam' => '2020/08/14 00:00:00',
                 'finish_exam' => '2020/08/14 00:00:00',
                 'duration' => '30',

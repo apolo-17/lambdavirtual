@@ -29,7 +29,7 @@
                         {{ $student->university->name }}
                     </td>
                     <td class="border px-4 py-2">
-                        <a href="#">Ver</a>
+                        <a href="{{ action('StudentController@show',[$student->id]) }}">Ver</a>
                     </td>
                 </tr>
                 @endforeach

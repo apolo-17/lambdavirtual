@@ -34,6 +34,7 @@ Route::post('/student-profile-store','StudentProfileController@store')->name('st
 Route::get('/student-profile-edit','StudentProfileController@Edit')->name('student-profile-edit')->middleware('verified');
 Route::post('/student-profile-edit','StudentProfileController@update')->name('student-profile-update')->middleware('verified');
 
+
 /* Route::group(['middleware' => ['role:Admin']], function () {
 
     Route::get('/home-admin','HomeAdminController@index')->name('homeAdmin');
@@ -58,6 +59,8 @@ Route::post('/admin-exam-status-update','ExamsController@updateStatus')->name('u
 Route::get('/admin-exam-delete/{id}', 'ExamsController@delete')->name('exam-delete')->middleware('verified');
 
 Route::get('/admin-students-index','StudentController@index')->name('student-admin-index')->middleware('verified');
+Route::get('/admin-student-profile-show/{id}','StudentController@show')->name('student-profile-show')->middleware('verified');
+Route::get('/admin-student-profile-exam-result-show/{id}','StudentController@showExamProfileResult')->name('student-profile-exam-result-show')->middleware('verified');
 
 Route::post('/admin-exam-edit-information', function(Request $request) {
     return Exams::find($request->id);

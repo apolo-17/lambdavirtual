@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ExamStudent;
 use App\StudentProfile;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = StudentProfile::with(['user','university'])->get();
-        //dd($students);
+
         return view('adminUsers.admin-users-index')->with(['students' => $students]);
     }
 
@@ -48,7 +49,17 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student_profile = StudentProfile::find($id)->load(['user','university','country']);
+
+        $student_exam =ExamStudent::where('student_id',$student_profile->id)->with(['exam'])->get();
+        return view('adminUsers.admin-users-show')->with(['student' => $student_profile, 'exams' => $student_exam]);
+    }
+
+    public function showExamProfileResult($id)
+    {
+        $exam = ExamStudent::find($id);
+        $questionary = json_decode($exam->questionary);
+        return view('adminUsers.admin-users-show-exam-profile-result')->with(['questionary' => $questionary]);
     }
 
     /**
