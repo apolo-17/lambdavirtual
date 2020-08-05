@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Exams;
 use App\ExamStudent;
+use App\Exports\ExamStudentExport;
 use App\StudentProfile;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExamStudentController extends Controller
 {
@@ -258,6 +260,18 @@ class ExamStudentController extends Controller
     {
         ExamStudent::where([['student_id',auth()->user()->studentProfile->id],['exam_id',$exam_id]])->update(['done'=> 1]);
         return true;
+    }
+
+    public function downloadExam($id)
+    {
+        return Excel::download((new ExamStudentExport($id)), 'Exam_Students.xlsx');
+        /* \Excel::download('ExamStudents', function($excel) use ($id){
+            $exam_student = ExamStudent::where('exam_id',$id)->get();
+
+            $excel->sheet('ExamStudents', function($sheet) use ($exam_student){
+                $sheet->fromArray($exam_student);
+            });
+        })->download('xlsx'); */
     }
 
     /**

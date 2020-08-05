@@ -19,7 +19,7 @@ class ExamStudent extends Model
 
     public function exam()
     {
-        return $this->belongsTo(Exams::class,);
+        return $this->belongsTo(Exams::class);
     }
 
     public function getResultAttribute()
