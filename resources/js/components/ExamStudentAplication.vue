@@ -6,6 +6,7 @@
             @updateDepartmentFilter="updateDepartmentFilter"
             @updateEmailFilter="updateEmailFilter"
         ></filters-exam-aplication>
+
         <table-exam-aplication
             :students="examsFiltered"
         ></table-exam-aplication>
