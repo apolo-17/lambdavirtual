@@ -2643,16 +2643,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['exam_aplication', 'country'],
   data: function data() {
     return {
       selected_country_id: null,
-      input_department: null
+      input_department: null,
+      input_email: null
     };
   },
   mounted: function mounted() {
-    console.log(this.exam_aplication[0].student_profiles.age);
+    console.log(this.exam_aplication);
   },
   methods: {
     updateCountrySelected: function updateCountrySelected(event) {
@@ -2660,6 +2662,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateDepartmentFilter: function updateDepartmentFilter(event) {
       this.input_department = event;
+    },
+    updateEmailFilter: function updateEmailFilter(event) {
+      this.input_email = event;
     }
   },
   computed: {
@@ -2668,7 +2673,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var students_finals_filtered = [];
       this.exam_aplication.forEach(function (exam) {
-        students_finals_filtered.push(exam.student_profiles);
+        students_finals_filtered.push(exam.student_profile);
       });
 
       if (this.selected_country_id) {
@@ -2680,6 +2685,12 @@ __webpack_require__.r(__webpack_exports__);
       if (this.input_department) {
         students_finals_filtered = students_finals_filtered.filter(function (student) {
           return student.department.toLowerCase().includes(_this.input_department.toLowerCase());
+        });
+      }
+
+      if (this.input_email) {
+        students_finals_filtered = students_finals_filtered.filter(function (student) {
+          return student.user.email.toLowerCase().includes(_this.input_email.toLowerCase());
         });
       }
 
@@ -2723,11 +2734,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['country'],
   data: function data() {
     return {
-      department: ""
+      department: '',
+      emailStudent: ''
     };
   },
   methods: {
@@ -2736,6 +2757,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     updateDepartmentFilter: function updateDepartmentFilter() {
       this.$emit('updateDepartmentFilter', this.department);
+    },
+    updateEmailFilter: function updateEmailFilter() {
+      this.$emit('updateEmailFilter', this.emailStudent);
     }
   }
 });
@@ -60764,7 +60788,8 @@ var render = function() {
         attrs: { country: _vm.country },
         on: {
           updateCountrySelected: _vm.updateCountrySelected,
-          updateDepartmentFilter: _vm.updateDepartmentFilter
+          updateDepartmentFilter: _vm.updateDepartmentFilter,
+          updateEmailFilter: _vm.updateEmailFilter
         }
       }),
       _vm._v(" "),
@@ -60842,6 +60867,34 @@ var render = function() {
               _vm.department = $event.target.value
             },
             _vm.updateDepartmentFilter
+          ]
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c("div", [
+      _c("label", { attrs: { for: "" } }, [_vm._v("Email")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.emailStudent,
+            expression: "emailStudent"
+          }
+        ],
+        attrs: { type: "email", placeholder: "Buscar Email" },
+        domProps: { value: _vm.emailStudent },
+        on: {
+          input: [
+            function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.emailStudent = $event.target.value
+            },
+            _vm.updateEmailFilter
           ]
         }
       })
@@ -60966,7 +61019,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.students, function(student) {
+        _vm._l(_vm.students, function(student, index) {
           return _c("tr", { key: student.id }, [
             _c("td", { staticClass: "border px-4 py-2" }, [
               _vm._v(
@@ -61016,13 +61069,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c("td", { staticClass: "border px-4 py-2" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(student.result) +
-                  "\n                "
-              )
-            ])
+            _c("td", { staticClass: "border px-4 py-2" })
           ])
         }),
         0
@@ -81714,14 +81761,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!***********************************************************!*\
   !*** ./resources/js/components/ExamStudentAplication.vue ***!
   \***********************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ExamStudentAplication_vue_vue_type_template_id_7439f582___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ExamStudentAplication.vue?vue&type=template&id=7439f582& */ "./resources/js/components/ExamStudentAplication.vue?vue&type=template&id=7439f582&");
 /* harmony import */ var _ExamStudentAplication_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ExamStudentAplication.vue?vue&type=script&lang=js& */ "./resources/js/components/ExamStudentAplication.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ExamStudentAplication_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ExamStudentAplication_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -81751,7 +81799,7 @@ component.options.__file = "resources/js/components/ExamStudentAplication.vue"
 /*!************************************************************************************!*\
   !*** ./resources/js/components/ExamStudentAplication.vue?vue&type=script&lang=js& ***!
   \************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

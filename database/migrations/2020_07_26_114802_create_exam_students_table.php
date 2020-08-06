@@ -16,8 +16,8 @@ class CreateExamStudentsTable extends Migration
         Schema::create('exam_students', function (Blueprint $table) {
             $table->id();
 
-            $table->uuid('student_id');
-            $table->foreign('student_id')->references('id')->on('student_profiles');
+            $table->uuid('student_profile_id');
+            $table->foreign('student_profile_id')->references('id')->on('student_profiles');
 
             $table->bigInteger('exam_id')->unsigned();
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');

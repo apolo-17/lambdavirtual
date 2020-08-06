@@ -4,6 +4,7 @@
             :country="country"
             @updateCountrySelected="updateCountrySelected"
             @updateDepartmentFilter="updateDepartmentFilter"
+            @updateEmailFilter="updateEmailFilter"
         ></filters-exam-aplication>
         <table-exam-aplication
             :students="examsFiltered"
@@ -16,11 +17,12 @@ export default {
     data() {
         return {
             selected_country_id:null,
-            input_department:null
+            input_department:null,
+            input_email:null
         }
     },
     mounted() {
-        console.log(this.exam_aplication[0].student_profiles.age)
+        console.log(this.exam_aplication)
     },
     methods: {
         updateCountrySelected(event){
@@ -28,6 +30,9 @@ export default {
         },
         updateDepartmentFilter(event){
             this.input_department = event
+        },
+        updateEmailFilter(event){
+            this.input_email = event
         }
     },
     computed: {
@@ -35,7 +40,7 @@ export default {
             let students_finals_filtered = [];
 
             this.exam_aplication.forEach(exam => {
-                students_finals_filtered.push(exam.student_profiles)
+                students_finals_filtered.push(exam.student_profile)
             });
 
             if (this.selected_country_id) {
@@ -47,6 +52,11 @@ export default {
             if (this.input_department) {
                 students_finals_filtered = students_finals_filtered.filter(
                     student => student.department.toLowerCase().includes(this.input_department.toLowerCase()) );
+            }
+
+            if (this.input_email) {
+                students_finals_filtered = students_finals_filtered.filter(
+                    student => student.user.email.toLowerCase().includes(this.input_email.toLowerCase()));
             }
 
             return students_finals_filtered;

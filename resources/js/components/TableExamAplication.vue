@@ -13,7 +13,7 @@
             </thead>
             <tbody>
 
-                <tr v-for="(student) in students" :key="student.id">
+                <tr v-for="(student, index) in students" :key="student.id">
                     <td class="border px-4 py-2">
                         {{ student.name }}
                     </td>
@@ -33,7 +33,7 @@
                         {{ student.department }}
                     </td>
                     <td class="border px-4 py-2">
-                        {{ student.result }}
+
                     </td>
                 </tr>
 
