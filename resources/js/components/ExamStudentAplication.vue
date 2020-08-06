@@ -37,26 +37,22 @@ export default {
     },
     computed: {
         examsFiltered(){
-            let students_finals_filtered = [];
-
-            this.exam_aplication.forEach(exam => {
-                students_finals_filtered.push(exam.student_profile)
-            });
+            let students_finals_filtered = this.exam_aplication;
 
             if (this.selected_country_id) {
                 students_finals_filtered = students_finals_filtered.filter(
-                    student => student.country_id == this.selected_country_id
+                    student => student.student_profile.country_id == this.selected_country_id
                 )
             }
 
             if (this.input_department) {
                 students_finals_filtered = students_finals_filtered.filter(
-                    student => student.department.toLowerCase().includes(this.input_department.toLowerCase()) );
+                    student => student.student_profile.department.toLowerCase().includes(this.input_department.toLowerCase()) );
             }
 
             if (this.input_email) {
                 students_finals_filtered = students_finals_filtered.filter(
-                    student => student.user.email.toLowerCase().includes(this.input_email.toLowerCase()));
+                    student => student.student_profile.user.email.toLowerCase().includes(this.input_email.toLowerCase()));
             }
 
             return students_finals_filtered;

@@ -66,7 +66,7 @@ class ExamsController extends Controller
     public function showExamAplication($id)
     {
         $exam_application = ExamStudent::where('exam_id',$id)->with(['studentProfile','studentProfile.user','studentProfile.country','studentProfile.university','studentProfile.schoolCycle','studentProfile.academicDegree','studentProfile.englishLevel'])->get();
-        //dd($exam_application);
+
         $country = Country::get();
         return view('adminexam.adminExamshowList')->with(['exam_aplication' => $exam_application, 'country' => $country]);
     }

@@ -16,7 +16,7 @@ class ExamStudent extends Model
 
     public function studentProfile()
     {
-        return $this->belongsTo(StudentProfile::class,'student_profile_id');
+        return $this->belongsTo(StudentProfile::class);
     }
 
     public function exam()

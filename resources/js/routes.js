@@ -6,5 +6,6 @@ export const routes = [
     {name:'exam-index', path: 'admin-exam-index', redirect:'admin-exam-index'},
     {name:'home', path: 'home', redirect:'home'},
     {name:'exam-runing', path:'/exam-runing/:id', component: QuestionsExam, props:true},
-    {name:'show-result', path:'/exam-show-result/:id', props:true}
+    {name:'show-result', path:'/exam-show-result/:id', props:true},
+    {name:'detal-exam', path:'/admin-student-profile-exam-result-show/:id', props:true},
 ];
