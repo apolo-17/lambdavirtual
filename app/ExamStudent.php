@@ -6,17 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExamStudent extends Model
 {
-    protected $fillable = ['student_id','exam_id','questionary','start','finish','done'];
+    protected $fillable = ['student_profile_id','exam_id','questionary','start','finish','done'];
 
     protected $dates = ['start','finish'];
 
     protected $appends = ['result'];
 
-    //protected $with = ['studentProfiles'];
+    //protected $with = ['studentProfile'];
 
-    public function studentProfiles()
+    public function studentProfile()
     {
-        return $this->belongsTo(StudentProfile::class,'student_id');
+        return $this->belongsTo(StudentProfile::class,'student_profile_id');
     }
 
     public function exam()

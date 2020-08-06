@@ -22,7 +22,7 @@ class ExamStudentController extends Controller
         $student = StudentProfile::where('user_id',auth()->user()->id)->first();
         $exam = Exams::find($exam_id);
         $message = false;
-        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id]])->first();
+        $exam_student = ExamStudent::where([['student_profile_id',$student->id],['exam_id',$exam_id]])->first();
 
         if ($exam_student == null) {
 
@@ -66,13 +66,13 @@ class ExamStudentController extends Controller
         $student = auth()->user()->studentProfile;
         $exam = Exams::find($exam_id);
 
-        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done',''],['start' ,'!=', null]])->first();
+        $exam_student = ExamStudent::where([['student_profile_id',$student->id],['exam_id',$exam_id],['done',''],['start' ,'!=', null]])->first();
 
         if ($exam_student == null) {
             $questionary = $this->structuringExam($exam->questionary);
 
             $exam_created = ExamStudent::create([
-                'student_id' => $student->id,
+                'student_profile_id' => $student->id,
                 'exam_id' => $exam_id,
                 'questionary' => $questionary,
                 'start' => Carbon::createFromFormat('D M d Y H:i:s e+', $start),
@@ -107,7 +107,7 @@ class ExamStudentController extends Controller
         } else {
 
 
-            $exam_update = ExamStudent::where([['student_id',$student->id],['exam_id',$exam_id],['done','']])->first();
+            $exam_update = ExamStudent::where([['student_profile_id',$student->id],['exam_id',$exam_id],['done','']])->first();
             $questionary = json_decode($exam_update->questionary);
 
             $question_out_solved = [];
@@ -223,7 +223,7 @@ class ExamStudentController extends Controller
     {
 
         $student = StudentProfile::where('user_id',auth()->user()->id)->first();
-        $exam_student = ExamStudent::where([['student_id',$student->id],['exam_id',$request->exam_id],['done',false]])->first();
+        $exam_student = ExamStudent::where([['student_profile_id',$student->id],['exam_id',$request->exam_id],['done',false]])->first();
 
         $exam = json_decode($exam_student->questionary);
 
@@ -251,14 +251,14 @@ class ExamStudentController extends Controller
             return response()->json(['questions' => $questions, 'question_solved' => count($question_answer_solved)]);
         }
         $exam_student->update(['done' => true]);
-        //dd($exam_student->id);
+
         return response()->json(['route_finish' => true, 'exam_studient_id' => $exam_student->id]);
 
     }
 
     public function overTime($exam_id)
     {
-        ExamStudent::where([['student_id',auth()->user()->studentProfile->id],['exam_id',$exam_id]])->update(['done'=> 1]);
+        ExamStudent::where([['student_profile_id',auth()->user()->studentProfile->id],['exam_id',$exam_id]])->update(['done'=> 1]);
         return true;
     }
 
@@ -300,6 +300,6 @@ class ExamStudentController extends Controller
 
     /* public function starExam($id)
     {
-        return $time = ExamStudent::where([['student_id',auth()->user()->id],['exam_id',$id]])->first()->created_at;
+        return $time = ExamStudent::where([['student_profile_id',auth()->user()->id],['exam_id',$id]])->first()->created_at;
     } */
 }

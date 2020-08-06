@@ -19,6 +19,15 @@
                 @input="updateDepartmentFilter"
             >
         </div>
+        <div>
+            <label for="">Email</label>
+            <input
+                type="email"
+                placeholder="Buscar Email"
+                v-model="emailStudent"
+                @input="updateEmailFilter"
+            >
+        </div>
     </div>
 </template>
 
@@ -27,7 +36,8 @@ export default {
     props:['country'],
     data() {
         return {
-            department:"",
+            department:'',
+            emailStudent:''
         }
     },
     methods: {
@@ -36,6 +46,9 @@ export default {
         },
         updateDepartmentFilter(){
             this.$emit('updateDepartmentFilter',this.department)
+        },
+        updateEmailFilter(){
+            this.$emit('updateEmailFilter',this.emailStudent)
         }
     },
 }
