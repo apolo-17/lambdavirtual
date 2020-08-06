@@ -50,9 +50,7 @@
                             :active="{{ $exam->active }}"
                         ></deploy-exam>
                     <div>
-                        <a href="{{ action('ExamStudentController@downloadExam',[$exam->id]) }}">
-                            Descargar
-                        </a>
+                    <a href="{{ action('ExamsController@showExamAplication',[$exam->id]) }}">Ver examen</a>
                     </div>
 
                 </div>
@@ -63,6 +61,7 @@
             </article>
             @endforeach
         </div>
+
     </div>
 </div>
 

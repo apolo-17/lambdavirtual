@@ -45,6 +45,31 @@
                 <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{ $student->district }}" readonly>
             </div>
         </div>
+        <div class="flex">
+            <div class="w-1/3 p-2">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">DNI:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{ $student->dni }}" readonly>
+            </div>
+            <div class="w-1/3 p-2">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Ciclo:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{ $student->schoolCycle->name }}" readonly>
+            </div>
+            <div class="w-1/3 p-2">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Grado academico:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{ $student->academicDegree->name }}" readonly>
+            </div>
+        </div>
+        <div class="flex">
+            <div class="w-1/3 p-2">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Nivel de ingles:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{ $student->englishLevel->level }}" readonly>
+            </div>
+            <div class="w-1/3 p-2">
+                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Trabaja actualmente:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" value="{{ $student->work }}" readonly>
+            </div>
+
+        </div>
     </div>
     <div class="mt-4 w-full">
         <div class="m-8 flex justify-center">

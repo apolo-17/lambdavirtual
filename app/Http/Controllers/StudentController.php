@@ -49,7 +49,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student_profile = StudentProfile::find($id)->load(['user','university','country']);
+        $student_profile = StudentProfile::find($id)->load(['user','university','country','schoolCycle','academicDegree','englishLevel']);
 
         $student_exam =ExamStudent::where('student_id',$student_profile->id)->with(['exam'])->get();
         return view('adminUsers.admin-users-show')->with(['student' => $student_profile, 'exams' => $student_exam]);

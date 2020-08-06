@@ -11,4 +11,9 @@ class Exams extends Model
     protected $cast = [
         'questionary' => 'array'
     ];
+
+    public function examStudent()
+    {
+        return $this->hasMany(ExamStudent::class);
+    }
 }
