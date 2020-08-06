@@ -12,9 +12,11 @@ class ExamStudent extends Model
 
     protected $appends = ['result'];
 
+    //protected $with = ['studentProfiles'];
+
     public function studentProfiles()
     {
-        return $this->belongsToMany(StudentProfile::class);
+        return $this->belongsTo(StudentProfile::class,'student_id');
     }
 
     public function exam()

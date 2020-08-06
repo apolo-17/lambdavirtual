@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Country;
 use App\Exams;
+use App\ExamStudent;
 use Illuminate\Http\Request;
 
 class ExamsController extends Controller
@@ -59,6 +61,15 @@ class ExamsController extends Controller
 
         return $exam;
 
+    }
+
+    public function showExamAplication($id)
+    {
+        //$exam = Exams::find($id)->load(['examStudent']);
+        $exam_application = ExamStudent::where('exam_id',$id)->with(['studentProfiles','studentProfiles.user','studentProfiles.country','studentProfiles.university','studentProfiles.schoolCycle','studentProfiles.academicDegree','studentProfiles.englishLevel'])->get();
+        //dd($exam_application);
+        $country = Country::get();
+        return view('adminexam.adminExamshowList')->with(['exam_aplication' => $exam_application, 'country' => $country]);
     }
 
     /**

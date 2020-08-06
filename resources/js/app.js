@@ -26,7 +26,10 @@ Vue.component('answers-exam', require('./components/AnswersExam').default);
 //Action of exam to admin
 Vue.component('delete-exam', require('./components/DeleteExam').default);
 Vue.component('show-exam', require('./components/ShowExam').default);
-
+//Show exam All students aplication
+Vue.component('exam-student-aplication', require('./components/ExamStudentAplication').default);
+Vue.component('filters-exam-aplication', require('./components/FiltersExamAplication').default);
+Vue.component('table-exam-aplication', require('./components/TableExamAplication').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

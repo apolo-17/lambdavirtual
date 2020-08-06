@@ -70,9 +70,10 @@
                         ></deploy-exam>
                     </td>
                     <td class="border px-4 py-2">
-                        <a href="{{ action('ExamStudentController@downloadExam',[$exam->id]) }}">
+                        {{-- <a href="{{ action('ExamStudentController@downloadExam',[$exam->id]) }}">
                             Descargar
-                        </a>
+                        </a> --}}
+                        <a href="{{ action('ExamsController@showExamAplication',[$exam->id]) }}">Ver examen</a>
                     </td>
                 </tr>
                 @endforeach
