@@ -25,7 +25,7 @@
 <body>
 	<div class="adminwrap" id="app">
 		<div class="adminlateral">
-			<header class="adminlateral__header">
+			<header class="adminlateral__header"><center>
 				<img src="{{ asset('images/logo.png') }}" alt="logo lambda">
 			</header>
 			<div class="adminlateral__menu">
