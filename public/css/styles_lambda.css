@@ -8,6 +8,7 @@
   background-color: #fafafa;
   color: #707070;
   border-left: 2px solid #f4f4f4;
+  height: 100vh;
 }
 .content__header {
   display: flex;
@@ -152,9 +153,11 @@
 }
 .userslateral__header {
   text-align: center;
+  margin: 1.5em 0;
 }
-.userslateral__header margin-bottom 1em img {
+.userslateral__header img {
   text-align: center;
+  width: 50%;
 }
 .userslateral__menu ul {
   margin: 0;
@@ -179,11 +182,11 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0.7em;
+  padding: 0.4em;
 }
 .userslateral__img {
   width: 50px;
-  margin-right: 25px;
+  margin-right: 1em;
 }
 @media screen and (max-width: 768px) {
   .userslateral {
@@ -194,10 +197,6 @@
     justify-content: center;
     width: 100%;
   }
-  .userslateral__item {
-    padding: 0.4em;
-  }
-
   .userslateral__img {
     width: 40px;
     margin-right: 10px;

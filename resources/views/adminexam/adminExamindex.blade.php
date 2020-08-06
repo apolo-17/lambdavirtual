@@ -3,6 +3,7 @@
 @section('content')
 @if($exams->isEmpty())
 
+
 <div class="cardExamen">
     <img src="{{ asset('images/premio.png') }}" alt="" class="cardExamen__image">
     <h3 class="cardExamen__title">1er Concurso</h3>
@@ -19,66 +20,48 @@
 
 @else
 
-<div class="mt-6">
-    <div class="flex justify-end">
+
+<div style="width:100%">
+<br><br><br>
+    Exámenes<br><br>
+    <div style="text-align:right">
         <a href="{{ action('ExamsController@create') }}">
-            <button class="bg-red-700  hover:bg-red-500 text-white font-bold py-2 px-4 rounded-full">Crear Examen</button>
+            <button class="cardExamen__btn">Crear Exámen</button>
         </a>
     </div>
     <div>
-        <table class="table-fixed">
-            <thead>
-                <th class="w-1/4 px-4 py-2">Nombre del examen</th>
-                <th class="w-1/4 px-4 py-2">Fecha de lanzamiento</th>
-                <th class="w-1/4 px-4 py-2">Fecha final</th>
-                <th class="w-1/4 px-4 py-2">Duracion</th>
-                <th class="w-auto"></th>
-                <th class="w-auto">Activar</th>
-                <th class="w-auto"></th>
-
-            </thead>
-            <tbody>
-                @foreach($exams as $exam)
-                <tr>
-                    <td class="border px-4 py-2">
-                        {{ $exam->name }}
-                    </td>
-                    <td class="border px-4 py-2">
-                        {{ $exam->deploy_exam }}
-                    </td>
-                    <td class="border px-4 py-2">
-                        {{ $exam->finish_exam }}
-                    </td>
-                    <td class="border px-4 py-2">
-                        {{ $exam->duration }}
-                    </td>
-                    <td class="border px-4 py-2 adminexamen__action">
-                        <div class="adminexamen__action-edit">
-                            <a href="{{ route('exam-edit', $exam->id ) }}">
-                                <img src="{{ asset('images/edit.png') }}" alt="editar">
-                            </a>
-                        </div>
-                        <div class="adminexamen__action-remove">
-                            <delete-exam :exam_id="{{ $exam->id }}" ></delete-exam>
-                        </div>
-                        ...
-                    </td>
-                    <td class="border px-4 py-2">
-                        <deploy-exam
+        <br><br>
+        <div class="cardQuestion-wrap">
+            @foreach($exams as $exam)
+            <article class="cardQuestion">
+                <div class="cardQuestion__divleft">
+                    <div class="cardQuestion__title">{{ $exam->name }}</div>
+                    <div class="cardQuestion__pregunta">
+                    Inicio: {{ $exam->deploy_exam }}
+                    </div>
+                    <div class="cardQuestion__respuesta">
+                    Final: {{ $exam->finish_exam }}
+                    </div>
+                    <div>
+                    Duracion: {{ $exam->duration }}
+                    </div>
+                    <deploy-exam
                             :exam_id="{{ $exam->id }}"
                             :active="{{ $exam->active }}"
                         ></deploy-exam>
-                    </td>
-                    <td class="border px-4 py-2">
-                        {{-- <a href="{{ action('ExamStudentController@downloadExam',[$exam->id]) }}">
-                            Descargar
-                        </a> --}}
-                        <a href="{{ action('ExamsController@showExamAplication',[$exam->id]) }}">Ver examen</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+                    <div>
+                    <a href="{{ action('ExamsController@showExamAplication',[$exam->id]) }}">Ver examen</a>
+                    </div>
+
+                </div>
+                <div class="cardQuestion__divright">
+                    <a href="{{ route('exam-edit', $exam->id ) }}"><img src="./images/edit.png" alt=""></a>
+                    <delete-exam :exam_id="{{ $exam->id }}" ></delete-exam><br>
+                </div>
+            </article>
+            @endforeach
+        </div>
+
     </div>
 </div>
 
