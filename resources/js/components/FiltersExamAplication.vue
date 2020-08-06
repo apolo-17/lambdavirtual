@@ -1,7 +1,7 @@
-<template>
-    <div>
-        <div>
-            <label for="">Pais</label>
+<template class="filtersTemplate">
+    <div class="filters">
+        <div class="filters__items">
+            <label for="">Pais:</label>
             <select @change="updateCountrySelected">
                 <option value="">Seleccione un Pais</option>
                 <option v-for="country in country"
@@ -10,8 +10,8 @@
                 >{{ country.name }}</option>
             </select>
         </div>
-        <div>
-            <label for="">Departamento</label>
+        <div class="filters__items">
+            <label for="">Departamento:</label>
             <input
                 type="text"
                 placeholder="Buscar departamento"
@@ -19,8 +19,8 @@
                 @input="updateDepartmentFilter"
             >
         </div>
-        <div>
-            <label for="">Email</label>
+        <div class="filters__items">
+            <label for="">Email:</label>
             <input
                 type="email"
                 placeholder="Buscar Email"

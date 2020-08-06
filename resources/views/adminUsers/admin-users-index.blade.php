@@ -3,33 +3,32 @@
 @section('content')
 
 <div class="mt-6">
-    <div>
-        <table class="table-fixed">
-            <thead>
-                <th class="w-1/4 px-4 py-2">Nombre</th>
-                <th class="w-1/4 px-4 py-2">Email</th>
-                <th class="w-1/4 px-4 py-2">Telefono</th>
-                <th class="w-1/4 px-4 py-2">Universidad</th>
-                <th class="w-1/4 px-4 py-2">Opciones</th>
-
+    <div class="adminReport">
+        <table class="adminReport__table">
+            <thead class="adminReport__tablehead">
+                <td>Nombre</td>
+                <td>Email</td>
+                <td>Telefono</td>
+                <td>Pais</td>
+                <td>Opciones</td>
             </thead>
             <tbody>
                 @foreach($students as $student)
                 <tr>
-                    <td class="border px-4 py-2">
+                    <td class="adminReport__table-td"><img src="{{ asset('images/avatar2.png') }}" >
                         {{ $student->full_name }}
                     </td>
-                    <td class="border px-4 py-2">
+                    <td class="adminReport__table-td">
                         {{ $student->user->email }}
                     </td>
-                    <td class="border px-4 py-2">
+                    <td class="adminReport__table-td">
                         {{ $student->phone_number }}
                     </td>
-                    <td class="border px-4 py-2">
-                        {{ $student->university->name }}
+                    <td class="adminReport__table-td">
+                        {{ $student->country->name }}
                     </td>
-                    <td class="border px-4 py-2">
-                        <a href="{{ action('StudentController@show',[$student->id]) }}">Ver</a>
+                    <td class="adminReport__table-td">
+                        <a href="{{ action('StudentController@show',[$student->id]) }}" class="adminReport__btn">Ver</a>
                     </td>
                 </tr>
                 @endforeach
