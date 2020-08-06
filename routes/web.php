@@ -33,6 +33,7 @@ Route::get('/student-profile-create', 'StudentProfileController@create')->name('
 Route::post('/student-profile-store','StudentProfileController@store')->name('student-profile-store')->middleware('verified');
 Route::get('/student-profile-edit','StudentProfileController@Edit')->name('student-profile-edit')->middleware('verified');
 Route::post('/student-profile-edit','StudentProfileController@update')->name('student-profile-update')->middleware('verified');
+Route::get('/lambda-terms-and-conditions','StudentProfileController@termsConditions')->name('terms-conditions')->middleware('verified');
 
 
 /* Route::group(['middleware' => ['role:Admin']], function () {

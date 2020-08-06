@@ -133,6 +133,11 @@ class StudentProfileController extends Controller
         return redirect()->route('student-profile-index');
     }
 
+    public function termsConditions()
+    {
+        return view('terms _and _Conditions');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
